@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
@@ -16,17 +17,7 @@ Route::get('/registration/success/{firstname}', function ($firstname) {
     return view('emails.registration-success', ['firstname' => $firstname]);
 })->name('registration.success');
 
-Route::get('/dashboard', function () {
-    $role = Auth::user()->role_id;
-    switch ($role) {
-        case 1: //Super Admin
-            return view('Admin.dashboard');
-            break;
-        case 2: //Super Admin
-            break;
-    }
-    //return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
