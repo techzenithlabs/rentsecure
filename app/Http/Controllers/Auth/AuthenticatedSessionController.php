@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -28,11 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Check user status before allowing login
+        $user = Auth::user();
+        if ($user && $user->status === 0) {
+            Auth::logout();
+            return Redirect::route('login')->with('info', 'Your profile is under review. You will be informed once it is verified or rejected.');
+        }
 
         // Redirect other users to their respective dashboards
         return redirect()->intended(route('dashboard', absolute: false));
-
-        //return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
