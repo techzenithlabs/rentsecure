@@ -2,8 +2,26 @@
     <div class="navigation">
         <ul>
             <li><a href="#"><img class="img-fluid" src="{{ asset('public/assets/images/dashboard.png') }}"> Dashboard</a></li>
-            <li><a href="#"><img class="img-fluid" src="{{ asset('public/assets/images/property.png') }}"> Properties</a></li>
-            <li><a href="#"><img class="img-fluid" src="{{ asset('public/assets/images/user.png') }}"> Screening</a></li>
+            <li>
+                <a href="#propertiesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <img class="img-fluid" src="{{ asset('public/assets/images/property.png') }}"> Properties
+                </a>
+                <ul class="collapse list-unstyled" id="propertiesSubmenu">
+                    <li><a href="#">Landlord Property</a></li>
+                    <li><a href="#">Tenants</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#screeningSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <img class="img-fluid" src="{{ asset('public/assets/images/user.png') }}"> Screening
+                </a>
+                <ul class="collapse list-unstyled" id="screeningSubmenu">
+                    <li><a href="#">Landlord</a></li>
+                    <li><a href="#">Tenant</a></li>
+
+                </ul>
+            </li>
             <li><a href="#"><img class="img-fluid" src="{{ asset('public/assets/images/price.png') }}"> Pricing</a></li>
         </ul>
     </div>

@@ -23,7 +23,6 @@
         <link rel="stylesheet" href="{{ asset('public/assets/css/custom.css') }}">
         <!-- Scripts -->
 
-       <script src="{{ asset('public/build/app.js') }}" defer></script>
 <script>
         var baseURL = "{{ url('/') }}";
 </script>
@@ -50,5 +49,5 @@
 
             </section>
         </div>
-    </body>
-</html>
+@include('includes.footer')
+
