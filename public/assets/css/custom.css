@@ -53,3 +53,11 @@ ul > li ul > li > a{
     height: 120px; /* Adjust this value as needed */
   }
 
+ .card-title{
+    font-size: 1.1em;
+ }
+  .card-body p.card-text.badge{
+    font-size:2em;
+    font-weight: 700;
+  }
+
