@@ -1,9 +1,18 @@
+@php
+use Illuminate\Support\Facades\App;
+@endphp
 @include('includes.header')
 
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Content -->
+            @php
+            $getLandlordData=getLandlordScreening();
+            $baseURL=config('app.url');
+
+
+            @endphp
 
             <section class="main-wrapper">
                 @include('layouts.admin.sidebar')
@@ -11,111 +20,68 @@
                 <div class="cont-wrapper">
                     <div class="tenant-screening">
                         <div class="card-head">
-                            <h3>Tenant Screening</h3>
-                            <div class="progress-sec">
-                                <ul>
-                                    <li class="completed">
-                                        <label>Step 1/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li class="completed">
-                                        <label>Step 2/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li>
-                                        <label>Step 3/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li>
-                                        <label>Step 4/4</label>
-                                        <span></span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h3>Landlords</h3>
+
                         </div>
                         <div class="form-content">
                         <div class="card-body whopays-sec min-hieght">
-                            <h2>Select 	Report<span>Applicant currently resides in</span></h2>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="country" type="radio" id="inlineradio1" value="option1">
-                                    <label class="form-check-label" for="inlineradio1">Canada</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="country" type="radio" id="inlineradio2" value="option2">
-                                    <label class="form-check-label" for="inlineradio2">United States of America	</label>
-                                  </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Credit Report, and Background Check <label class="new">Best Value</label></h3>
+                            @if(isset($getLandlordData)&&!empty($getLandlordData))
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sr No</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Street Address</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">Country</th>
+                                        <th scope="col">ZipCode</th>
+                                        <th scope="col">Documents</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                             @php
+                             $cnt=1;
+                           ;
+                             @endphp
+                            @foreach($getLandlordData as $user)
 
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4">$32.98 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara">
-                                                    <li>Long Form equifax credit report</li>
-                                                    <li>Current and former addresses</li>
-                                                    <li>aliases</li>
-                                                    <li>Employment confirmation</li>
-                                                    <li>Open and closed credit Facilities (Trade lines)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara">
-                                                    <li>credit balances</li>
-                                                    <li>collections</li>
-                                                    <li>bankruptcies</li>
-                                                    <li>inquiries</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara"><li>Global Public information search for:criminal records, court decisions, negative press,Sanctions andmore</li></ul>
-                                            </div>
-                                        </div>
-                                    </li>
+                             @php
+                             $userId=$user->id;
+                             $userName=$user->firstname." ".$user->lastname;
+                             $userEmail=$user->email;
+                             $userPhone=$user->phone;
+                             $userAddress=$user->street_address;
+                             $userCity=$user->city;
+                             $userState=$user->state;
+                             $userCountry=$user->country;
+                             $userZip=$user->zipcode;
+                             $userdoctype=$user->document_type;
+                             $userdocument=$user->documents;
+                             @endphp
+                             <tr>
+                                <td>{{ $cnt++ }}</td>
+                                <td>{{ $userName }}</td>
+                                <td>{{ $userEmail }}</td>
+                                <td>{{ $userPhone }}</td>
+                                <td>{{ $userAddress }}</td>
+                                <td>{{ $userCity }}</td>
+                                <td>{{ $userState }}</td>
+                                <td>{{ $userCountry }}</td>
+                                <td>{{ $userZip }}</td>
+                                <td><em>{{ $userdoctype }}</em> <p><a href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
+                              </tr>
+                            @endforeach
+                                </tbody>
+                                <table
+                            @else
+                            <h4 class="text-danger text-center">Sorry Record Doesn't Exists 😞</h4>
+                            @endif
 
-                                </ul>
-                            </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Credit Report</h3>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$32.98 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
 
-                                        <hr>
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Background Check</h3>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$16.99 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
-
-                                        <hr>
-
-                                    </li>
-
-                                </ul>
-                            </div>
                         </div>
                         </div>
                         <div class="card-footer">
