@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
@@ -22,6 +23,8 @@ Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['au
 
 Route::middleware('auth')->group(function () {
     Route::get('/property/landlord', [PropertyController::class, 'landLordProperty'])->name('property.landlord');
+    Route::get('/screening/landlord', [ScreeningController::class, 'landlordScreening'])->name('screening.landlord');
+    Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
