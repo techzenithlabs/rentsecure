@@ -4,8 +4,8 @@ namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailNotification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\URL;
 
 class VerifyUserEmail extends VerifyEmailNotification
 {
@@ -18,12 +18,6 @@ class VerifyUserEmail extends VerifyEmailNotification
     public function toMail($notifiable)
     {
         $verificationUrl = $this->verificationUrl($notifiable);
-        // log::info($notifiable);
-        // // Log recipient's details
-        // Log::info('Sending verification email to: ' . $notifiable->email);
-
-        // // Log verification URL
-        // Log::info('Verification URL: ' . $verificationUrl);
 
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
@@ -43,5 +37,23 @@ class VerifyUserEmail extends VerifyEmailNotification
                 'salutation' => 'Regards,<br>' . config('app.name'),
                 'displayableActionUrl' => $verificationUrl,
             ]);
+    }
+
+    /**
+     * Get the verification URL for the given notifiable.
+     *
+     * @param  mixed  $notifiable
+     * @return string
+     */
+    protected function verificationUrl($notifiable)
+    {
+        return URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            [
+                'id' => $notifiable->getKey(),
+                'hash' => sha1($notifiable->getEmailForVerification()),
+            ]
+        );
     }
 }
