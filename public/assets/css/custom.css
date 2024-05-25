@@ -1,6 +1,29 @@
-ul.collapse{
-    visibility: visible;
+ul.collapse,#userloggedin.collapse{
+    visibility: visible !important;
 }
+.login-sec a:after
+{
+    content: "" !important;
+}
+a#userloggedelem{
+    position: absolute !important;
+    /* transform: translate(58px, -10px); */
+    right: 32px !important;
+    top: 25px !important;
+}
+a#userloggedin::after{
+
+    display: inline-block !important;
+    margin-left: .255em !important;
+    vertical-align: .255em !important;
+    content: unset !important;
+    border-top: .3em solid !important;
+    border-right: .3em solid transparent !important;
+    border-bottom: 0 !important;
+    border-left: .3em solid transparent !important;
+}
+
+
 
 .navigation ul li a
 {
@@ -14,3 +37,18 @@ ul > li ul > li > a{
     padding-top:0px !important;
     padding-left:10px !important;
 }
+
+.userlogged
+{
+    position: absolute !important;
+    top: 60px !important;
+    right: 20px;
+    width: 120px;
+}
+
+.userlogged ul > li:nth-child(1){
+    padding: 8px 22px;
+    border-bottom: 1px dotted #a1a1aa99;
+}
+
+

@@ -13,15 +13,18 @@
 				</ul>
 			</div>
 			<div class="login-sec">
-				<button class="btn btn-secondary">
+                <button class="btn btn-secondary">
 					<img class="images" src="{{asset('public/assets/images/admin-img.png') }}">
 					<a class="admin">
                         {{ Auth::user()->firstname }} {{Auth::user()->lastname  }} <label>{{ roleById(Auth::user()->role_id) }}</label>
 					</a>
+
 				</button>
+
+                <a id="userloggedelem" href="#userloggedin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
 		  </div>
              <!-- Settings Dropdown -->
-             <div class="shadow-lg rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
+             <div id="userloggedin" class="collapse userlogged shadow-lg rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
                 <ul>
                     <li><a href="{{ route('profile.edit')}}">{{ __('Profile') }}</a></li>
                     <li>
