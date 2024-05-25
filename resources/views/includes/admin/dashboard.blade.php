@@ -6,39 +6,60 @@
             </div>
 
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="card text-white bg-primary mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Users</h5>
-                    <p class="card-text">1,234</p>
+                    <p class="card-text">5</p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="card text-white bg-success mb-3 custom-card-height">
                   <div class="card-body">
-                    <h5 class="card-title">Revenue</h5>
-                    <p class="card-text">$12,345</p>
+                    <h5 class="card-title">Total Land lords</h5>
+                    <p class="card-text">2</p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="card text-white bg-danger mb-3 custom-card-height">
                   <div class="card-body">
-                    <h5 class="card-title">Issues</h5>
-                    <p class="card-text">23</p>
+                    <h5 class="card-title">Total Tenants</h5>
+                    <p class="card-text">2</p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3 custom-card-height">
-                  <div class="card-body">
-                    <h5 class="card-title">Tasks</h5>
-                    <p class="card-text">45</p>
-                  </div>
-                </div>
-              </div>
+
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="card text-white bg-primary mb-3 custom-card-height">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Land Lord Screening</h5>
+                      <p class="card-text">2</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card text-white bg-success mb-3 custom-card-height">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Tenant Screening</h5>
+                      <p class="card-text">3</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card text-white bg-danger mb-3 custom-card-height">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Properties</h5>
+                      <p class="card-text">2</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
 
             <div class="row">
               <div class="col-md-12">
