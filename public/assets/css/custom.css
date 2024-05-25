@@ -1,3 +1,11 @@
 ul.collapse{
     visibility: visible;
 }
+
+ul > li ul > li{
+    padding: 6px !important;;
+}
+
+ul > li ul > li > a{
+    padding:0px !important;
+}
