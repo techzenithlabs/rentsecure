@@ -32,11 +32,23 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <section class="main-wrapper">
+                @switch(Auth::user()->role_id)
+                @case(1):{{-- SuperAdmin --}}
+                @include('layouts.admin.sidebar')
+                  @break
+                @case(2):{{-- Landlord --}}
+                @include('layouts.landlord.sidebar')
+                  @break
+                @case(3):{{-- Tenant --}}
+                @include('layouts.tenant.sidebar')
+                  @break
+               @endswitch
+
+
+
+            </section>
         </div>
     </body>
 </html>
