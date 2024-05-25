@@ -7,7 +7,7 @@
                     <img class="img-fluid" src="{{ asset('public/assets/images/property.png') }}"> Properties
                 </a>
                 <ul class="collapse list-unstyled" id="propertiesSubmenu">
-                    <li><a href="#">Landlord Property</a></li>
+                    <li><a href="{{ route('property.landlord') }}">Landlord Property</a></li>
                     <li><a href="#">Tenants</a></li>
 
                 </ul>

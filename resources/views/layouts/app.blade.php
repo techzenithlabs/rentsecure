@@ -50,7 +50,7 @@
                <!-----Include main layout--->
                @switch(Auth::user()->role_id)
                @case(1){{-- SuperAdmin --}}
-               @include('includes.admin.dashboard')
+               @include('includes.admin.content')
                  @break
                @case(2){{-- Landlord --}}
                @include('includes.landlord.content')
