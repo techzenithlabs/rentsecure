@@ -1,8 +1,3 @@
-@php
-$role_id=Auth::user()->role_id;
-@endphp
-
-
 
 <x-app-layout>
     <x-slot name="header">
