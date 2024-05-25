@@ -1,6 +1,15 @@
 ul.collapse,#userloggedin.collapse{
     visibility: visible !important;
 }
+.dropdown-toggle:empty::after
+{
+    font-size:22px;
+    margin-left: 2px;
+}
+.dropdown-toggle::after
+{
+    right:-4px !important;
+}
 .login-sec a:after
 {
     content: "" !important;

@@ -2,6 +2,7 @@
 use App\Models\Country;
 use App\Models\Role;
 use App\Models\State;
+use App\Models\User;
 
 if (!function_exists('roleById')) {
     function roleById($role_id)
@@ -23,4 +24,40 @@ if (!function_exists('getStatesByCountryId')) {
     {
         return State::where('country_id', $countryId)->pluck('name', 'id')->toArray();
     }
+}
+
+if (!function_exists('getUserData')) {
+    function getUserData($userId = null)
+    {
+        $users = User::where(['is_deleted' => 0])->whereIn('role_id', [2, 3])->count();
+        $landlords = User::where(['role_id' => 2, 'is_deleted' => 0])->count();
+        $tenants = User::where(['role_id' => 3, 'is_deleted' => 0])->count();
+        $allusers = (Object) [];
+        $allusers->total = $users;
+        $allusers->landlords = $landlords;
+        $allusers->tenants = $tenants;
+        return $allusers;
+    }
+}
+
+if (!function_exists('getLandlordScreening')) {
+    function getLandlordScreening($userId = null)
+    {
+        $landlords = User::leftJoin('user_documents', 'user_documents.user_id', '=', 'users.id')
+            ->where(['users.role_id' => 2, 'users.status' => 0]) //Landlord
+            ->get();
+        return $landlords->isNotEmpty() ? $landlords : [];
+    }
+}
+
+if (!function_exists('getTenantScreening')) {
+    function getTenantScreening($userId = null)
+    {
+        $tenants = User::leftJoin('user_documents', 'user_documents.user_id', '=', 'users.id')
+            ->where(['users.role_id' => 3, 'users.status' => 0]) //Tenants
+            ->get();
+
+        return $tenants->isNotEmpty() ? $tenants : [];
+    }
+
 }
