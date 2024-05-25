@@ -1,108 +1,135 @@
+@include('includes.header')
 
-<div class="main-content">
-    <div class="cont-wrapper">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h2">Dashboard</h1>
-            </div>
+            <!-- Page Content -->
 
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card text-white bg-primary mb-3 custom-card-height">
-                  <div class="card-body">
-                    <h5 class="card-title">Total Users</h5>
-                    <p class="card-text badge">5</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card text-white bg-success mb-3 custom-card-height">
-                  <div class="card-body">
-                    <h5 class="card-title">Total Land lords</h5>
-                    <p class="card-text badge">2</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card text-white bg-danger mb-3 custom-card-height">
-                  <div class="card-body">
-                    <h5 class="card-title">Total Tenants</h5>
-                    <p class="card-text badge">2</p>
-                  </div>
-                </div>
-              </div>
+            <section class="main-wrapper">
+                @include('layouts.admin.sidebar')
+                <div class="main-content">>
+                <div class="cont-wrapper">
+                    <div class="tenant-screening">
+                        <div class="card-head">
+                            <h3>Tenant Screening</h3>
+                            <div class="progress-sec">
+                                <ul>
+                                    <li class="completed">
+                                        <label>Step 1/4</label>
+                                        <span></span>
+                                    </li>
+                                    <li class="completed">
+                                        <label>Step 2/4</label>
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        <label>Step 3/4</label>
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        <label>Step 4/4</label>
+                                        <span></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-content">
+                        <div class="card-body whopays-sec min-hieght">
+                            <h2>Select 	Report<span>Applicant currently resides in</span></h2>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="country" type="radio" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">Canada</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="country" type="radio" id="inlineradio2" value="option2">
+                                    <label class="form-check-label" for="inlineradio2">United States of America	</label>
+                                  </div>
+                            <div class="payInfo-sec1 mt-4">
+                                <ul>
+                                    <li>
+                                        <h3>Credit Report, and Background Check <label class="new">Best Value</label></h3>
 
-            </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4">$32.98 <span>/ Report</span></h3></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-4 col-lg-4">
+                                                <ul class="subpara">
+                                                    <li>Long Form equifax credit report</li>
+                                                    <li>Current and former addresses</li>
+                                                    <li>aliases</li>
+                                                    <li>Employment confirmation</li>
+                                                    <li>Open and closed credit Facilities (Trade lines)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                <ul class="subpara">
+                                                    <li>credit balances</li>
+                                                    <li>collections</li>
+                                                    <li>bankruptcies</li>
+                                                    <li>inquiries</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                <ul class="subpara"><li>Global Public information search for:criminal records, court decisions, negative press,Sanctions andmore</li></ul>
+                                            </div>
+                                        </div>
+                                    </li>
 
-            <div class="row">
-                <div class="col-md-4">
-                  <div class="card text-white bg-primary mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Land Lord Screening</h5>
-                      <p class="card-text badge">2</p>
+                                </ul>
+                            </div>
+                            <div class="payInfo-sec1 mt-4">
+                                <ul>
+                                    <li>
+                                        <h3>Credit Report</h3>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$32.98 <span>/ Report</span></h3></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
+                                        </div>
+
+                                        <hr>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="payInfo-sec1 mt-4">
+                                <ul>
+                                    <li>
+                                        <h3>Background Check</h3>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$16.99 <span>/ Report</span></h3></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
+                                        </div>
+
+                                        <hr>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="back-btn">Back</button>
+                            <button class="next-btn">Continue</button>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-success mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Tenant Screening</h5>
-                      <p class="card-text badge">3</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-danger mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Properties</h5>
-                      <p class="card-text badge">2</p>
-                    </div>
-                  </div>
                 </div>
 
-              </div>
-
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card text-white bg-primary mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Sold Properties</h5>
-                      <p class="card-text badge">2</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-success mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Pending Properties</h5>
-                      <p class="card-text badge">3</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-danger mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">On Hold Properties</h5>
-                      <p class="card-text badge">2</p>
-                    </div>
-                  </div>
                 </div>
 
-              </div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-title">Sales Overview</h5>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart" width="400" height="150"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-    </div>
-   </div>
+            </section>
+        </div>
+@include('includes.footer')
+
