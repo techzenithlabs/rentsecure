@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\App;
             <!-- Page Content -->
             @php
             $getLandlordData=getLandlordScreening();
-            $baseURL=config('app.url');
+            $baseURL=config('app.url').'/storage/app/';
 
 
             @endphp
@@ -37,7 +37,6 @@ use Illuminate\Support\Facades\App;
                                         <th scope="col">City</th>
                                         <th scope="col">State</th>
                                         <th scope="col">Country</th>
-                                        <th scope="col">ZipCode</th>
                                         <th scope="col">Documents</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -69,10 +68,11 @@ use Illuminate\Support\Facades\App;
                                 <td>{{ $userPhone }}</td>
                                 <td>{{ $userAddress }}</td>
                                 <td>{{ $userCity }}</td>
-                                <td>{{ $userState }}</td>
-                                <td>{{ $userCountry }}</td>
-                                <td>{{ $userZip }}</td>
-                                <td><em>{{ $userdoctype }}</em> <p><a href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
+                                <td>{{ !empty(getStateById($userState))?getStateById($userState):"N/A" }}</td>
+                                <td>{{ !empty(getCountryById($userCountry))?getCountryById($userCountry):"N/A" }}</td>
+
+                                <td><em>{{ $userdoctype }}</em> <p><a style="color:blue" target="blank" href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
+                                <td><a style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/> <a style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
                               </tr>
                             @endforeach
                                 </tbody>

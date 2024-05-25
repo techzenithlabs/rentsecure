@@ -26,6 +26,22 @@ if (!function_exists('getStatesByCountryId')) {
     }
 }
 
+if (!function_exists('getCountryById')) {
+    function getCountryById($countryId)
+    {
+        $country = Country::select('name')->where('id', $countryId)->first();
+        return $country->name;
+    }
+}
+
+if (!function_exists('getStateById')) {
+    function getStateById($stateId)
+    {
+        $state = State::select('name')->where('id', $stateId)->first();
+        return $state->name;
+    }
+}
+
 if (!function_exists('getUserData')) {
     function getUserData($userId = null)
     {
