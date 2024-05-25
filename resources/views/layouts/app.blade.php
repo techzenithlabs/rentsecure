@@ -34,16 +34,34 @@
             <!-- Page Content -->
             <section class="main-wrapper">
                 @switch(Auth::user()->role_id)
-                @case(1):{{-- SuperAdmin --}}
+                @case(1){{-- SuperAdmin --}}
                 @include('layouts.admin.sidebar')
                   @break
-                @case(2):{{-- Landlord --}}
+                @case(2){{-- Landlord --}}
                 @include('layouts.landlord.sidebar')
                   @break
-                @case(3):{{-- Tenant --}}
+                @case(3){{-- Tenant --}}
                 @include('layouts.tenant.sidebar')
                   @break
                @endswitch
+
+
+
+               <!-----Include main layout--->
+               @switch(Auth::user()->role_id)
+               @case(1){{-- SuperAdmin --}}
+               @include('includes.admin.dashboard')
+                 @break
+               @case(2){{-- Landlord --}}
+               @include('includes.landlord.content')
+                 @break
+               @case(3){{-- Tenant --}}
+               @include('includes.tenant.content')
+                 @break
+              @endswitch
+
+
+               <!-----incude main layout-->
 
 
 

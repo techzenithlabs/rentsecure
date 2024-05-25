@@ -23,8 +23,6 @@ a#userloggedin::after{
     border-left: .3em solid transparent !important;
 }
 
-
-
 .navigation ul li a
 {
     padding: 14px 4px;
@@ -51,4 +49,7 @@ ul > li ul > li > a{
     border-bottom: 1px dotted #a1a1aa99;
 }
 
+.custom-card-height {
+    height: 120px; /* Adjust this value as needed */
+  }
 
