@@ -109,8 +109,7 @@ use Illuminate\Support\Facades\App;
                         </div>
                         </div>
                         <div class="card-footer">
-                            <button class="back-btn">Back</button>
-                            <button class="next-btn">Continue</button>
+
                         </div>
                     </div>
                 </div>
