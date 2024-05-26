@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'zipcode',
         'role_id',
         'verification_token',
+        'status',
     ];
 
     /**

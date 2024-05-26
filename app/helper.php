@@ -60,7 +60,8 @@ if (!function_exists('getLandlordScreening')) {
     function getLandlordScreening($userId = null)
     {
         $landlords = User::leftJoin('user_documents', 'user_documents.user_id', '=', 'users.id')
-            ->where(['users.role_id' => 2, 'users.status' => 0]) //Landlord
+            ->select()
+            ->where(['users.role_id' => 2]) //Landlord
             ->get();
         return $landlords->isNotEmpty() ? $landlords : [];
     }

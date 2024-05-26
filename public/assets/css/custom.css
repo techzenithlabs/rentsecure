@@ -70,3 +70,16 @@ ul > li ul > li > a{
     font-weight: 700;
   }
 
+.btn-success.disabled{
+    cursor: not-allowed;
+    background-color: #1987546b;
+    border-color:#1987546b;
+    opacity: 0.4;
+}
+.btn-danger.disabled{
+    cursor: not-allowed;
+    border-color:#b02a3761;
+    background-color:#b02a3761;
+    opacity: 0.4;
+}
+

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\User_Document;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -34,5 +37,36 @@ class AdminController extends Controller
 
         }
 
+    }
+
+    public function adminAction(Request $request)
+    {
+        try {
+            $userId = $request->input('userId');
+            $action = $request->input('action');
+            $status = ($action == 1) ? 1 : 0;
+
+            $user = User::find($userId);
+            $user->status = $status;
+            if ($user->save()) {
+                $data = [
+                    "is_verified" => $action,
+                ];
+                $docUpdate = User_Document::where('user_id', $user->id)->update($data);
+                $res = [
+                    "status" => 1,
+                    "message" => $action == 1 ? "You Verified Successfully" : "Sorry you Rejected",
+
+                ];
+                return response()->json($res, 200);
+            }
+
+        } catch (\Exception $e) {
+            $res = [
+                "status" => 0,
+                "message" => $e->getMessage(),
+            ];
+            return response()->json($res, 500);
+        }
     }
 }

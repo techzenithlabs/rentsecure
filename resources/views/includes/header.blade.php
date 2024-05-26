@@ -25,6 +25,7 @@
 
 <script>
         var baseURL = "{{ url('/') }}";
+        var csrfToken=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 </script>
     </head>
     <body class="font-sans antialiased">

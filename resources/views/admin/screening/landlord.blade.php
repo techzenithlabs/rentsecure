@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\App;
             <!-- Page Content -->
             @php
             $getLandlordData=getLandlordScreening();
+
             $baseURL=config('app.url').'/storage/app/';
 
 
@@ -21,6 +22,16 @@ use Illuminate\Support\Facades\App;
                     <div class="tenant-screening">
                         <div class="card-head">
                             <h3>Landlords</h3>
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-6"></div>
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="adminactions pull-right">
+                                        <div style="display:none" class="verifiedsuccess alert alert-success"></div>
+                                        <div style="display:none" class="verifiedfailed alert alert-danger"></div>
+                                      </div>
+                                </div>
+                            </div>
+
 
                         </div>
                         <div class="form-content">
@@ -49,7 +60,8 @@ use Illuminate\Support\Facades\App;
                             @foreach($getLandlordData as $user)
 
                              @php
-                             $userId=$user->id;
+
+                             $userId=$user->user_id;
                              $userName=$user->firstname." ".$user->lastname;
                              $userEmail=$user->email;
                              $userPhone=$user->phone;
@@ -60,6 +72,7 @@ use Illuminate\Support\Facades\App;
                              $userZip=$user->zipcode;
                              $userdoctype=$user->document_type;
                              $userdocument=$user->documents;
+                             $isVerified=$user->is_verified;
                              @endphp
                              <tr>
                                 <td>{{ $cnt++ }}</td>
@@ -72,7 +85,18 @@ use Illuminate\Support\Facades\App;
                                 <td>{{ !empty(getCountryById($userCountry))?getCountryById($userCountry):"N/A" }}</td>
 
                                 <td><em>{{ $userdoctype }}</em> <p><a style="color:blue" target="blank" href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
-                                <td><a style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/> <a style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
+                                <td>
+                                    @if($isVerified==0)
+                                        <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
+                                        <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
+                                    @elseif($isVerified==1)
+                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-success disabled">Approve</a><br/>
+                                    <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
+                                    @elseif($isVerified==2)
+                                    <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
+                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-danger disabled">Reject</a></td>
+                                    @endif
+
                               </tr>
                             @endforeach
                                 </tbody>
