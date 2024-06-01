@@ -107,7 +107,7 @@ class RegisteredUserController extends Controller
                 'zipcode' => $request->zipcode,
                 'role_id' => $role->id, // Assign the role_id
                 'verification_token' => $verificationToken, // Save the verification token
-                'status' => 1,
+                'status' => 0,
             ]);
 
             $userDocumentData = [
