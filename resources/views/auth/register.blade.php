@@ -133,10 +133,12 @@
                                             <label>Upload Document <span>(driver's license or passport. If
                                                     corporation-articles of incorporation)</span></label>
                                             <div class="upload-sec">
+                                                <div id="filename"></div>
                                                 <input id="uploadFile" class="f-input form-control"
                                                     placeholder="Choose Document" />
                                                 <div class="fileUpload btn btn--browse">
                                                     <span>Browse</span>
+
                                                     <input id="uploadBtn" type="file" name="file" class="upload" />
                                                 </div>
 

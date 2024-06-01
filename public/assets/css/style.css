@@ -463,7 +463,7 @@ button.view-applicant{
     background: #642a81;
     border: 1px solid #642a81;
     padding:12px 12px 12px 12px;
-    border-radius: 22px 22px 22px 22px; 
+    border-radius: 22px 22px 22px 22px;
     width: 45%;
     max-width: 100%;
 }
@@ -543,6 +543,16 @@ button.view-sample:hover {
 
 .container input[type="checkbox"] {
     margin-right: 10px; /* Add margin between checkbox and text */
+}
+
+.upload-sec #filename{
+    position: absolute;
+    left: 144px;
+    /* background: #80808021; */
+    color: #8e96bd;
+    font-weight: 700;
+    padding: 3px;
+    border-radius: 12px 12px 12px 12px;
 }
 
 

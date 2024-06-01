@@ -5,6 +5,17 @@ $(document).ready(function(){
     $('#state').select2({
         placeholder: 'Select State'
     });
+    $('#filename').hide();
+    $('#filename').html('');
+
+    $('#uploadBtn').on('change',function(e){
+        $('#filename').hide();
+        $('#filename').html('')
+        var fileName = e.target.files[0].name;
+        $('#filename').show();
+        $('#filename').html(fileName)
+
+    })
 })
 
 let getTabs=document.querySelectorAll('ul.nav.nav-pills > li');
@@ -52,4 +63,7 @@ function getStates(elem) {
         }
     });
 }
+
+
+
 
