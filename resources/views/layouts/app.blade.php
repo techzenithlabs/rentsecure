@@ -5,6 +5,7 @@
 
             <!-- Page Content -->
             <section class="main-wrapper">
+            
                 @switch(Auth::user()->role_id)
                 @case(1){{-- SuperAdmin --}}
                 @include('layouts.admin.sidebar')
@@ -23,10 +24,10 @@
                @include('includes.admin.dashboard')
                  @break
                @case(2){{-- Landlord --}}
-               @include('includes.landlord.content')
+               @include('includes.landlord.dashboard')
                  @break
                @case(3){{-- Tenant --}}
-               @include('includes.landlord.content')
+               @include('includes.landlord.dashboard')
                  @break
               @endswitch
 

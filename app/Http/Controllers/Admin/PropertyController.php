@@ -12,10 +12,25 @@ class PropertyController extends Controller
 
     }
 
+    /**********Admin **********/
+
     public function landLordProperty()
     {
         return View('admin.properties.landlord');
 
     }
+    /**********Admin **********/
+
+    /**********Land Lord **********/
+    public function myProperty()
+    {
+        return View('landlord.properties');
+    }
+
+    public function Pricing()
+    {
+        return View('landlord.pricing');
+    }
+    /**********Land Lord **********/
 
 }

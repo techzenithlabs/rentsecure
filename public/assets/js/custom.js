@@ -116,7 +116,7 @@ function takeAction(event, user_Id, action) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    var successMessage = document.getElementById('success-message');
+    var successMessage = document.getElementById('success-error-message');
     if (successMessage) {
         setTimeout(function () {
             successMessage.style.display = 'none';

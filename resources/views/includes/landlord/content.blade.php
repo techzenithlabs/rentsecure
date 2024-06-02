@@ -4,14 +4,24 @@
             <div class="col-md-6 col-lg-6">
 
             </div>
-            <div id="success-message" class="col-md-6 col-lg-6">
+            <div id="success-error-message" class="success-error col-md-6 col-lg-6">
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
 
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
             </div>
+
+
+            <!-- Rest of your dashboard view -->
+
         </div>
         <div class="tenant-screening">
             <div class="card-head">

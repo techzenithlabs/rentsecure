@@ -22,8 +22,13 @@ Route::get('/registration/success/{firstname}', function ($firstname) {
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/property/landlord', [PropertyController::class, 'landLordProperty'])->name('property.landlord');
     Route::get('/screening/landlord', [ScreeningController::class, 'landlordScreening'])->name('screening.landlord');
+
+    Route::get('/property', [PropertyController::class, 'myProperty'])->name('property');
+    Route::get('/pricing', [PropertyController::class, 'Pricing'])->name('pricing');
+
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
