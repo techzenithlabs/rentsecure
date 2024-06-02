@@ -10,7 +10,7 @@ class ScreeningController extends Controller
     {
 
     }
-
+    /**********Admin *******************/
     public function landlordScreening()
     {
         return View('admin.screening.landlord');
@@ -22,4 +22,15 @@ class ScreeningController extends Controller
         return View('admin.screening.tenant');
 
     }
+    /**********Admin *******************/
+
+    /**********Landlord *******************/
+
+    public function landlordtenantScreening()
+    {
+        return View('landlord.tenant-screening');
+
+    }
+
+    /**********Landlord *******************/
 }

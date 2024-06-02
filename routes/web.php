@@ -29,7 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/property', [PropertyController::class, 'myProperty'])->name('property');
     Route::get('/pricing', [PropertyController::class, 'Pricing'])->name('pricing');
 
+    /*****Admin */
+
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
+    /****Admin */
+
+    /***Landlord ***/
+    Route::get('/landlord/screening/tenant', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
+
+    /***Landlord ****/
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
