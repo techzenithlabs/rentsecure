@@ -114,3 +114,12 @@ function takeAction(event, user_Id, action) {
     }
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    var successMessage = document.getElementById('success-message');
+    if (successMessage) {
+        setTimeout(function () {
+            successMessage.style.display = 'none';
+        }, 5000); // 5000 milliseconds = 5 seconds
+    }
+});
