@@ -35,7 +35,7 @@ class VerifyEmailController extends Controller
 
         Auth::logout();
 
-        return redirect()->route('login')->with('info', 'Your profile is under review. You will be informed once it is verified or rejected.');
+        return redirect()->route('login')->with('info', 'You can successfully Login now, However your uploaded documents is been reviewed by admin and soon you will notified');
 
     }
 

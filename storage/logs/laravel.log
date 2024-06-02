@@ -2732,3 +2732,7 @@
 #67 C:\\laragon\\www\\rentsecure\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
 #68 {main}
 "} 
+[2024-06-02 09:02:39] local.INFO: Error Auth guard [admin] is not defined.  
+[2024-06-02 09:03:06] local.INFO: Verification attempt for user: {"email":"muruguanswamy@yopmail.com"} 
+[2024-06-02 09:03:06] local.INFO: User successfully verified: {"email":"muruguanswamy@yopmail.com"} 
+[2024-06-02 09:03:06] local.INFO: User verification token updated to null: {"email":"muruguanswamy@yopmail.com"} 
