@@ -83,4 +83,28 @@ ul > li ul > li > a{
     opacity: 0.4;
 }
 
+button.add-btn{
+    background: #642a81;
+    border: #642a81;
+    font-size: 12px;
+    border-radius: 30px;
+    color: #fff;
+    padding: 8px 15px;
+    font-family: 'graphikmedium';
+    position: absolute;
+    top: 200px;
+    right: 64px;
+}
+.fileUpload.btn.btn--browse
+{
+    width: 145px !important;
+    right:700px !important;
+    bottom:0px;
+    vertical-align: middle;
+}
+
+#propertyimg{
+    width: 80% !important;
+}
+
 

@@ -5,7 +5,7 @@
 
             <!-- Page Content -->
             <section class="main-wrapper">
-            
+
                 @switch(Auth::user()->role_id)
                 @case(1){{-- SuperAdmin --}}
                 @include('layouts.admin.sidebar')

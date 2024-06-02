@@ -3,6 +3,7 @@ use App\Models\Country;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\User;
+use Carbon\Carbon;
 
 if (!function_exists('roleById')) {
     function roleById($role_id)
@@ -77,4 +78,17 @@ if (!function_exists('getTenantScreening')) {
         return $tenants->isNotEmpty() ? $tenants : [];
     }
 
+}
+
+if (!function_exists('human_readable_date')) {
+    /**
+     * Convert a date to a human-readable format.
+     *
+     * @param string $date
+     * @return string
+     */
+    function human_readable_date($date)
+    {
+        return Carbon::parse($date)->translatedFormat('d F, Y');
+    }
 }

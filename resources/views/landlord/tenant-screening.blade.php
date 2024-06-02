@@ -5,7 +5,7 @@
 
             <!-- Page Content -->
             <section class="main-wrapper">
-            
+
                 @switch(Auth::user()->role_id)
                 @case(1){{-- SuperAdmin --}}
                 @include('layouts.admin.sidebar')
@@ -75,7 +75,7 @@
                                 </ul>
                             </div>
                         </div>
-                      </div> 
+                      </div>
                         <div class="card-footer">
                             <button class="back-btn">Back</button>
                             <button class="next-btn">Continue</button>

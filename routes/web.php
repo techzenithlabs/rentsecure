@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/property/landlord', [PropertyController::class, 'landLordProperty'])->name('property.landlord');
     Route::get('/screening/landlord', [ScreeningController::class, 'landlordScreening'])->name('screening.landlord');
 
-    Route::get('/property', [PropertyController::class, 'myProperty'])->name('property');
+    Route::match(['get', 'post'], '/property', [PropertyController::class, 'myProperty'])->name('property');
     Route::get('/pricing', [PropertyController::class, 'Pricing'])->name('pricing');
 
     /*****Admin */

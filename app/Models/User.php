@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Property;
 use App\Models\User_Document;
 use App\Notifications\VerifyUserEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -66,6 +67,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function documents()
     {
         return $this->hasMany(User_Document::class);
+    }
+
+    // Add the relationship
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'landlord_id');
+    }
+
+    // Scope to get only landlords
+    public function scopeLandlords($query)
+    {
+        return $query->where('role_id', 2);
     }
 
     public function sendEmailVerificationNotification()
