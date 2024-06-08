@@ -64,26 +64,13 @@ class RegisteredUserController extends Controller
 
             $role = Role::select('id')->where('name', $roleName)->first();
 
-            $files = $request->file('files') ?? [];
+            $files = $request->file('file') ?? [];
 
             // $filename = $file->getClientOriginalName();
             // $tmppath = $file->getPathname();
             // $filepath = $file->getRealPath();
             // $size = $file->getSize();
             // $mime = $file->getMimeType();
-
-            $directory = 'public/document_uploaded/documents';
-
-            // Check if the directory exists
-            if (!Storage::exists('public/document_uploaded/documents')) {
-                // If the directory does not exist, create it
-                Storage::makeDirectory('public/document_uploaded/documents');
-                // Set permissions to 0777
-                File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
-            } else {
-                // If the directory exists, update permissions to 0777
-                File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
-            }
 
             // Get the storage path to the directory
 
@@ -106,13 +93,21 @@ class RegisteredUserController extends Controller
                 'status' => 1,
             ]);
 
-            // $userDocumentData = [
-            //     'user_id' => $user->id,
-            //     'document_type' => $mime,
-            //     'documents' => $storedFilePath,
-            //     'expiry_date' => $request->expiry_date ?? null,
-            //     'is_verified' => 0,
-            // ];
+            if (isset($user->id) && !empty($user->id)) {
+                $directory = 'public/document_uploaded/documents/user_' . $user->id . '';
+
+                // Check if the directory exists
+                if (!Storage::exists('public/document_uploaded/documents/user_' . $user->id . '')) {
+                    // If the directory does not exist, create it
+                    Storage::makeDirectory('public/document_uploaded/documents/user_' . $user->id . '');
+                    // Set permissions to 0777
+                    File::chmod(storage_path('app/public/document_uploaded/documents/user_' . $user->id . ''), 0777);
+                } else {
+                    // If the directory exists, update permissions to 0777
+                    File::chmod(storage_path('app/public/document_uploaded/documents/user_' . $user->id . ''), 0777);
+                }
+
+            }
 
             // Send verification email
             event(new Registered($user));
