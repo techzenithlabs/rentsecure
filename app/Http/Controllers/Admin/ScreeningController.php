@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class ScreeningController extends Controller
 {
@@ -21,6 +22,19 @@ class ScreeningController extends Controller
     {
         return View('admin.screening.tenant');
 
+    }
+
+    public function viewDocuments($user_id)
+    {
+        try {
+            $data = [];
+            $user = User::findOrFail($user_id);
+            $data['documents'] = !empty($user->documents) ? $user->documents : [];
+            return View('admin.properties.landlord-documents')->with($data);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+        }
     }
     /**********Admin *******************/
 

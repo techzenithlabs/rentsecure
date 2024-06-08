@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pricing', [PropertyController::class, 'Pricing'])->name('pricing');
 
     /*****Admin */
+    Route::get('landlord-documents/{user_id}', [ScreeningController::class, 'viewDocuments'])->name('landlord.documents');
 
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
     /****Admin */

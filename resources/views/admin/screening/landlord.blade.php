@@ -48,20 +48,19 @@ use Illuminate\Support\Facades\App;
                                         <th scope="col">City</th>
                                         <th scope="col">State</th>
                                         <th scope="col">Country</th>
-                                        <th scope="col">Documents</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Uploaded Documents</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                              @php
                              $cnt=1;
-                           ;
+
                              @endphp
                             @foreach($getLandlordData as $user)
 
                              @php
 
-                             $userId=$user->user_id;
+                             $userId=$user->id;
                              $userName=$user->firstname." ".$user->lastname;
                              $userEmail=$user->email;
                              $userPhone=$user->phone;
@@ -70,9 +69,7 @@ use Illuminate\Support\Facades\App;
                              $userState=$user->state;
                              $userCountry=$user->country;
                              $userZip=$user->zipcode;
-                             $userdoctype=$user->document_type;
-                             $userdocument=$user->documents;
-                             $isVerified=$user->is_verified;
+
                              @endphp
                              <tr>
                                 <td>{{ $cnt++ }}</td>
@@ -84,18 +81,8 @@ use Illuminate\Support\Facades\App;
                                 <td>{{ !empty(getStateById($userState))?getStateById($userState):"N/A" }}</td>
                                 <td>{{ !empty(getCountryById($userCountry))?getCountryById($userCountry):"N/A" }}</td>
 
-                                <td> <p><a style="color:blue" target="blank" href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
-                                <td>
-                                    @if($isVerified==0)
-                                        <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
-                                        <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
-                                    @elseif($isVerified==1)
-                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-success disabled">Approve</a><br/>
-                                    <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a></td>
-                                    @elseif($isVerified==2)
-                                    <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
-                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-danger disabled">Reject</a></td>
-                                    @endif
+                                <td> <p><a style="color:blue" target="blank" href="{{ url('landlord-documents/' . $userId) }}">View Document</a></p></td>
+
 
                               </tr>
                             @endforeach

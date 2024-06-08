@@ -69,4 +69,6 @@ class AdminController extends Controller
             return response()->json($res, 500);
         }
     }
+
+
 }
