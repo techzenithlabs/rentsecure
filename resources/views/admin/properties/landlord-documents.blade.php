@@ -8,6 +8,8 @@
             <div class="cont-wrapper" style="min-height:500px">
                 <div class="row">
                     <div class="col-sm-10 col-lg-10">
+                        <div style="display:none" class="verifiedsuccess alert alert-success"></div>
+                        <div style="display:none" class="verifiedfailed alert alert-danger"></div>
 
                     </div>
                     <div class="col-sm-2 col-lg-2">
@@ -22,7 +24,7 @@
                                 <th scope="col">Sr No</th>
                                 <th scope="col">Documents</th>
                                 <th scope="col">Expiry Date</th>
-                                <th scope="col">Action</th>
+
 
                             </tr>
                         </thead>
@@ -45,23 +47,26 @@
                                 <td>{{ ++$key }}</td>
                                 <td><a href="{{ $filePath.$uploadeddocuments }}">Click Here</a></td>
                                 <td>N/A</td>
-                                <td>
-                                    @if($isVerified==0)
-                                    <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
-                                    <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a>
-                                    @elseif($isVerified==1)
-                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-success disabled">Approve</a><br/>
-                                    <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a>
-                                    @elseif($isVerified==2)
-                                    <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
-                                    <a disabled style="padding:4px;font-size:0.8em" class="btn btn-danger disabled">Reject</a>
-                                    @endif
-                                </td>
+
                             </tr>
 
                             @endforeach
+
                             </tbody>
+
                         </table>
+                        <center>
+                        @if($isVerified==0)
+                        <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a>
+                        <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a>
+                        @elseif($isVerified==1)
+                        <a disabled style="padding:4px;font-size:0.8em" class="btn btn-success disabled">Approve</a><br/>
+                        <a onclick="takeAction(event,'{{$userId}}',2)" style="padding:4px;font-size:0.8em" class="btn btn-danger">Reject</a>
+                        @elseif($isVerified==2)
+                        <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a>
+                        <a disabled style="padding:4px;font-size:0.8em" class="btn btn-danger disabled">Reject</a>
+                        @endif
+                    </center>
                 @endif
             </div>
 

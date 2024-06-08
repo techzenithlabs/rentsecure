@@ -26,8 +26,7 @@ use Illuminate\Support\Facades\App;
                                 <div class="col-sm-6 col-lg-6"></div>
                                 <div class="col-sm-6 col-lg-6">
                                     <div class="adminactions pull-right">
-                                        <div style="display:none" class="verifiedsuccess alert alert-success"></div>
-                                        <div style="display:none" class="verifiedfailed alert alert-danger"></div>
+
                                       </div>
                                 </div>
                             </div>
