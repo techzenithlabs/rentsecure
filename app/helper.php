@@ -1,5 +1,6 @@
 <?php
 use App\Models\Country;
+use App\Models\Property;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\User;
@@ -54,6 +55,20 @@ if (!function_exists('getUserData')) {
         $allusers->landlords = $landlords;
         $allusers->tenants = $tenants;
         return $allusers;
+    }
+}
+
+if (!function_exists('getLandLordData')) {
+    function getLandLordData($userId = null)
+    {
+        $userId = Auth::user()->id;
+        $totalproperties = Property::where('landlord_id', $userId)->where(['status' => 1, 'is_deleted' => 0])->count();
+        $verifiedProperties = Property::where('landlord_id', $userId)->where(['status' => 1, 'is_verified' => 1, 'is_deleted' => 0])->count();
+
+        $properties = (Object) [];
+        $properties->total = $totalproperties;
+        $properties->verified = $verifiedProperties;
+        return $properties;
     }
 }
 

@@ -123,3 +123,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000); // 5000 milliseconds = 5 seconds
     }
 });
+
+function uploadProperty(event){
+    const file = event.target.files[0];
+    imagePreview.style.display='none';
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    }
+}

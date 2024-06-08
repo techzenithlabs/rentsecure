@@ -23,23 +23,7 @@
             @break
         @endswitch
 
-        <!-----Include main layout--->
-        @switch(Auth::user()->role_id)
-            @case(1)
-                {{-- SuperAdmin --}}
-                @include('includes.admin.dashboard')
-            @break
 
-            @case(2)
-                {{-- Landlord --}}
-                @include('includes.landlord.dashboard')
-            @break
-
-            @case(3)
-                {{-- Tenant --}}
-                @include('includes.landlord.dashboard')
-            @break
-        @endswitch
 
         <!-----incude main layout-->
 
@@ -140,10 +124,12 @@
 
                                             <div class="fileUpload btn btn--browse">
                                                 <span>Browse</span>
-                                                <input id="uploadBtn" type="file" name="file" class="upload">
+                                                <input onchange="uploadProperty(event)" id="uploadBtn" type="file" name="file" class="upload">
 
                                             </div>
+
                                         </div>
+                                        <img id="imagePreview" alt="Image Preview" style="display:none; max-width:100%; height:auto;">
                                         <x-input-error :messages="$errors->get('file')" class="mt-2 text-danger" />
                                     </div>
                                 </div>
