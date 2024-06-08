@@ -32,6 +32,7 @@ document.getElementById('uploadBtn').addEventListener('change', function(event) 
     fileList.innerHTML = ''; // Clear any existing file names
     $('.invalid-file').hide();
     $('.invalid-file').html('')
+    $('.btn.btn-screening').prop('disabled',false)
 
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -39,6 +40,7 @@ document.getElementById('uploadBtn').addEventListener('change', function(event) 
         // Check if the file type is allowed
         if (!allowedTypes.includes(file.type)) {
             $('.invalid-file').show()
+            $('.btn.btn-screening').prop('disabled','disabled')
             $('.invalid-file').html('File type not allowed: ' + file.name)
             continue;
         }

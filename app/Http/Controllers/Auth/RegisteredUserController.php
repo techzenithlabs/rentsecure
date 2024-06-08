@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
                 'state' => ['required'],
                 'city' => ['required'],
                 'zipcode' => ['required'],
-                'files.*' => ['required', 'file', 'mimes:pdf,doc,docx,jpeg,jpg,png,xlsx,gif', 'max:5048'],
+                'file.*' => ['required', 'file', 'mimes:pdf,doc,docx,jpeg,jpg,png,xlsx,gif', 'max:5048'],
                 'agreement' => ['required'],
 
             ]);

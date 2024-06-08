@@ -136,13 +136,13 @@
                                                 <input id="uploadFile" class="f-input form-control" placeholder="Choose Document" readonly />
                                                 <div class="fileUpload btn btn--browse">
                                                     <span>Browse</span>
-                                                    <input id="uploadBtn" type="file" name="files[]" class="upload" multiple accept=".pdf,.doc,.docx,.jpeg,.jpg,.png,.xlsx,.gif"/>
+                                                    <input id="uploadBtn" type="file" name="file[]" class="upload" multiple accept=".pdf,.doc,.docx,.jpeg,.jpg,.png,.xlsx,.gif"/>
                                                 </div>
 
                                             </div>
                                             <div style="display:none" class="invalid-file text text-danger ms-2 mt-1 mb-1"></div>
                                             <div id="fileList" class="file-list"></div>
-                                            <x-input-error :messages="$errors->get('files.*')" class="mt-2 text-danger" />
+                                            <x-input-error :messages="$errors->get('file.*')" class="mt-2 text-danger" />
                                         </div>
 
                                         <div class="form-group col-12 checkbox-sec">
