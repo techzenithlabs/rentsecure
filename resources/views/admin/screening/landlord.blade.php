@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\App;
                                 <td>{{ !empty(getStateById($userState))?getStateById($userState):"N/A" }}</td>
                                 <td>{{ !empty(getCountryById($userCountry))?getCountryById($userCountry):"N/A" }}</td>
 
-                                <td><em>{{ $userdoctype }}</em> <p><a style="color:blue" target="blank" href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
+                                <td> <p><a style="color:blue" target="blank" href="{{ $baseURL.$userdocument }}">View Document</a></p></td>
                                 <td>
                                     @if($isVerified==0)
                                         <a onclick="takeAction(event,'{{$userId}}',1)" style="padding:4px;font-size:0.8em" class="btn btn-success">Approve</a><br/>
