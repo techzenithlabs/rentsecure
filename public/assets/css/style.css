@@ -555,6 +555,25 @@ button.view-sample:hover {
     border-radius: 12px 12px 12px 12px;
 }
 
+file-list {
+    margin-top: 10px;
+}
+
+.file-item {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    background: #8e96bd0d;
+}
+
+.file-item p {
+    margin: 0;
+    font-weight: bold;
+}
+
+
 
 
 

@@ -8,14 +8,7 @@ $(document).ready(function(){
     $('#filename').hide();
     $('#filename').html('');
 
-    $('#uploadBtn').on('change',function(e){
-        $('#filename').hide();
-        $('#filename').html('')
-        var fileName = e.target.files[0].name;
-        $('#filename').show();
-        $('#filename').html(fileName)
 
-    })
 })
 
 let getTabs=document.querySelectorAll('ul.nav.nav-pills > li');
@@ -30,6 +23,47 @@ getTabs.forEach(function(e){
     })
 
 })
+
+document.getElementById('uploadBtn').addEventListener('change', function(event) {
+    const files = event.target.files;
+    const fileList = document.getElementById('fileList');
+    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'image/gif'];
+
+    fileList.innerHTML = ''; // Clear any existing file names
+    $('.invalid-file').hide();
+    $('.invalid-file').html('')
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        // Check if the file type is allowed
+        if (!allowedTypes.includes(file.type)) {
+            $('.invalid-file').show()
+            $('.invalid-file').html('File type not allowed: ' + file.name)
+            continue;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const div = document.createElement('div');
+            div.classList.add('file-item');
+
+            // Create file name text
+            const fileName = document.createElement('p');
+            fileName.textContent = file.name;
+            div.appendChild(fileName);
+
+            // Check if file is an image
+
+
+            fileList.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
 
 
 function getStates(elem) {

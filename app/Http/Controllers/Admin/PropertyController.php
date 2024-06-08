@@ -102,7 +102,7 @@ class PropertyController extends Controller
             $user = Auth::user();
             $documents = $user->documents->first();
             $data['document_verified'] = isset($documents->is_verified) ? $documents->is_verified : "";
-            $getproperties = Property::where('is_deleted', 0)->get();
+            $getproperties = Property::where(['landlord_id' => $user->id, 'is_deleted' => 0])->get();
             $data['base_url'] = env('APP_URL');
 
             $data['properties'] = $getproperties->isNotEmpty() ? $getproperties : [];

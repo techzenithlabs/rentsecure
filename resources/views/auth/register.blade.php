@@ -130,29 +130,30 @@
                                             <x-input-error :messages="$errors->get('zipcode')" class="mt-2 text-danger" />
                                         </div>
                                         <div class="form-group col-12 upload-doc">
-                                            <label>Upload Document <span>(driver's license or passport. If
-                                                    corporation-articles of incorporation)</span></label>
+                                            <label>Upload Document <span>(driver's license or passport. If corporation-articles of incorporation)</span></label>
+                                            <p class="text-sm text-gray-500"><strong>Note: </strong><em>you can upload multiple files</em></p>
                                             <div class="upload-sec">
-                                                <div id="filename"></div>
-                                                <input id="uploadFile" class="f-input form-control"
-                                                    placeholder="Choose Document" />
+                                                <input id="uploadFile" class="f-input form-control" placeholder="Choose Document" readonly />
                                                 <div class="fileUpload btn btn--browse">
                                                     <span>Browse</span>
-
-                                                    <input id="uploadBtn" type="file" name="file" class="upload" />
+                                                    <input id="uploadBtn" type="file" name="files[]" class="upload" multiple accept=".pdf,.doc,.docx,.jpeg,.jpg,.png,.xlsx,.gif"/>
                                                 </div>
 
                                             </div>
-                                            <x-input-error :messages="$errors->get('file')" class="mt-2 text-danger" />
+                                            <div style="display:none" class="invalid-file text text-danger ms-2 mt-1 mb-1"></div>
+                                            <div id="fileList" class="file-list"></div>
+                                            <x-input-error :messages="$errors->get('files.*')" class="mt-2 text-danger" />
                                         </div>
+
                                         <div class="form-group col-12 checkbox-sec">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
                                                 <label class="form-check-label" for="exampleCheck1">I agree to the <a
                                                         href="#"> terms and conditions</a> </label>
                                             </div>
                                             <button class="btn btn-screening">Start Screening</button>
                                         </div>
+                                        <x-input-error :messages="$errors->get('agreement')" class="mt-1 text-danger" />
                                     </div>
                                 </form>
 

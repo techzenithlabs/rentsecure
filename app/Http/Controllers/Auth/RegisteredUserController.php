@@ -51,7 +51,8 @@ class RegisteredUserController extends Controller
                 'state' => ['required'],
                 'city' => ['required'],
                 'zipcode' => ['required'],
-                'file' => ['required', 'file', 'mimes:pdf,docx,xlss,jpeg,png', 'max:2048'],
+                'files.*' => ['required', 'file', 'mimes:pdf,doc,docx,jpeg,jpg,png,xlsx,gif', 'max:5048'],
+                'agreement' => ['required'],
 
             ]);
 
@@ -63,33 +64,28 @@ class RegisteredUserController extends Controller
 
             $role = Role::select('id')->where('name', $roleName)->first();
 
-            $file = $request->file('file');
+            $files = $request->file('files') ?? [];
 
-            $filename = $file->getClientOriginalName();
-            $tmppath = $file->getPathname();
-            $filepath = $file->getRealPath();
-            $size = $file->getSize();
-            $mime = $file->getMimeType();
+            // $filename = $file->getClientOriginalName();
+            // $tmppath = $file->getPathname();
+            // $filepath = $file->getRealPath();
+            // $size = $file->getSize();
+            // $mime = $file->getMimeType();
 
-            $directory = 'public/document_uploaded';
+            $directory = 'public/document_uploaded/documents';
 
             // Check if the directory exists
-            if (!Storage::exists('public/document_uploaded')) {
+            if (!Storage::exists('public/document_uploaded/documents')) {
                 // If the directory does not exist, create it
-                Storage::makeDirectory('public/document_uploaded');
+                Storage::makeDirectory('public/document_uploaded/documents');
                 // Set permissions to 0777
-                File::chmod(storage_path('app/public/document_uploaded'), 0777);
+                File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
             } else {
                 // If the directory exists, update permissions to 0777
-                File::chmod(storage_path('app/public/document_uploaded'), 0777);
+                File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
             }
 
             // Get the storage path to the directory
-
-            $storedFilePath = $file->store($directory);
-
-            // Get the storage path to the stored file
-            $storagePath = storage_path('app/' . $storedFilePath);
 
             // Create verification token
             $verificationToken = \Str::random(60);
@@ -110,19 +106,31 @@ class RegisteredUserController extends Controller
                 'status' => 1,
             ]);
 
-            $userDocumentData = [
-                'user_id' => $user->id,
-                'document_type' => $mime,
-                'documents' => $storedFilePath,
-                'expiry_date' => $request->expiry_date ?? null,
-                'is_verified' => 0,
-            ];
+            // $userDocumentData = [
+            //     'user_id' => $user->id,
+            //     'document_type' => $mime,
+            //     'documents' => $storedFilePath,
+            //     'expiry_date' => $request->expiry_date ?? null,
+            //     'is_verified' => 0,
+            // ];
 
             // Send verification email
             event(new Registered($user));
 
             // Create the associated document
-            $user->documents()->create($userDocumentData);
+            if (!empty($files)) {
+                foreach ($files as $file) {
+                    $storedFilePath = $file->store($directory);
+                    $userDocumentData = [
+                        'user_id' => $user->id,
+                        'document_type' => $file->getMimeType(),
+                        'documents' => $storedFilePath,
+                        'expiry_date' => $request->expiry_date ?? null,
+                        'is_verified' => 0,
+                    ];
+                    $user->documents()->create($userDocumentData);
+                }
+            }
 
             Auth::login($user);
 
