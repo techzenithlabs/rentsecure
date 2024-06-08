@@ -94,17 +94,17 @@ class RegisteredUserController extends Controller
             ]);
 
             if (isset($user->id) && !empty($user->id)) {
-                $directory = 'public/document_uploaded/documents/user_' . $user->id . '';
+                $directory = 'public/document_uploaded/documents';
 
                 // Check if the directory exists
-                if (!Storage::exists('public/document_uploaded/documents/user_' . $user->id . '')) {
+                if (!Storage::exists('public/document_uploaded/documents')) {
                     // If the directory does not exist, create it
-                    Storage::makeDirectory('public/document_uploaded/documents/user_' . $user->id . '');
+                    Storage::makeDirectory('public/document_uploaded/documents');
                     // Set permissions to 0777
-                    File::chmod(storage_path('app/public/document_uploaded/documents/user_' . $user->id . ''), 0777);
+                    File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
                 } else {
                     // If the directory exists, update permissions to 0777
-                    File::chmod(storage_path('app/public/document_uploaded/documents/user_' . $user->id . ''), 0777);
+                    File::chmod(storage_path('app/public/document_uploaded/documents'), 0777);
                 }
 
             }
