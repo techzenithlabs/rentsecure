@@ -14,7 +14,7 @@
             </li>
             <li>
                 <a href="#screeningSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <img class="img-fluid" src="{{ asset('public/assets/images/user.png') }}"> Screening
+                    <img class="img-fluid" src="{{ asset('public/assets/images/user.png') }}"> Users
                 </a>
                 <ul class="collapse list-unstyled" id="screeningSubmenu">
                     <li><a href="{{ route('screening.landlord') }}">Landlord</a></li>

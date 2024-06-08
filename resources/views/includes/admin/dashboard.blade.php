@@ -5,7 +5,7 @@
               <h1 class="h2">Dashboard</h1>
             </div>
 
-            <div class="row">
+            <div class="row" style="min-height: 400px;">
               <div class="col-md-4">
                 <div class="card text-white bg-primary mb-3 custom-card-height">
                   <div class="card-body">
@@ -33,75 +33,7 @@
 
             </div>
 
-            <div class="row">
-                <div class="col-md-4">
-                  <div class="card text-white bg-primary mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Land Lord Screening</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-success mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Tenant Screening</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-warning mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Properties</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card text-white bg-primary mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Sold Properties</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-success mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">Pending Properties</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card text-white bg-warning mb-3 custom-card-height">
-                    <div class="card-body">
-                      <h5 class="card-title">On Hold Properties</h5>
-                      <p class="card-text badge">0</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-title">Sales Overview</h5>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart" width="400" height="150"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
     </div>
    </div>
