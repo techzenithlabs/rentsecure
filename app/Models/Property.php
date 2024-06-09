@@ -22,6 +22,7 @@ class Property extends Model
         'is_verified',
         'is_deleted', // Include the new field is_deleted
         'deleted_by', // Include the new field deleted_by
+        'screening_status', //Include screening statusforproperty
     ];
 
     public function landlord()

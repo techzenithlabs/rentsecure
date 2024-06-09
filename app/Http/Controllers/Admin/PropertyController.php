@@ -102,10 +102,19 @@ class PropertyController extends Controller
             $user = Auth::user();
             $documents = $user->documents->first();
             $data['document_verified'] = isset($documents->is_verified) ? $documents->is_verified : "";
-            $getproperties = Property::where(['landlord_id' => $user->id, 'is_deleted' => 0])->get();
+
+            $getproperties = Property::where(['landlord_id' => $user->id, 'is_deleted' => 0])
+                ->orderBy('created_at', 'desc')
+                ->get();
+            $getscreeningproperties = Property::where(['landlord_id' => $user->id, 'is_deleted' => 0])
+                ->where('screening_status', '<>', '0')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
             $data['base_url'] = env('APP_URL');
 
             $data['properties'] = $getproperties->isNotEmpty() ? $getproperties : [];
+            $data['screening_properties'] = $getscreeningproperties->isNotEmpty() ? $getscreeningproperties : [];
 
             return View('landlord.properties')->with($data);
         } catch (\Exception $e) {

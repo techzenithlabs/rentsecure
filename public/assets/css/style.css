@@ -370,10 +370,12 @@ border: none; height: 44px; line-height: 44px; padding: 0px 0px;}
 .added-pro .table td {font-size: 13px;  white-space: nowrap;  }
 .added-pro .table th,.added-pro .table td{padding: 10px 7px;}
 .added-pro .table td button {background: #642a81; border: #642a81; font-size: 12px; border-radius: 30px; color: #fff; padding: 5px 15px; font-family: 'graphikmedium';}
+.added-pro .table td button.disabled{background: #cca4e0;cursor: not-allowed; }
 .added-pro .table tbody tr { border-bottom: 1px dotted #9FA2B4;}
 .added-pro .table tbody tr:last-child{border: none;}
 .added-pro .table span.review {color: #F7A928;}
 .added-pro .table span.complete {color: #00C24E;}
+.added-pro .table span.rejected {color: #c20020;}
 .added-pro .table td, .added-pro .table th {vertical-align: middle;}
 .added-pro .table td lable {display: block; font-size: 12px; text-align: center;}
 .added-pro .table td button.send-req {background: #f1ecf3; color: #642a81; font-size: 12px;}

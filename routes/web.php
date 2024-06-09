@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
     /***Landlord ***/
     Route::get('/landlord/screening/tenant', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
+    Route::post('/landlord/property/screening', [ScreeningController::class, 'PropertyScreening'])->name('property-screening');
 
     /***Landlord ****/
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

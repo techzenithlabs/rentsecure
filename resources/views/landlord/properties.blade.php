@@ -28,6 +28,7 @@
         <!-----incude main layout-->
 
         <div class="main-content">
+
             <div class="cont-wrapper">
                 <div class="row">
                     <div class="col-sm-12 col-lg-12">
@@ -148,118 +149,155 @@
 
                 </div>
                 <div class="added-pro">
-                    <h2>Added Properties</h2>
-                    @if(isset($properties)&&!empty($properties))
+
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Address</th>
-                                            <th scope="col">Available Dates</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <h2>Added Properties</h2>
+                    @if(isset($properties)&&!empty($properties))
+
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Available Dates</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
                                         @foreach($properties as $property)
+                                        @php
+                                         $get_screening_status=$property->screening_status;
+                                        @endphp
+                                        <form name="property_screening" action="{{ route('property-screening') }}" method="post"  enctype="multipart/form-data">
+                                            @csrf
+
+                                        <input type="hidden" name="property_id" value="{{ $property->id }}">
                                         <tr>
                                             <td>{{  $property->apartment }} ,{{  $property->street_address }}, {{ $property->zipcode }}</td>
                                             <td><img class="img-fluid" src="{{ asset('public/assets/images/date-icon.png') }}"> {{ !empty($property->date_available)?human_readable_date($property->date_available):""}}</td>
                                             <td>{!! !empty($base_url)&&!empty($property->property_images)?'<img id="propertyimg" width="100" src='.$base_url.'/storage/app/'.$property->property_images.'></img>':"" !!}</td>
-                                            <td><button>Start Screening</button></td>
-                                        </tr>
+                                            <td>
+                                                @switch($get_screening_status)
 
+                                                    @case ('0')
+                                                    <button class="notscreening" type="submit" name="submit">Start Screening</button>
+                                                       @break;
+                                                    @case('1')
+                                                      <button disabled class="disabled" type="submit" name="submit">Under Screening</button>
+
+                                                        @break
+                                                    @case('2')
+                                                    <button disabled class="disabled" type="submit" name="submit">Review Pending</button>
+                                                        @break;
+
+                                                    @case ('3')
+                                                    <button disabled class="disabled" type="submit" name="submit">Approved</button>
+                                                        @break
+
+                                                    @case ('4')
+                                                    <button disabled class="disabled" type="submit" name="submit">Rejected</button>
+                                                        @break
+                                                    @default
+
+                                                @endswitch
+                                                <td>
+
+
+                                        </tr>
+                                        </form>
                                         @endforeach
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Screening Progress</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>123 Main Street, Toronto ON M4L 1V2</td>
-                                            <td><button class="send-req">Request Sent</button>
-                                                <lable>awaiting documentation.</lable>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>347 Church Street, Toronto ON M4L 6H1</td>
-                                            <td><span class="review">Review in Progress</span></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>347 Church Street, Toronto ON M4L 6H1</td>
-                                            <td><span class="complete">Completed</span></td>
-                                            <td><button>Download Report</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
+
                     @else
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive">
-                                <table class="table">
 
-                                    <tbody>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table">
 
-                                        <h4 class="text-danger text-sm text-center">Sorry No Property is Availabe</h4>
+                                <tbody>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Screening Progress</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>123 Main Street, Toronto ON M4L 1V2</td>
-                                            <td><button class="send-req">Request Sent</button>
-                                                <lable>awaiting documentation.</lable>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>347 Church Street, Toronto ON M4L 6H1</td>
-                                            <td><span class="review">Review in Progress</span></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>347 Church Street, Toronto ON M4L 6H1</td>
-                                            <td><span class="complete">Completed</span></td>
-                                            <td><button>Download Report</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <h4 class="text-danger text-sm text-center">Sorry No Property is Availabe</h4>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
                     @endif
-                </div>
+
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+
+
+                        @if(isset($screening_properties)&&!empty($screening_properties))
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Screening Progress</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach($screening_properties as $sp)
+                                <tr>
+                                    <td>{{ $sp->street_address }}</td>
+                                    <td>
+                                        @switch($sp->screening_status)
+                                            @case('1')
+                                            <button class="send-req">Request Sent</button>
+                                               <lable>awaiting documentation.</lable>
+
+                                                @break
+
+                                            @case('2')
+                                            <span class="review">Review in Progress</span>
+
+                                                @break
+
+                                            @case ('3')
+                                            <span class="complete">Completed</span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;<button>Download Report</button>
+
+                                                @break
+
+                                            @case ('4')
+                                            <span class="rejected">Rejected</span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;<span class="text-danger"><em>Unfortunately your Screening Rejected, Kindly contact admin</em></span>
+
+                                                @break
+                                            @default
+
+                                        @endswitch
+                                    </td>
+                                </tr>
+                                @endforeach
+
+
+                         </tbody>
+
+                            </table>
+                            @else
+
+                            <h4 class="text-danger text-sm text-center">Sorry No Property is Under SCreening</h4>
+
+
+                            @endif
+                        </div>
+
+                    </div>
+
+
+
+                </div><!--row end-->
+
 
             </div>
         </div>
