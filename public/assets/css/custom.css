@@ -114,4 +114,15 @@ button.add-btn{
 
 }
 
+.allstatus{
+    display: flex;
+}
+
+.allstatus img{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left:10px;
+}
+
 

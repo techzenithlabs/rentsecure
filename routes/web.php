@@ -23,8 +23,8 @@ Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['au
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/property/landlord', [PropertyController::class, 'landLordProperty'])->name('property.landlord');
-    Route::get('/screening/landlord', [ScreeningController::class, 'landlordScreening'])->name('screening.landlord');
+    Route::match(['get', 'post'], '/property/landlord', [PropertyController::class, 'landLordProperty'])->name('property.landlord');
+    Route::match(['get', 'post'], '/screening/landlord', [ScreeningController::class, 'landlordPropertyScreening'])->name('screening.landlord');
 
     Route::match(['get', 'post'], '/property', [PropertyController::class, 'myProperty'])->name('property');
     Route::get('/pricing', [PropertyController::class, 'Pricing'])->name('pricing');
@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('landlord-documents/{user_id}', [ScreeningController::class, 'viewDocuments'])->name('landlord.documents');
 
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
+    Route::post('/admin-action', [AdminController::class, 'adminAction'])->name('admin-action');
+    Route::post('/screening-action', [PropertyController::class, 'ScreeningStatus'])->name('screening-action');
+
     /****Admin */
 
     /***Landlord ***/
@@ -43,8 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::post('/admin-action', [AdminController::class, 'adminAction'])->name('admin-action');
 
 });
 

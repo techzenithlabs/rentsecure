@@ -8,121 +8,107 @@
             <section class="main-wrapper">
                 @include('layouts.admin.sidebar')
                 <div class="main-content">>
-                <div class="cont-wrapper">
-                    <div class="tenant-screening">
-                        <div class="card-head">
-                            <h3>Tenant Screening</h3>
-                            <div class="progress-sec">
-                                <ul>
-                                    <li class="completed">
-                                        <label>Step 1/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li class="completed">
-                                        <label>Step 2/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li>
-                                        <label>Step 3/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li>
-                                        <label>Step 4/4</label>
-                                        <span></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-content">
-                        <div class="card-body whopays-sec min-hieght">
-                            <h2>Select 	Report<span>Applicant currently resides in</span></h2>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="country" type="radio" id="inlineradio1" value="option1">
-                                    <label class="form-check-label" for="inlineradio1">Canada</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="country" type="radio" id="inlineradio2" value="option2">
-                                    <label class="form-check-label" for="inlineradio2">United States of America	</label>
-                                  </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Credit Report, and Background Check <label class="new">Best Value</label></h3>
+                <div class="cont-wrapper" style="min-height:500px">
+                    <!-- success message -->
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
 
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4">$32.98 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara">
-                                                    <li>Long Form equifax credit report</li>
-                                                    <li>Current and former addresses</li>
-                                                    <li>aliases</li>
-                                                    <li>Employment confirmation</li>
-                                                    <li>Open and closed credit Facilities (Trade lines)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara">
-                                                    <li>credit balances</li>
-                                                    <li>collections</li>
-                                                    <li>bankruptcies</li>
-                                                    <li>inquiries</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-4 col-lg-4">
-                                                <ul class="subpara"><li>Global Public information search for:criminal records, court decisions, negative press,Sanctions andmore</li></ul>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Credit Report</h3>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$32.98 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
-
-                                        <hr>
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="payInfo-sec1 mt-4">
-                                <ul>
-                                    <li>
-                                        <h3>Background Check</h3>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-3"><h3 class="mt-4 pull-left">$16.99 <span>/ Report</span></h3></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"></div>
-                                            <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
-                                        </div>
-
-                                        <hr>
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="back-btn">Back</button>
-                            <button class="next-btn">Continue</button>
-                        </div>
                     </div>
+                    @endif
+
+                    <!-- error message -->
+                    @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+
+                    </div>
+                    @endif
+
+                    <div style="display:none" class="screeningsuccessstatus alert alert-success alert-dismissible fade show">
+
+                    </div>
+
+                    <div style="display:none" class="screeningerrorstatus alert alert-danger alert-dismissible fade show">
+
+                    </div>
+
+
+
+                    <div class="table-responsive">
+                     @php
+                        $filePath = config('app.url').'/storage/app/';
+                     @endphp
+                        @if(isset($properties)&&!empty($properties))
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sr No</th>
+                                    <th scope="col">Land Lord Name</th>
+                                    <th scope="col">Property Details</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Documents</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($properties as $key=>$property)
+                                <form name="admin_screening" action="{{ route('property.landlord') }}" method="post"  enctype="multipart/form-data">
+                                    @csrf
+                                @php
+                                 $admin_screening_status=$property->screening_status;
+                                @endphp
+                                <input type="hidden" name="landlord_id" value="{{ $property->landlord_id }}">
+                                <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+                                <tr>
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ getuserbyId($property->landlord_id) }}</td>
+                                    <td>{{ $property->apartment }}, {{$property->street_address}}, {{$property->province}}, {{$property->zipcode }}</td>
+                                    <td> <p class="mt-2"><img width="40" src="{{ $filePath.$property->property_images }}"></p></td>
+                                    <td></td>
+                                    <td>
+                                        @switch($admin_screening_status)
+                                            @case('1') <!-- Landlord Requested For Screening -->
+                                            <button class="btn btn-primary">Start Review</button>
+
+                                            @break
+                                            @case('2')  <!-- Admin is Screening -->
+                                            <div class="allstatus">
+                                            <button class="btn btn-warning">Review in Progress</button>
+                                            <a onclick="changeStatus(event,'approve','{{$property->landlord_id}}','{{$property->id}}')" role="button" title="Approve"><img src="{{ asset('public/assets/images/icons/approve.png') }}"></a>
+                                            <a onclick="changeStatus(event,'reject','{{$property->landlord_id}}','{{$property->id}}')" role="button" title="Reject"><img src="{{ asset('public/assets/images/icons/reject.png') }}"></a>
+                                            </div>
+
+                                                @break
+                                            @case('3')  <!-- Admin Approved -->
+                                            <button disabled class="btn btn-success">Approved</button>
+
+                                                @break
+                                            @case('4') <!-- Admin Rejected -->
+                                            <button disabled class="btn btn-danger">Rejected</button>
+
+                                                @break
+
+                                            @default
+
+                                        @endswitch
+
+                                    </td>
+
+                                </tr>
+                                </form>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+                        @else
+                        <h4 class="text-danger text-sm text-center mt-4">Sorry No Property is Availabe for Screening</h4>
+                        @endif
+                    </div>
+
+
                 </div>
 
                 </div>

@@ -114,7 +114,6 @@ function takeAction(event, user_Id, action) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     var successMessage = document.getElementById('success-error-message');
     if (successMessage) {
@@ -138,4 +137,114 @@ function uploadProperty(event){
 
         reader.readAsDataURL(file);
     }
+}
+
+function changeStatus(event,status,landlord_id,property_id){
+    event.preventDefault();
+    $('.screeningsuccessstatus').hide();
+    $('.screeningsuccessstatus').html('')
+    $('.screeningerrortatus').hide();
+    $('.screeningerrortatus').html('')
+    let data={}
+
+    if(status=="approve"){
+         data={
+            landlord_id:landlord_id,
+            property_id:property_id,
+            status:status,
+        }
+      let approve=confirm("Are you sure you want to Approve ?");
+      if(approve && approve==true){
+        $.ajax({
+            url: baseURL + "/screening-action",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            type: "POST",
+            data: data,
+            success: function (response) {
+               if(response.status==1){
+                $('.screeningerrortatus').hide()
+                $('.screeningerrortatus').html('')
+                $('.screeningsuccessstatus').show()
+                $('.screeningsuccessstatus').html(response.message);
+
+                setTimeout(function(){
+                    $('.screeningsuccessstatus').hide()
+                    $('.screeningsuccessstatus').html('')
+                    location.reload();
+                },5000)
+
+               }else{
+                $('.screeningsuccessstatus').hide()
+                $('.screeningsuccessstatus').html('');
+                $('.screeningerrortatus').show()
+                $('.screeningerrortatus').html(response.message)
+
+                setTimeout(function(){
+                    $('.screeningerrortatus').hide()
+                    $('.screeningerrortatus').html('')
+                    location.reload();
+                },5000)
+
+               }
+            },
+            error: function (response) {
+                $('.screeningerrortatus').show()
+                $('.screeningerrortatus').html(response)
+
+            },
+        });
+      }
+    }else{
+      let reject=confirm("Are you sure you want to Reject ?");
+      if(reject && reject==true){
+        data={
+            landlord_id:landlord_id,
+            property_id:property_id,
+            status:status,
+        }
+        $.ajax({
+            url: baseURL + "/screening-action",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            type: "POST",
+            data: data,
+            success: function (response) {
+               if(response.status==1){
+                $('.screeningerrortatus').hide()
+                $('.screeningerrortatus').html('')
+                $('.screeningsuccessstatus').show()
+                $('.screeningsuccessstatus').html(response.message);
+
+                setTimeout(function(){
+                    $('.screeningsuccessstatus').hide()
+                    $('.screeningsuccessstatus').html('')
+                    location.reload();
+                },5000)
+
+               }else{
+                $('.screeningsuccessstatus').hide()
+                $('.screeningsuccessstatus').html('');
+                $('.screeningerrortatus').show()
+                $('.screeningerrortatus').html(response.message)
+
+                setTimeout(function(){
+                    $('.screeningerrortatus').hide()
+                    $('.screeningerrortatus').html('')
+                    location.reload();
+                },5000)
+
+               }
+            },
+            error: function (response) {
+                $('.screeningerrortatus').show()
+                $('.screeningerrortatus').html(response)
+            },
+        });
+      }
+
+    }
+
 }

@@ -22,10 +22,95 @@ class PropertyController extends Controller
 
     /**********Admin **********/
 
-    public function landLordProperty()
+    public function landLordProperty(Request $request)
     {
-        return View('admin.properties.landlord');
+        try {
+            $data = [];
+            $properties = Property::whereHas('landlord', function ($query) {
+                $query->where(['role_id' => 2, 'status' => 1, 'is_deleted' => 0]);
+            })->get();
+            $data['properties'] = $properties->isNotEmpty() ? $properties : [];
 
+            if ($request->isMethod('post')) {
+
+                $property_id = $request->property_id;
+                $landlord_id = $request->landlord_id;
+
+                $Property = Property::where(['id' => $property_id, 'landlord_id' => $landlord_id, 'status' => 1, 'is_deleted' => 0])->first();
+                if (!empty($Property)) {
+                    $Property->screening_status = '2';
+                    if ($Property->save()) {
+                        return redirect()->back()->with('success', "Property is Under Review..You can check necessary details and Update the status Accordingly")->withInput();
+                    }
+                } else {
+                    return redirect()->back()->with('error', "Sorry, invalid property or it might have been deleted by the landlord")->withInput();
+                }
+
+            }
+            return View('admin.properties.landlord')->with($data);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            dd($errorMessage);
+            return redirect()->back()->with('error', $errorMessage)->withInput();
+        }
+
+    }
+
+    public function ScreeningStatus(Request $request)
+    {
+        try {
+            $response = [];
+            if ($request->ajax()) {
+                $property_id = $request->property_id;
+                $landlord_id = $request->landlord_id;
+                $status = $request->status;
+
+                $getproperties = Property::where(['landlord_id' => $landlord_id, 'id' => $property_id, 'status' => 1, 'is_deleted' => 0])->first();
+
+                if (!empty($getproperties)) {
+                    if ($status == "approve") {
+                        $getproperties->screening_status = '3';
+                        if ($getproperties->save()) {
+                            $response = [
+                                "status" => 1,
+                                "message" => "You have approved the Property Screening",
+                            ];
+                            return response()->json($response, 200);
+
+                        }
+
+                    } else {
+                        $getproperties->screening_status = '4';
+                        if ($getproperties->save()) {
+                            $response = [
+                                "status" => 1,
+                                "message" => "You have rejected the Property Screening",
+                            ];
+                            return response()->json($response, 200);
+
+                        }
+
+                    }
+
+                } else {
+                    $response = [
+                        "status" => 0,
+                        "message" => "Sorry invalid Property or Have been Deleted by Landlord",
+                    ];
+                    return response()->json($response, 200);
+
+                }
+
+            }
+
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            $response = [
+                "status" => 0,
+                "message" => $errorMessage,
+            ];
+            return response()->json($response, 500);
+        }
     }
     /**********Admin **********/
 

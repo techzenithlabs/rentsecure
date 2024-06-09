@@ -14,9 +14,23 @@ class ScreeningController extends Controller
 
     }
     /**********Admin *******************/
-    public function landlordScreening()
+    public function landlordPropertyScreening(Request $request)
     {
-        return View('admin.screening.landlord');
+        try {
+            $properties = Property::whereHas('landlord', function ($query) {
+                $query->where(['role_id' => 2, 'status' => 1, 'is_deleted' => 0]);
+            })->get();
+            $data['properties'] = $properties->isNotEmpty() ? $properties : [];
+
+            if ($request->isMethod('post')) {
+
+            }
+            return View('admin.screening.landlord')->with($data);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+
+        }
 
     }
 
@@ -38,6 +52,7 @@ class ScreeningController extends Controller
             return redirect()->back()->withErrors([$e->getMessage()])->withInput();
         }
     }
+
     /**********Admin *******************/
 
     /**********Landlord *******************/

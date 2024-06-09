@@ -105,3 +105,11 @@ if (!function_exists('human_readable_date')) {
         return Carbon::parse($date)->translatedFormat('d F, Y');
     }
 }
+
+if (!function_exists('getuserbyId')) {
+    function getuserbyId($userId)
+    {
+        $user = User::select('firstname', 'lastname')->where(['id' => $userId, 'status' => 1, 'is_deleted' => 0])->first();
+        return !empty($user) ? $user->firstname . " " . $user->lastname : "N/A";
+    }
+}
