@@ -70,7 +70,7 @@
                                     <td>
                                         @switch($admin_screening_status)
                                             @case('0') <!-- Landlord Requested For Screening -->
-                                            <button disabled class="btn btn-info">Review Request Pending</button>
+                                            <button disabled class="btn btn-secondary">Review Request Pending</button>
                                             @break
                                             @case('1') <!-- Landlord Requested For Screening -->
                                             <button class="btn btn-primary">Start Review</button>
