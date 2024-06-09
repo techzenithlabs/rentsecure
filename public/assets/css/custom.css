@@ -125,4 +125,32 @@ button.add-btn{
     margin-left:10px;
 }
 
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+    transform: translate(10px, 0px);
+
+}
+
+.file-upload label {
+    background-color: #4c9baf;
+    color: white;
+    padding: 4px 10px;
+
+      border-radius: 22px 22px 22px 22px;
+    cursor: pointer;
+}
+
+.file-upload input[type="file"] {
+
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
 

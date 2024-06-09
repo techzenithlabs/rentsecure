@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin-action', [AdminController::class, 'adminAction'])->name('admin-action');
     Route::post('/screening-action', [PropertyController::class, 'ScreeningStatus'])->name('screening-action');
 
+    Route::post('/upload-approved-documents', [PropertyController::class, 'uploadDocuments'])->name('upload-approved-documents');
+
     /****Admin */
 
     /***Landlord ***/

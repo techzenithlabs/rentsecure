@@ -248,3 +248,80 @@ function changeStatus(event,status,landlord_id,property_id){
     }
 
 }
+
+function uploadReport(event,landlord_id,property_id){
+    event.preventDefault();
+    $('.screeningsuccessstatus').hide();
+    $('.screeningsuccessstatus').html('');
+    $('.screeningerrorstatus').hide();
+    $('.screeningerrorstatus').html('')
+    let documentPreview=document.getElementById('documentpreview');
+    documentPreview.style.display='none';
+    const file = event.target.files[0];
+
+    let formData = new FormData();
+    formData.append('landlord_id', landlord_id);
+    formData.append('property_id', property_id);
+    formData.append('upload-report', file);
+    $.ajax({
+        url: baseURL + "/upload-approved-documents",
+        type: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+           if(response.status==1){
+            documentPreview.style.display="block";
+            documentPreview.innerText=file.name;
+
+            let resMsg=response.message;
+            $('.screeningerrortatus').hide();
+            $('.screeningerrortatus').html('');
+            $('.screeningsuccessstatus').show();
+            $('.screeningsuccessstatus').html(resMsg)
+
+            setTimeout(function(){
+                $('.screeningsuccessstatus').hide();
+                $('.screeningsuccessstatus').html('')
+                location.reload();
+            },5000)
+
+           }else{
+            let resMsg=response.message;
+            $('.screeningsuccessstatus').hide();
+            $('.screeningsuccessstatus').html('')
+            $('.screeningerrortatus').show();
+            $('.screeningerrortatus').html(resMsg);
+
+            setTimeout(function(){
+                $('.screeningerrortatus').hide('');
+                $('.screeningerrortatus').html('');
+                location.reload();
+            },5000)
+
+           }
+        },
+        error: function(xhr, status, error) {
+            //console.error(xhr.responseText);
+
+            $('.screeningsuccessstatus').hide();
+            $('.screeningsuccessstatus').html('')
+            $('.screeningerrortatus').show();
+            $('.screeningerrortatus').html(xhr.responseText);
+
+            setTimeout(function(){
+                $('.screeningerrortatus').hide('');
+                $('.screeningerrortatus').html('');
+                location.reload();
+            },5000)
+        }
+    });
+
+}
+
+function saveFilePath(filePath, landlord_id, property_id) {
+    // Write code to save the file path in the database
+}

@@ -57,6 +57,7 @@
                                     @csrf
                                 @php
                                  $admin_screening_status=$property->screening_status;
+                                 $uploaded_report=!empty($property->uploaded_report)?$property->uploaded_report:"";
                                 @endphp
                                 <input type="hidden" name="landlord_id" value="{{ $property->landlord_id }}">
                                 <input type="hidden" name="property_id" value="{{ $property->id }}">
@@ -85,7 +86,20 @@
 
                                                 @break
                                             @case('3')  <!-- Admin Approved -->
+                                            <div class="allstatus">
                                             <button style="cursor:not-allowed" disabled class="btn btn-success">Approved</button>
+                                            <div role="button" class="file-upload">
+                                                <label role="button" for="file-input">Upload Report</label>
+                                                <input onchange="uploadReport(event,'{{ $property->landlord_id }}','{{ $property->id }}')" id="file-input" style="margin-left:20px;" type="file" name="upload-report">
+
+
+                                            </div>
+                                            <p  style="margin-left:20px;font-weight:800;line-height:2.4em">{!!isset($uploaded_report)&&!empty($uploaded_report)?"<span class='text text-success'>Report Uploaded</span>":"<span class='text text-danger'>Report Pending</span>"!!}</p>
+
+                                            </div>
+                                            <div id="documentpreview">
+
+                                            </div>
 
                                                 @break
                                             @case('4') <!-- Admin Rejected -->

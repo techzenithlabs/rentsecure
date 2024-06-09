@@ -50,7 +50,7 @@ class PropertyController extends Controller
             return View('admin.properties.landlord')->with($data);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            dd($errorMessage);
+
             return redirect()->back()->with('error', $errorMessage)->withInput();
         }
 
@@ -111,6 +111,71 @@ class PropertyController extends Controller
             ];
             return response()->json($response, 500);
         }
+    }
+
+    public function uploadDocuments(Request $request)
+    {
+        try {
+            $response = [];
+            if ($request->ajax()) {
+                $property_id = $request->property_id;
+                $landlord_id = $request->landlord_id;
+                $file = $request->file('upload-report');
+                $directory = 'public/document_uploaded/approved_documents';
+                if (!Storage::exists('public/document_uploaded/approved_documents')) {
+                    // If the directory does not exist, create it
+                    Storage::makeDirectory('public/document_uploaded/approved_documents');
+                    // Set permissions to 0777
+                    File::chmod(storage_path('app/public/document_uploaded/approved_documents'), 0777);
+                } else {
+                    // If the directory exists, update permissions to 0777
+                    File::chmod(storage_path('app/public/document_uploaded/approved_documents'), 0777);
+                }
+
+                $storedFilePath = $file->store($directory);
+
+                if ($storedFilePath) {
+                    $getapprovedproperty = Property::where(['landlord_id' => $landlord_id, 'id' => $property_id, 'status' => 1, 'is_deleted' => 0, 'screening_status' => 4])->first();
+                    if (!empty($getapprovedproperty)) {
+                        $getapprovedproperty->uploaded_report = $storedFilePath;
+                        if ($getapprovedproperty->save()) {
+                            $response = [
+                                "status" => 1,
+                                "message" => "You have successfully Upload Report",
+                                "data" => $storedFilePath,
+                            ];
+                            return response()->json($response, 200);
+
+                        }
+
+                    } else {
+                        $response = [
+                            "status" => 0,
+                            "message" => "Sorry Invalid Property or property feleted By landlord",
+                        ];
+                        return response()->json($response, 200);
+
+                    }
+                } else {
+                    $response = [
+                        "status" => 0,
+                        "message" => "Sorry Some technical issues are there while uploading, Please try later or contact admin",
+                    ];
+                    return response()->json($response, 200);
+
+                }
+
+            }
+
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            $response = [
+                "status" => 0,
+                "message" => $errorMessage,
+            ];
+            return response()->json($response, 500);
+        }
+
     }
     /**********Admin **********/
 
