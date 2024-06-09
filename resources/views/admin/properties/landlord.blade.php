@@ -94,7 +94,7 @@
 
 
                                             </div>
-                                            <p  style="margin-left:20px;font-weight:800;line-height:2.4em">{!!isset($uploaded_report)&&!empty($uploaded_report)?"<span class='text text-success'>Report Uploaded</span>":"<span class='text text-danger'>Report Pending</span>"!!}</p>
+                                            <p  style="margin-left:20px;font-weight:800;line-height:2.4em">{!!isset($uploaded_report)&&!empty($uploaded_report)?"<span class='text text-success'>Report Uploaded</span>":"<span class='text text-warning'><strong>Report Pending</strong></span>"!!}</p>
 
                                             </div>
                                             <div id="documentpreview">

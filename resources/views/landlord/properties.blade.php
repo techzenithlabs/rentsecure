@@ -170,6 +170,7 @@
                                         @foreach($properties as $property)
                                         @php
                                          $get_screening_status=$property->screening_status;
+
                                         @endphp
                                         <form name="property_screening" action="{{ route('property-screening') }}" method="post"  enctype="multipart/form-data">
                                             @csrf
@@ -249,6 +250,10 @@
 
 
                                 @foreach($screening_properties as $sp)
+                                @php
+
+                                $uploaded_report=!empty($sp->uploaded_report)?$sp->uploaded_report:"";
+                                @endphp
                                 <tr>
                                     <td>{{ $sp->street_address }}</td>
                                     <td>
@@ -265,7 +270,10 @@
                                                 @break
 
                                             @case ('3')
-                                            <span class="complete">Completed</span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;<button>Download Report</button>
+                                            <span class="complete">Completed</span>
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            {!! (!empty($uploaded_report)) ? '<button onclick="downloadReport(\''. $uploaded_report .'\')">Download Report</button>' : '<span class="text text-danger">Report Pending</span>' !!}
+
 
                                                 @break
 

@@ -322,6 +322,11 @@ function uploadReport(event,landlord_id,property_id){
 
 }
 
-function saveFilePath(filePath, landlord_id, property_id) {
-    // Write code to save the file path in the database
+function downloadReport(filePath) {
+    // Open a new window or tab with the file download URL
+    let storedPath=baseURL+'/storage/app/';
+    let filefullPath=storedPath+filePath;
+    window.location.href=filefullPath;
+    //window.open(filefullPath, '_blank');
 }
+
