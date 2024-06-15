@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('landlord-documents/{user_id}', [ScreeningController::class, 'viewDocuments'])->name('landlord.documents');
 
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
+    /**Screening steps ***/
+
     Route::post('/admin-action', [AdminController::class, 'adminAction'])->name('admin-action');
     Route::post('/screening-action', [PropertyController::class, 'ScreeningStatus'])->name('screening-action');
 
@@ -41,7 +43,7 @@ Route::middleware('auth')->group(function () {
     /****Admin */
 
     /***Landlord ***/
-    Route::get('/landlord/screening/tenant', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
+    Route::match(['get','post'],'/landlord/screening/tenant/{step?}', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
     Route::post('/landlord/property/screening', [ScreeningController::class, 'PropertyScreening'])->name('property-screening');
 
     /***Landlord ****/

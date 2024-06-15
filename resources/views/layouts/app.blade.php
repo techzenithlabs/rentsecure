@@ -26,8 +26,8 @@
                @case(2){{-- Landlord --}}
                @include('includes.landlord.dashboard')
                  @break
-               @case(3){{-- Tenant --}}
-               @include('includes.landlord.dashboard')
+               @case(3){{-- Tenant --}}               
+               @include('includes.tenant.dashboard')
                  @break
               @endswitch
 

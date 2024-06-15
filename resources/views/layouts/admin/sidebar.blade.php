@@ -8,9 +8,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="propertiesSubmenu">
                     <li><a href="{{ route('property.landlord') }}">Landlord Property</a></li>
-                    <li><a href="#">Tenants</a></li>
-
-                </ul>
+                      </ul>
             </li>
             <li>
                 <a href="#screeningSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

@@ -17,23 +17,11 @@
                 @include('layouts.tenant.sidebar')
                   @break
                @endswitch
-
-              <!-----Include main layout--->
-               @switch(Auth::user()->role_id)
-               @case(1){{-- SuperAdmin --}}
-               @include('includes.admin.dashboard')
-                 @break
-               @case(2){{-- Landlord --}}
-               @include('includes.landlord.dashboard')
-                 @break
-               @case(3){{-- Tenant --}}
-               @include('includes.landlord.dashboard')
-                 @break
-              @endswitch
-
                <!-----incude main layout-->
                <div class="main-content">
                 <div class="cont-wrapper">
+                <form method="post" action="{{ url('landlord/screening/tenant/step2') }}" name="formstep1">
+                        @csrf
                     <div class="tenant-screening">
                         <div class="card-head">
                             <h3>Tenant Screening</h3>
@@ -61,26 +49,30 @@
                         <div class="form-content">
                         <div class="card-body whopays-sec min-hieght">
                             <h2>Select Who Pays <span>Select who will be entering the applicant’s information and paying</span></h2>
+                           
                             <div class="payInfo-sec">
+                                <input type="hidden" id="paymentinfo" name="paymentinfo" value="{{ !empty($paymentinfo)?$paymentinfo:"" }}">
                                 <ul>
-                                    <li>
+                                    <li  role="button" {!! !empty($paymentinfo) && $paymentinfo == 'landlord' ? 'style="border:1px solid grey;"' : '' !!} data-info="landlord">
                                         <h3>You fill out information and pay</h3>
                                         <span>Enter the applicant’s information and get a report back within 5 minutes.</span>
                                     </li>
-                                    <li>
+                                    <li role="button" {!! !empty($paymentinfo) && $paymentinfo == 'tenant' ? 'style="border:1px solid grey;"' : '' !!} data-info="tenant">
                                         <h3>Applicant Fills Out information and pays</h3>
                                         <span>Email the applicants a form to collect their information and consent.</span>
                                         <label class="new">New</label>
                                     </li>
                                 </ul>
                             </div>
+                          
                         </div>
                       </div>
                         <div class="card-footer">
-                            <button class="back-btn">Back</button>
-                            <button class="next-btn">Continue</button>
+                            <button disabled class="back-btn">Back</button>
+                            <button type="submit" class="next-btn">Continue</button>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
               </section>

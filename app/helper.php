@@ -113,3 +113,20 @@ if (!function_exists('getuserbyId')) {
         return !empty($user) ? $user->firstname . " " . $user->lastname : "N/A";
     }
 }
+
+if (!function_exists('document_verified')) {
+    function document_verified()
+    {
+        $user = Auth::user();
+        $role = $user->role_id;
+
+        if ($role == 2) { //if user is landlord
+            $documents = $user->documents->first();
+            return isset($documents->is_verified) ? $documents->is_verified : "";
+
+        } else {
+            return "Sorry Landlord doesnt exists";
+        }
+
+    }
+}

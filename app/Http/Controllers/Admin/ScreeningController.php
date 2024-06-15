@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ScreeningController extends Controller
 {
@@ -57,9 +58,62 @@ class ScreeningController extends Controller
 
     /**********Landlord *******************/
 
-    public function landlordtenantScreening()
+    public function landlordtenantScreening(Request $request,$step = null)
     {
-        return View('landlord.tenant-screening');
+        $data=[];
+        if ($step === null) {
+            // Handle the case when no step is provided
+            return view('landlord.tenant-screening.step1');
+        }
+
+        switch ($step) {
+            case 'step1':
+                if($request->isMethod('post')){
+                
+
+                }
+                if (Session::has('paymentinfo')) {
+                    $data['paymentinfo']=Session::get('paymentinfo');
+                    
+                }
+                return view('landlord.tenant-screening.step1')->with($data);
+            case 'step2':
+                if($request->isMethod('post')){
+                    
+                    $paymentType=!empty($request->paymentinfo)?$request->paymentinfo:"landlord";
+                    if(!empty($paymentType)){
+                        Session::put('paymentinfo', $paymentType);
+                    }else{
+                        Session::forget('paymentinfo');
+                    }                  
+
+                    
+                }
+                if (Session::has('country')) {
+                    $data['country']=Session::get('country');
+                    
+                }
+
+                return view('landlord.tenant-screening.step2')->with($data);
+            case 'step3':
+                if($request->isMethod('post')){
+                    $country=!empty($request->country)?$request->country:"";
+                  
+                    if(!empty($country)){
+                        Session::put('country', $country);
+                    }
+                    
+                }
+             
+
+            
+                return view('landlord.tenant-screening.step3')->with($data);
+            case 'step4':
+                return view('landlord.tenant-screening.step4');
+            default:
+                // Handle invalid step or redirect to a default step
+                return redirect()->route('landlord.screening.tenant', ['step' => 'step1']);
+        }
 
     }
 

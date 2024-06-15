@@ -330,3 +330,18 @@ function downloadReport(filePath) {
     //window.open(filefullPath, '_blank');
 }
 
+let paymentInfo=document.querySelectorAll('.payInfo-sec > ul > li');
+paymentInfo.forEach(function(e,i){
+    e.addEventListener('click',function(event){
+        event.preventDefault();
+
+
+        let checkinfo=this.getAttribute('data-info');
+       document.getElementById('paymentinfo').value=checkinfo
+     
+        
+    
+
+    })
+})
+

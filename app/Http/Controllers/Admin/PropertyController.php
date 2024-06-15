@@ -251,7 +251,7 @@ class PropertyController extends Controller
             }
             $user = Auth::user();
             $documents = $user->documents->first();
-            $data['document_verified'] = isset($documents->is_verified) ? $documents->is_verified : "";
+            $data['document_verified'] = document_verified();
 
             $getproperties = Property::where(['landlord_id' => $user->id, 'is_deleted' => 0])
                 ->orderBy('created_at', 'desc')
