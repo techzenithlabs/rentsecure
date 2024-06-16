@@ -18,21 +18,6 @@
                   @break
                @endswitch
 
-              <!-----Include main layout--->
-               @switch(Auth::user()->role_id)
-               @case(1){{-- SuperAdmin --}}
-               @include('includes.admin.dashboard')
-                 @break
-               @case(2){{-- Landlord --}}
-               @include('includes.landlord.dashboard')
-                 @break
-               @case(3){{-- Tenant --}}
-               @include('includes.landlord.dashboard')
-                 @break
-              @endswitch
-
-               <!-----incude main layout-->
-
                <div class="main-content">
                 <div class="cont-wrapper">
                     <div class="pricing-sec">
@@ -43,7 +28,7 @@
                             <div class="offer-list">
                                 <div class="offer-head">
                                     <h3>Features</h3>
-                                    <img class="img-fluid" src="images/logo.png">
+                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
                                 </div>
                                 <ul>
                                     <li>Aliquam tincidunt mauris eu.</li>
@@ -60,7 +45,7 @@
                             <div class="offer-list">
                                 <div class="offer-head">
                                     <h3>Other</h3>
-                                    <img class="img-fluid" src="images/logo.png">
+                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
                                 </div>
                                 <ul>
                                     <li><i class="bi bi-check-lg"></i></li>
@@ -80,7 +65,7 @@
                             <div class="offer-list">
                                 <div class="offer-head">
                                     <h3>P1</h3>
-                                    <img class="img-fluid" src="images/logo.png">
+                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
                                 </div>
                                 <ul>
                                     <li><i class="bi bi-check-lg"></i></li>
@@ -100,7 +85,7 @@
                             <div class="offer-list">
                                 <div class="offer-head">
                                     <h3>P2</h3>
-                                    <img class="img-fluid" src="images/logo.png">
+                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
                                 </div>
                                 <ul>
                                     <li><i class="bi bi-check-lg"></i></li>
