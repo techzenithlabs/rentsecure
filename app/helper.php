@@ -72,6 +72,16 @@ if (!function_exists('getLandLordData')) {
     }
 }
 
+if (!function_exists('getLandlordProperty')) {
+    function getLandlordProperty($userId = null)
+    {
+       $landlord_id=Auth::user()->id;
+       $properties=Property::where('landlord_id',$landlord_id)
+                   ->pluck('id');
+       return !empty($properties)?$properties:[];
+    }
+}
+
 if (!function_exists('getLandlordScreening')) {
     function getLandlordScreening($userId = null)
     {

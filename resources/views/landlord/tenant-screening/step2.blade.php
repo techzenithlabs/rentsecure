@@ -20,7 +20,7 @@
                <!-----incude main layout-->
                <div class="main-content">
                 <div class="cont-wrapper">
-                    <form method="post" action="{{ url('landlord/screening/tenant/step3') }}" name="formstep1">
+                    <form method="post" action="{{ url('landlord/screening/tenant/step3') }}" name="formstep2">
                         @csrf
                         <div class="tenant-screening">
                             <div class="card-head">
@@ -56,12 +56,12 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" {!! !empty($country)&&$country=="usa"?'checked':'' !!} name="country" type="radio" id="inlineradio2" value="usa">
                                         <label class="form-check-label" for="inlineradio2">United States of America	</label>
-                                    </div>	
+                                    </div>
                                 <div class="payInfo-sec1 mt-4">
-                                    <ul>					
+                                    <ul>
                                         <li>
                                             <h3>Credit Report, and Background Check <label class="new">Best Value</label></h3>
-                                        
+
                                             <div class="row">
                                                 <div class="col-sm-3 col-lg-3"><h3 class="mt-4">$32.98 <span>/ Report</span></h3></div>
                                                 <div class="col-sm-3 col-lg-3"></div>
@@ -92,11 +92,11 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                                 <div class="payInfo-sec1 mt-4">
-                                    <ul>					
+                                    <ul>
                                         <li>
                                             <h3>Credit Report</h3>
                                             <div class="row">
@@ -105,15 +105,15 @@
                                                 <div class="col-sm-3 col-lg-3"></div>
                                                 <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
                                             </div>
-                                            
+
                                             <hr>
-                                        
+
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                                 <div class="payInfo-sec1 mt-4">
-                                    <ul>					
+                                    <ul>
                                         <li>
                                             <h3>Background Check</h3>
                                             <div class="row">
@@ -122,11 +122,11 @@
                                                 <div class="col-sm-3 col-lg-3"></div>
                                                 <div class="col-sm-3 col-lg-3"><button class="view-sample btn btn-primary">View Sample</button></div>
                                             </div>
-                                            
+
                                             <hr>
-                                        
+
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <button type="submit" class="next-btn">Continue</button>
                             </div>
                         </div>
-                    </form>    
+                    </form>
                 </div>
             </div>
               </section>
