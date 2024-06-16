@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TenantScreeningEmail;
+
 
 class ScreeningController extends Controller
 {
@@ -263,6 +266,8 @@ class ScreeningController extends Controller
                 $tenantscreening->dob = $formData->dob ?? '';
                 $tenantscreening->address = $formData->address ?? '';
                 if ($tenantscreening->save()) {
+                    Mail::to($tenantscreening->tenant_email)->send(new TenantScreeningEmail($tenantscreening));
+
                     $response = [
                         'status' => 1,
                         'message' => "Screening information Saved Successfully",
