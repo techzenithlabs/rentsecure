@@ -107,11 +107,12 @@ button.add-btn{
     width: 80% !important;
 }
 #imagePreview{
-    transform: translate(0px, 8px);
-    width: 10%;
-    max-width: 30%;
-    border: 4px solid #8e96bd;
 
+    transform: translate(0px, 8px);
+    width: 25%;
+    max-width: 30%;
+    border: 1px solid #a1a1aa6e;
+    background: #8080800d;
 }
 
 .allstatus{

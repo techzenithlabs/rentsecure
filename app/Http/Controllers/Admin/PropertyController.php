@@ -195,7 +195,7 @@ class PropertyController extends Controller
                     'zipcode' => ['required'],
 
                     'agreement' => ['required', 'accepted'],
-                    'file' => ['required', 'file', 'mimes:jpeg,jpg,png', 'max:5048'],
+                    'file' => ['required', 'file', 'mimes:doc,docx,pdf,xlsx,txt', 'max:5048'], // 2MB max size
 
                 ]);
 
@@ -239,7 +239,7 @@ class PropertyController extends Controller
                     'province' => $request->province,
                     'date_available' => $request->date_available,
                     'zipcode' => $request->zipcode,
-                    'property_images' => $storedFilePath,
+                    'property_docs' => $storedFilePath,
                     'is_verified' => 0,
                     'status' => 1,
                     'created_at' => Carbon::now()->toDateString(),

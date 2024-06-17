@@ -24,7 +24,6 @@ class TenantScreening extends Model
         'address',
     ];
 
-
     protected static function booted()
     {
         static::deleting(function ($tenantScreening) {

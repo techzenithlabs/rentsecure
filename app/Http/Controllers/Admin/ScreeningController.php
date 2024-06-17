@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TenantScreeningEmail;
 use App\Models\Property;
 use App\Models\TenantScreening;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\TenantScreeningEmail;
-
+use Illuminate\Support\Facades\Session;
 
 class ScreeningController extends Controller
 {
@@ -70,7 +69,7 @@ class ScreeningController extends Controller
             // Handle the case when no step is provided
             return view('landlord.tenant-screening.step1');
         }
-        $landlord_id=Auth::user()->id;
+        $landlord_id = Auth::user()->id;
 
         switch ($step) {
             case 'step1':
@@ -102,7 +101,6 @@ class ScreeningController extends Controller
             case 'step3':
                 if ($request->isMethod('post')) {
                     $country = !empty($request->country) ? $request->country : "";
-
 
                     if (!empty($country)) {
                         Session::put('country', $country);
@@ -154,13 +152,12 @@ class ScreeningController extends Controller
                     $data['applicant_consignment'] = Session::get('applicant_consignment');
                 }
 
-
                 return view('landlord.tenant-screening.step3')->with($data);
             case 'step4':
                 if ($request->isMethod('post')) {
-                    $allinfo=$request->all();
+                    $allinfo = $request->all();
 
-                    if(!empty($allinfo)){
+                    if (!empty($allinfo)) {
                         Session::put('paymentinfo', $allinfo['paymentinfo']);
                         Session::put('country', $allinfo['country']);
                         Session::put('firstname', $allinfo['firstname']);
@@ -175,22 +172,21 @@ class ScreeningController extends Controller
 
                 }
 
-
-                $getproperties=Property::where('landlord_id',$landlord_id)
-                               ->select('id','street_address')
-                               ->get();
-                $properties=[];
-                if(!empty($getproperties)){
-                    foreach($getproperties as $prop){
-                        $properties[]=[
-                            'id'=>$prop->id,
-                            'address'=>$prop->street_address
+                $getproperties = Property::where('landlord_id', $landlord_id)
+                    ->select('id', 'street_address')
+                    ->get();
+                $properties = [];
+                if (!empty($getproperties)) {
+                    foreach ($getproperties as $prop) {
+                        $properties[] = [
+                            'id' => $prop->id,
+                            'address' => $prop->street_address,
                         ];
                     }
 
                 }
 
-                $data['properties']=!empty($properties)?$properties:[];
+                $data['properties'] = !empty($properties) ? $properties : [];
 
                 if (Session::has('paymentinfo')) {
                     $data['paymentinfo'] = Session::get('paymentinfo');
@@ -253,10 +249,10 @@ class ScreeningController extends Controller
 
                 $tenantscreening = new TenantScreening();
                 $tenantscreening->landlord_id = $landlorddetail->id;
-                $tenantscreening->property_id=$formData->landlord_property??'';
-                $tenantscreening->tenant_first_name=$formData->tenant_first_name??'';
-                $tenantscreening->tenant_last_name=$formData->tenant_last_name??'';
-                $tenantscreening->tenant_email=$formData->tenant_email??'';
+                $tenantscreening->property_id = $formData->landlord_property ?? '';
+                $tenantscreening->tenant_first_name = $formData->tenant_first_name ?? '';
+                $tenantscreening->tenant_last_name = $formData->tenant_last_name ?? '';
+                $tenantscreening->tenant_email = $formData->tenant_email ?? '';
                 $tenantscreening->country = $formData->country ?? '';
                 $tenantscreening->paymentinfo = $formData->paymentinfo ?? '';
                 $tenantscreening->firstname = $formData->firstname ?? '';

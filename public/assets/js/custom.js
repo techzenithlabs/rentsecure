@@ -125,13 +125,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function uploadProperty(event){
     const file = event.target.files[0];
+    $('.invalidfile').text('')
+    const allowedMimes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/plain'];
     imagePreview.style.display='none';
     if (file) {
+        if (!allowedMimes.includes(file.type)) {
+
+            $('.invalidfile').text('Invalid file type. Please select a DOC, DOCX, PDF, XLSX, or TXT file.')
+            event.target.value = ''; // Clear the file input
+            return;
+        }
         const reader = new FileReader();
 
         reader.onload = function(e) {
             const imagePreview = document.getElementById('imagePreview');
-            imagePreview.src = e.target.result;
+            imagePreview.innerText=file.name;
             imagePreview.style.display = 'block';
         };
 
