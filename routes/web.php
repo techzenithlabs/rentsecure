@@ -40,6 +40,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/upload-approved-documents', [PropertyController::class, 'uploadDocuments'])->name('upload-approved-documents');
 
+    Route::match(['get', 'post'], '/cms', [AdminController::class, 'adminCMS'])->name('cms');
+    Route::get('/cms/add', [AdminController::class, 'addCMS'])->name('cms.add');
+    Route::match(['get', 'post'], '/cms/edit/{id?}', [AdminController::class, 'editCMS'])->name('cms.edit');
+
     /****Admin */
 
     /***Landlord ***/

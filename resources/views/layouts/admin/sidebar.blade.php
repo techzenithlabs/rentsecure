@@ -20,6 +20,10 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="{{ route('cms') }}">Cms</a>
+
+            </li>
 
         </ul>
     </div>
