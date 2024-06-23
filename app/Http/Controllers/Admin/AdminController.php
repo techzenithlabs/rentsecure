@@ -78,7 +78,7 @@ class AdminController extends Controller
         try {
             $data = [];
             if ($request->isMethod('post')) {
-                $getslug = strpos($request->title, ' ') > -1 ? str_replace(' ', '_', $request->title) : $request->title;
+                $getslug = strpos($request->title, ' ') > -1 ? str_replace(' ', '-', $request->title) : $request->title;
 
                 $data = [
                     "page_name" => $request->title,
@@ -115,7 +115,7 @@ class AdminController extends Controller
             if ($request->isMethod('post')) {
                 $id = $request->id;
                 $getpage = trim($request->title);
-                $getslug = strpos($request->title, ' ') > -1 ? str_replace(' ', '_', $request->title) : $request->title;
+                $getslug = strpos($request->title, ' ') > -1 ? str_replace(' ', '-', $request->title) : $request->title;
                 $descripton = trim($request->description);
                 $pages = Cms::findorfail($id);
                 $pages->page_name = $getpage;

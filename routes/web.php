@@ -4,13 +4,15 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+
+
+Route::get('/', [HomeController::class, 'homePage'])->name('home');
+Route::get('/{slug}', [HomeController::class, 'showPage']);
 
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
