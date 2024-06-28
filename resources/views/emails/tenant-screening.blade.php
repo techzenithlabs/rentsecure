@@ -8,9 +8,9 @@
     <p>Dear {{ $tenantscreening->tenant_first_name }},</p>
 
     <p>We have successfully received your screening information.</p>
-    <!-- Add more email content as needed -->
+    <p>Kindly Register <a href="https://testxone.com/rent/register?email={{$tenantscreening->tenant_email}}">Here</a></p>
 
     <p>Thank you,</p>
-    <p>Your Company Name</p>
+    <p>Rent Secure</p>
 </body>
 </html>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'homePage'])->name('home');
-Route::get('/{slug}', [HomeController::class, 'showPage']);
+Route::get('/page/{slug}', [HomeController::class, 'showPage']);
 
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
