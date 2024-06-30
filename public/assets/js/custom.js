@@ -340,11 +340,20 @@ function downloadReport(filePath) {
 
 let paymentInfo=document.querySelectorAll('.payInfo-sec > ul > li');
 paymentInfo.forEach(function(e,i){
-    e.addEventListener('click',function(event){
+       e.addEventListener('click',function(event){
         event.preventDefault();
 
 
         let checkinfo=this.getAttribute('data-info');
+        if(checkinfo=="landlord"){
+          this.style.border="1px solid grey";
+          let nextElem=this.nextElementSibling
+           nextElem.style.border="1px solid  #f3f3f3";
+        }else{
+            this.style.border="1px solid grey";
+            let prevElem=this.previousElementSibling;
+            prevElem.style.border="1px solid  #f3f3f3";
+        }
        document.getElementById('paymentinfo').value=checkinfo
 
     })
