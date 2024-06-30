@@ -32,7 +32,7 @@ $getemail=isset($_GET['email'])&&!empty($_GET['email'])?$_GET['email']:"";
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
-                                <input type="hidden" id="user_type" name="user_type" value="landlord">
+                                <input type="hidden" id="user_type" name="user_type" value="{!! !empty($getemail)?'tenant':'landlord' !!}">
                                 <form class="register-form">
                                     <div class="row">
                                         <div class="form-group col-6">
