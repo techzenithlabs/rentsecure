@@ -724,3 +724,14 @@ file-list {
     font-family: 'graphiksemibold';
 }
 
+
+.accordion .card-header {
+    cursor: pointer;
+}
+.accordion .btn {
+    text-align: left;
+    width: 100%;
+}
+.accordion .icon {
+    float: right;
+}

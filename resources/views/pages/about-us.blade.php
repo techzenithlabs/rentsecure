@@ -131,48 +131,77 @@
     </div>
 </section>
 <section class="faq-section text-center py-5 bg-light">
-    <div class="container">
-        <h2 class="mb-5">Frequently Asked Questions</h2>
-        <div id="faqAccordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            What is your return policy?
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion" style="">
-                    <div class="card-body">
-                        Our return policy lasts 30 days...
+    <div class="container mt-5">
+        <h2>Frequently Asked Questions</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="accordionLeft" class="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOneLeft">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneLeft" aria-expanded="true" aria-controls="collapseOneLeft">
+                                    Question 1
+                                    <span class="icon">+</span>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOneLeft" class="collapse" aria-labelledby="headingOneLeft" data-parent="#accordionLeft">
+                            <div class="card-body">
+                                Answer to question 1.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwoLeft">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwoLeft" aria-expanded="false" aria-controls="collapseTwoLeft">
+                                    Question 2
+                                    <span class="icon">+</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwoLeft" class="collapse" aria-labelledby="headingTwoLeft" data-parent="#accordionLeft">
+                            <div class="card-body">
+                                Answer to question 2.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            How do I track my order?
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion" style="">
-                    <div class="card-body">
-                        You can track your order using...
+
+            <div class="col-md-6">
+                <div id="accordionRight" class="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOneRight">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneRight" aria-expanded="true" aria-controls="collapseOneRight">
+                                    Question 3
+                                    <span class="icon">+</span>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOneRight" class="collapse" aria-labelledby="headingOneRight" data-parent="#accordionRight">
+                            <div class="card-body">
+                                Answer to question 3.
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Can I change my shipping address?
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                    <div class="card-body">
-                        Yes, you can change your shipping...
+                    <div class="card">
+                        <div class="card-header" id="headingTwoRight">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwoRight" aria-expanded="false" aria-controls="collapseTwoRight">
+                                    Question 4
+                                    <span class="icon">+</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwoRight" class="collapse" aria-labelledby="headingTwoRight" data-parent="#accordionRight">
+                            <div class="card-body">
+                                Answer to question 4.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
