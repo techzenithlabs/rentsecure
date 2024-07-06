@@ -11,6 +11,7 @@
                 <li><a href="{{ URL('page/pricing') }}">Pricing</a></li>
                 <li style="display:none"><a href="#">Testimonial</a></li>
                 <li><a href="{{ URL('page/blog') }}">Blog</a></li>
+                <li><a href="{{ URL('page/contact-us') }}">Contact Us</a></li>
             </ul>
             <div class="sign-up">
                 <a href="{{ route('login') }}">Login</a>

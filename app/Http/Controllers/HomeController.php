@@ -28,8 +28,11 @@ class HomeController extends Controller
         if (!empty($page->slug)) {
             $view = match ($page->slug) {
                 'about-us' => view('pages.about-us', ['page' => $page]),
+                'services' => view('pages.services', ['page' => $page]),
                 'blog' => view('pages.blog', ['page' => $page]),
-                'blog' => view('pages.blog', ['page' => $page]),
+                'pricing' => view('pages.pricing', ['page' => $page]),
+                'contact-us' => view('pages.contact-us', ['page' => $page]),
+                default => abort(404),
             };
         }
 
