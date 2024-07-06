@@ -23,7 +23,17 @@ class HomeController extends Controller
             return response()->view('errors.404', [], 404);
         }
 
+        $view = "";
+
+        if (!empty($page->slug)) {
+            $view = match ($page->slug) {
+                'about-us' => view('pages.about-us', ['page' => $page]),
+                'blog' => view('pages.blog', ['page' => $page]),
+                'blog' => view('pages.blog', ['page' => $page]),
+            };
+        }
+
         // Pass the page data to the view
-        return view('pages.show', ['page' => $page]);
+        return $view;
     }
 }
