@@ -157,7 +157,10 @@ class ScreeningController extends Controller
                 if ($request->isMethod('post')) {
                     $allinfo = $request->all();
 
-                    if (!empty($allinfo)) {
+                    if (!empty($allinfo['paymentinfo']) && $allinfo['firstname']
+                        && $allinfo['lastname'] && $allinfo['sin'] && $allinfo['middlename'] && $allinfo['dob']
+                        && $allinfo['address'] && $allinfo['applicant_confirm'] && $allinfo['applicant_consignment']) {
+
                         Session::put('paymentinfo', $allinfo['paymentinfo']);
                         Session::put('country', $allinfo['country']);
                         Session::put('firstname', $allinfo['firstname']);

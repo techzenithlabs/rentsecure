@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ url('landlord/screening/tenant/step3') }}" class="back-btn">Back</a>
+                            <a href="{!! Session::get('paymentinfo')=="tenant"?url('landlord/screening/tenant/step2'):url('landlord/screening/tenant/step3') !!}" class="back-btn">Back</a>
                             <button type="submit" class="next-btn">Send Invite</button>
                         </div>
                         </div>
