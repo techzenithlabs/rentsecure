@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
 
         // Retrieve the page from the database using the slug
-        $page = Cms::where('slug', $slug)->where('status', 1)->first();
+        $page = Cms::with('blocks')->where('slug', $slug)->where('status', 1)->first();
 
         // If the page doesn't exist, show a 404 error
         if (!$page) {

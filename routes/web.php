@@ -9,8 +9,6 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/', [HomeController::class, 'homePage'])->name('home');
 Route::get('/page/{slug}', [HomeController::class, 'showPage']);
 
@@ -45,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/cms', [AdminController::class, 'adminCMS'])->name('cms');
     Route::get('/cms/add', [AdminController::class, 'addCMS'])->name('cms.add');
     Route::match(['get', 'post'], '/cms/edit/{id?}', [AdminController::class, 'editCMS'])->name('cms.edit');
-
+    Route::post('/save-cms-block', [AdminController::class, 'saveCmsBlocks'])->name('save-cms.blocks');
     /****Admin */
 
     /***Landlord ***/

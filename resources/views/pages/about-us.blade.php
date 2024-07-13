@@ -11,13 +11,16 @@
                 <h2 class="header-title">ABOUT US</h2>
 
             </div>
+
+
         <h1 class="home-story text-start">Your Home Story</h1>
-        <p class="text-start mt-2 mb-2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia. Lorem Ipsum is not simply random text.</p>
-        <p class="text-start mt-3 mb-2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia. Lorem Ipsum is not simply random text.</p>
-        <button class="learnmore float-start mt-2">Contact Us</button>
+        <p class="text-start mt-2 mb-2">{{ !empty($page->description)?$page->description:"" }}</p>
+       <a class="learnmore float-start mt-2">Contact Us</a>
     </div>
     <div class="col-sm-5 col-lg-5">
-        <img src="{{ url('/public/assets/images/abouts-us/mask-group.png') }}">
+        <img src="{{!empty($page->blocks->home_story)?asset('storage/app/'.$page->blocks->home_story):"" }}" alt="File">
+
+
     </div>
     </div>
     </div>
@@ -88,7 +91,7 @@
             <div class="line1"></div>
             <h2 class="header-title1">OUR MISSION</h2>
             <h2 class="mb-4 text-start">Sustainability Goals</h2>
-             <p class="text-start">Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia. Lorem Ipsum is not simply random text.Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia. Lorem Ipsum is not simply random text.psum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
+             <p class="text-start">{{ !empty($page->blocks->our_mission)?$page->blocks->our_mission:"" }}</p>
             <button class="learnmore float-start">Contact Us</button>
            </div>
         </div>
