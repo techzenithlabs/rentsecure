@@ -166,7 +166,7 @@ class AdminController extends Controller
                                 Storage::makeDirectory($directory, 0775, true); // Create directory recursively
                             } else {
                                 // Directory exists, update permissions if needed
-                                Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
+                              //  Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
                             }
 
                             $getfilePath=$file->storeAs($directory, $fileName);
