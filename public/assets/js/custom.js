@@ -705,7 +705,12 @@ $(document).ready(function(){
                 $('.savedmessage ').hide();
                 $('.savedmessage ').html("")
                  $('#openblock').modal('hide')
+                 location.reload();
+
                },3000);
+
+
+
 
                }
             },

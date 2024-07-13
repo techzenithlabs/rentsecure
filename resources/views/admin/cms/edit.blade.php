@@ -113,8 +113,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Home Story</label><br/>
-                                <input type="file" name="home_story" id="home_story">
-
+                                <div style="display:inline-flex">
+                                <input type="file" name="home_story" id="home_story">  <img width="50px" src="{{!empty($pages->blocks->home_story)?asset('storage/app/'.$pages->blocks->home_story):"" }}" alt="File">
+                                </div>
                             </div>
 
                             <div class="col-md-12">
