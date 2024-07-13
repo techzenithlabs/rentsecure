@@ -32,6 +32,7 @@ class HomeController extends Controller
                 'blog' => view('pages.blog', ['page' => $page]),
                 'pricing' => view('pages.pricing', ['page' => $page]),
                 'contact-us' => view('pages.contact-us', ['page' => $page]),
+                'testimonial' => view('pages.testimonial', ['page' => $page]),
                 default => abort(404),
             };
         }
