@@ -613,13 +613,21 @@ file-list {
     transform: translate(-232px, -15px);
 }
 
-.header-title1 {
-    font-size: 24px;
+.container.blog
+{
+    padding:40px;
+}
+
+.userful-resources
+{
+    font-size: 18px;
     font-weight: bold;
     color: #8e44ad; /* Adjust the color as needed */
     margin: 0;
     padding: 0;
-    transform: translate(-140px, -15px);
+    position: absolute;
+    margin-bottom: 20px;
+    transform: translate(110px, -13px);
 }
 .mission-wrap
 {
@@ -734,4 +742,66 @@ file-list {
 }
 .accordion .icon {
     float: right;
+}
+
+.blog-card {
+    margin-bottom: 30px;
+}
+
+.blog-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.pagination {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    color: #007bff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-text {
+        font-size: 12px;
+    }
+
+    .pagination {
+        font-size: 12px;
+    }
 }
