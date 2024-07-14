@@ -130,7 +130,7 @@
 
                         @php
                          $titles=json_decode($pages->blocks->blog_title);
-                         $img=json_decode($pages->blocks->blog_img);
+                         $img=!empty($pages->blocks->blog_img)?json_decode($pages->blocks->blog_img):[];
                          $desc=json_decode($pages->blocks->blog_desc);
 
                         @endphp
@@ -138,7 +138,7 @@
                          @if(!empty($titles))
                          @foreach($titles as $key=>$val)
                          @php
-                          $imgs= $img[$key];
+                          $imgs= !empty($img)?$img[$key]:[];
                           $bogdesc=$desc[$key];
                          @endphp
 

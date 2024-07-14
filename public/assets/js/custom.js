@@ -723,6 +723,8 @@ $(document).ready(function(){
 
                 break;
             case 'blog':
+
+
                 $.ajax({
                     url: baseURL + "/save-cms-block",
                     headers: {

@@ -191,24 +191,27 @@ class AdminController extends Controller
                         }
                         break;
                     case 'blog':
+
                         $titles = $request->input('title');
                         $descriptions = $request->input('blogdesc');
-                        $files = $request->file('blogimg');
+                        $files = !empty($request->file('blogimg')) ? $request->file('blogimg') : [];
 
                         $filePaths = [];
-                        foreach ($files as $key => $file) {
-                            if ($file) {
-                                $fileName = time() . '_' . $file->getClientOriginalName();
-                                $directory = 'public/assets/images/pages/blog';
-                                $filePath = $file->storeAs($directory, $fileName);
-                                $filePaths[] = $filePath;
-                            } else {
-                                $filePaths[] = null;
+                        if (!empty($files)) {
+                            foreach ($files as $key => $file) {
+                                if ($file) {
+                                    $fileName = time() . '_' . $file->getClientOriginalName();
+                                    $directory = 'public/assets/images/pages/blog';
+                                    $filePath = $file->storeAs($directory, $fileName);
+                                    $filePaths[] = $filePath;
+                                } else {
+                                    $filePaths[] = null;
+                                }
                             }
                         }
                         $titlesJson = json_encode($titles);
                         $descriptionsJson = json_encode($descriptions);
-                        $filePathsJson = json_encode($filePaths);
+                        $filePathsJson = !empty($filePaths) ? json_encode($filePaths) : json_encode([]);
 
                         // Update or create the database entry
                         $updateOrCreate = CmsBlocks::updateOrCreate(

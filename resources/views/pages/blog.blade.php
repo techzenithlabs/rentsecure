@@ -14,7 +14,7 @@
     @php
 
      $blog_title=json_decode($page->blocks->blog_title);
-     $blog_img=json_decode($page->blocks->blog_img);
+     $blog_img=!empty($page->blocks->blog_img)?json_decode($page->blocks->blog_img):[];
      $blog_desc=json_decode($page->blocks->blog_desc);
      $blog_date=$page->blocks->updated_at;
 
@@ -26,7 +26,7 @@
     <div class="row mt-5 mb-2">
     @foreach($blog_title as $key => $val)
     @php
-      $getblogimg= $blog_img[$key];
+      $getblogimg= !empty($blog_img)?$blog_img[$key]:[];
       $getblogdesc=$blog_desc[$key];
     @endphp
 
