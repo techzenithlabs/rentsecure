@@ -680,49 +680,88 @@ $(document).ready(function(){
         event.preventDefault();
         var form = $(this);
         var formData = new FormData(form[0]);
+        let checkForm=$('input[name="pagename"]').val();
+
+        switch(checkForm){
+            case 'about-us':
+                let homeStoryFile = $('#home_story')[0].files[0];
+                if (homeStoryFile) {
+                    formData.append('home_story', homeStoryFile);
+                }
+                $.ajax({
+                    url: baseURL + "/save-cms-block",
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                       if(response.status==1){
+                       $('.savedmessage ').show();
+                       $('.savedmessage ').html(response.message);
+                       setTimeout(function(){
+                        $('.savedmessage ').hide();
+                        $('.savedmessage ').html("")
+                         $('#openblock').modal('hide')
+                         location.reload();
+
+                       },3000);
+                       }
+                    },
+                    error: function (response) {
+                        $(".verifiedfailed").show();
+                        $(".verifiedfailed").text(response);
+
+                        setTimeout(function () {
+                            $(".verifiedfailed").hide();
+                            $(".verifiedfailed").text("");
+                        }, 6000);
+                    },
+                });
+
+                break;
+            case 'blog':
+                $.ajax({
+                    url: baseURL + "/save-cms-block",
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                       if(response.status==1){
+                       $('.savedmessage ').show();
+                       $('.savedmessage ').html(response.message);
+                       setTimeout(function(){
+                        $('.savedmessage ').hide();
+                        $('.savedmessage ').html("")
+                         $('#openblock').modal('hide')
+                         location.reload();
+
+                       },3000);
+                       }
+                    },
+                    error: function (response) {
+                        $(".verifiedfailed").show();
+                        $(".verifiedfailed").text(response);
+
+                        setTimeout(function () {
+                            $(".verifiedfailed").hide();
+                            $(".verifiedfailed").text("");
+                        }, 6000);
+                    },
+                });
+                break;
+        }
 
         // Check if 'home_story' file input has a file selected
 
-        var homeStoryFile = $('#home_story')[0].files[0];
-        if (homeStoryFile) {
-            formData.append('home_story', homeStoryFile);
-        }
-
-        $.ajax({
-            url: baseURL + "/save-cms-block",
-            headers: {
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-               if(response.status==1){
-               $('.savedmessage ').show();
-               $('.savedmessage ').html(response.message);
-               setTimeout(function(){
-                $('.savedmessage ').hide();
-                $('.savedmessage ').html("")
-                 $('#openblock').modal('hide')
-                 location.reload();
-
-               },3000);
 
 
 
-
-               }
-            },
-            error: function (response) {
-                $(".verifiedfailed").show();
-                $(".verifiedfailed").text(response);
-
-                setTimeout(function () {
-                    $(".verifiedfailed").hide();
-                    $(".verifiedfailed").text("");
-                }, 6000);
-            },
-        });
     })
 })

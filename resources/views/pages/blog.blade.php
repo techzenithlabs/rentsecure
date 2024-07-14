@@ -10,74 +10,45 @@
         <h2 class="userful-resources">USEFUL RESOURCES FOR</h2>
 
     </div>
-    <h2 class="mb-5 mt-4">Landlords & Property Investors</h2>
-    <div class="row">
-        <div class="col-md-4 blog-card">
-            <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog1.png')}}" class="card-img-top" alt="Hotel Image">
-                <div class="card-body">
-                    <h5 class="card-title">10 Things All Rooms Should Have</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
-                    <p class="card-text"><small class="text-muted">November 12, 2023 by Admin</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 blog-card">
-            <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog2.png')}}" class="card-img-top" alt="Hotel Image">
-                <div class="card-body">
-                    <h5 class="card-title">Best Days to Book Hotel for Tour</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
-                    <p class="card-text"><small class="text-muted">November 13, 2023 by Admin</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 blog-card">
-            <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog3.png')}}" class="card-img-top" alt="Hotel Image">
-                <div class="card-body">
-                    <h5 class="card-title">Choose Any Place to Travel</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
-                    <p class="card-text"><small class="text-muted">November 14, 2023 by Admin</small></p>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat the above three columns to simulate more blog posts -->
-    </div>
 
-    <div class="row mt-5">
+    @php
+
+     $blog_title=json_decode($page->blocks->blog_title);
+     $blog_img=json_decode($page->blocks->blog_img);
+     $blog_desc=json_decode($page->blocks->blog_desc);
+     $blog_date=$page->blocks->updated_at;
+
+    @endphp
+
+
+    <h2 class="mb-5 mt-4">Landlords & Property Investors</h2>
+    @if(isset($blog_title)&&!empty($blog_title))
+    <div class="row mt-5 mb-2">
+    @foreach($blog_title as $key => $val)
+    @php
+      $getblogimg= $blog_img[$key];
+      $getblogdesc=$blog_desc[$key];
+    @endphp
+
         <div class="col-md-4 blog-card">
             <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog1.png')}}" class="card-img-top" alt="Hotel Image">
+
+                <img src="{{!empty($getblogimg)?asset('storage/app/'.$getblogimg):"" }}" class="card-img-top" alt="Hotel Image">
                 <div class="card-body">
-                    <h5 class="card-title">10 Things All Rooms Should Have</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
+                    <h5 class="card-title">{{ !empty($val)?$val:'' }}</h5>
+                    <p class="card-text">{{ !empty($getblogdesc)?$getblogdesc:''; }}</p>
                     <p class="card-text"><small class="text-muted">November 12, 2023 by Admin</small></p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 blog-card">
-            <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog2.png')}}" class="card-img-top" alt="Hotel Image">
-                <div class="card-body">
-                    <h5 class="card-title">Best Days to Book Hotel for Tour</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
-                    <p class="card-text"><small class="text-muted">November 13, 2023 by Admin</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 blog-card">
-            <div class="card">
-                <img src="{{url('/public/assets/images/blog/blog3.png')}}" class="card-img-top" alt="Hotel Image">
-                <div class="card-body">
-                    <h5 class="card-title">Choose Any Place to Travel</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt arcu vel arcu fermentum, eget placerat sem finibus.</p>
-                    <p class="card-text"><small class="text-muted">November 14, 2023 by Admin</small></p>
-                </div>
-            </div>
-        </div>
+
         <!-- Repeat the above three columns to simulate more blog posts -->
-    </div>
+
+    @endforeach
+</div>
+    @endif
+
+
 
     <!-- Pagination -->
     <nav aria-label="Page navigation example">

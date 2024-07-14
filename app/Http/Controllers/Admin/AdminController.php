@@ -154,9 +154,9 @@ class AdminController extends Controller
                 switch ($getpage) {
                     case 'about-us':
 
-                        $getfilePath="";
+                        $getfilePath = "";
 
-                        if($request->hasFile('home_story')) {
+                        if ($request->hasFile('home_story')) {
                             $file = $request->file('home_story');
                             $fileName = time() . '_' . $file->getClientOriginalName();
                             $directory = 'public/assets/images/pages/aboutus';
@@ -166,12 +166,11 @@ class AdminController extends Controller
                                 Storage::makeDirectory($directory, 0775, true); // Create directory recursively
                             } else {
                                 // Directory exists, update permissions if needed
-                              //  Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
+                                //  Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
                             }
 
-                            $getfilePath=$file->storeAs($directory, $fileName);
+                            $getfilePath = $file->storeAs($directory, $fileName);
                         }
-
 
                         $updateOrCreate = CmsBlocks::updateOrCreate(
                             ['cms_id' => $request->id], // Condition to check if block exists
@@ -182,19 +181,54 @@ class AdminController extends Controller
                             ]
                         );
 
-                        if(  $updateOrCreate ){
-                            $res=[
-                                "status"=>1,
-                                "message"=>"Updated Successfully"
+                        if ($updateOrCreate) {
+                            $res = [
+                                "status" => 1,
+                                "message" => "Updated Successfully",
                             ];
 
-                            return response()->json($res,200);
+                            return response()->json($res, 200);
                         }
                         break;
                     case 'blog':
-                        $getcms = Cms::where('id', $request->id)->first();
-                        $blocks = $getcms->blocks;
-                        dd($blocks);
+                        $titles = $request->input('title');
+                        $descriptions = $request->input('blogdesc');
+                        $files = $request->file('blogimg');
+
+                        $filePaths = [];
+                        foreach ($files as $key => $file) {
+                            if ($file) {
+                                $fileName = time() . '_' . $file->getClientOriginalName();
+                                $directory = 'public/assets/images/pages/blog';
+                                $filePath = $file->storeAs($directory, $fileName);
+                                $filePaths[] = $filePath;
+                            } else {
+                                $filePaths[] = null;
+                            }
+                        }
+                        $titlesJson = json_encode($titles);
+                        $descriptionsJson = json_encode($descriptions);
+                        $filePathsJson = json_encode($filePaths);
+
+                        // Update or create the database entry
+                        $updateOrCreate = CmsBlocks::updateOrCreate(
+                            ['cms_id' => $request->id], // Condition to check if block exists
+                            [
+                                'blog_title' => $titlesJson,
+                                'blog_desc' => $descriptionsJson,
+                                'blog_img' => $filePathsJson,
+                                // Add other fields similarly
+                            ]
+                        );
+
+                        if ($updateOrCreate) {
+                            $res = [
+                                "status" => 1,
+                                "message" => "Updated Successfully",
+                            ];
+
+                            return response()->json($res, 200);
+                        }
                         break;
                     case 'testimonial':
                         dd($request->id);

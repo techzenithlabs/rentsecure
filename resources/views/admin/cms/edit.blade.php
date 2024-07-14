@@ -114,19 +114,50 @@
                             <div class="col-md-12">
                                 <label>Home Story</label><br/>
                                 <div style="display:inline-flex">
-                                <input type="file" name="home_story" id="home_story">  <img width="50px" src="{{!empty($pages->blocks->home_story)?asset('storage/app/'.$pages->blocks->home_story):"" }}" alt="File">
+                                <input class="form_control" type="file" name="home_story" id="home_story">  <img width="50px" src="{{!empty($pages->blocks->home_story)?asset('storage/app/'.$pages->blocks->home_story):"" }}" alt="File">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <label>Our Mission</label>
-                                <textarea name="our_mission" rows="5" cols="50"id="our_mission" value="{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}">{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}</textarea>
+                                <textarea  name="our_mission" rows="5" cols="50" id="our_mission" value="{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}">{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}</textarea>
                             </div>
                         </div>
 
                         @endif
 
                         @if($page_slug=="blog")
+
+                        @php
+                         $titles=json_decode($pages->blocks->blog_title);
+                         $img=json_decode($pages->blocks->blog_img);
+                         $desc=json_decode($pages->blocks->blog_desc);
+
+                        @endphp
+                        <div class="row">
+                         @if(!empty($titles))
+                         @foreach($titles as $key=>$val)
+                         @php
+                          $imgs= $img[$key];
+                          $bogdesc=$desc[$key];
+                         @endphp
+
+                        <div class="col-md-12 mt-2 mb-2">
+                            <input class="form-control" type="text" placeholder="Enter Title" value="{{ !empty($val)?$val:'' }}" name="title[]" id="title1"><br/>
+                            <div style="display:inline-flex">
+                            <input class="form_control" type="file" name="blogimg[]" value="{{ !empty($imgs)?$imgs:''}}">  <img width="50px" src="{{!empty($imgs)?asset('storage/app/'.$imgs):"" }}" alt="File"><br/>
+                            </div>
+                            <textarea class="mt-2" name="blogdesc[]" rows="5" cols="53"  value="{{ !empty($bogdesc)?$bogdesc:""  }}">{{ !empty($bogdesc)?$bogdesc:""  }}</textarea>
+
+                        </div>
+                        <hr/>
+                        @endforeach
+                        @endif
+
+
+
+                        </div>
+
 
                         @endif
 
