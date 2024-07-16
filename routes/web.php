@@ -4,13 +4,13 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'homePage'])->name('home');
+Route::get('/page/{slug}', [HomeController::class, 'showPage']);
 
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
@@ -40,10 +40,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/upload-approved-documents', [PropertyController::class, 'uploadDocuments'])->name('upload-approved-documents');
 
+    Route::match(['get', 'post'], '/cms', [AdminController::class, 'adminCMS'])->name('cms');
+    Route::get('/cms/add', [AdminController::class, 'addCMS'])->name('cms.add');
+    Route::match(['get', 'post'], '/cms/edit/{id?}', [AdminController::class, 'editCMS'])->name('cms.edit');
+    Route::post('/save-cms-block', [AdminController::class, 'saveCmsBlocks'])->name('save-cms.blocks');
     /****Admin */
 
     /***Landlord ***/
-    Route::match(['get','post'],'/landlord/screening/tenant/{step?}', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
+    Route::match(['get', 'post'], '/landlord/screening/tenant/{step?}', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
+    Route::post('/landlord/tenant-screening', [ScreeningController::class, 'tenantScreeningSubmission'])->name('landlord.tenant-screening');
     Route::post('/landlord/property/screening', [ScreeningController::class, 'PropertyScreening'])->name('property-screening');
 
     /***Landlord ****/

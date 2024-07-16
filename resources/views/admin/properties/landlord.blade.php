@@ -46,7 +46,7 @@
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Land Lord Name</th>
                                     <th scope="col">Property Details</th>
-                                    <th scope="col">Image</th>
+                                    <th scope="col">Document Type</th>
                                     <th scope="col">Documents</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -66,8 +66,28 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ getuserbyId($property->landlord_id) }}</td>
                                     <td>{{ $property->apartment }}, {{$property->street_address}}, {{$property->province}}, {{$property->zipcode }}</td>
-                                    <td> <p class="mt-2"><img width="40" src="{{ $filePath.$property->property_images }}"></p></td>
-                                    <td></td>
+
+                                    <td>
+                                        @if(!empty($property->property_docs) && !empty($filePath))
+                                        @if(strpos($property->property_docs,'.doc')>-1 || strpos($property->property_docs,'.docx')>-1)
+                                        <em>Word Document</em>
+
+                                        @elseif(strpos($property->property_docs,'.xls')>-1 || strpos($property->property_docs,'.xlxs')>-1)
+                                        <em>Excel Document</em>
+
+                                        @elseif(strpos($property->property_docs,'.pdf')>-1)
+                                        <em>Pdf Document</em>
+
+                                        @elseif((strpos($property->property_docs,'.text')>-1))
+                                        <em>Text Document</em>
+
+                                        @endif
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="{!! $filePath.'/'.$property->property_docs !!}">Download Document</a>
+
+                                    </td>
                                     <td>
                                         @switch($admin_screening_status)
                                             @case('0') <!-- Landlord Requested For Screening -->

@@ -76,8 +76,14 @@
 <script src="{{ asset('public/assets/js/main.js') }}"></script>
 <script src="{{ asset('public/assets/js/select2.min.js') }}" defer></script>
 <!----Custom Js ----------------------------------------------->
-
+@if(Route::currentRouteName()=="register")
 <script src="{{ asset('public/assets/js/register.js') }}"></script>
+@endif
+
+@if(strpos(Route::currentRouteAction(),'showPage')>-1)
+<script src="{{ asset('public/assets/js/about-us.js') }}"></script>
+@endif
+
 
 <!----Custom Js ----------------------------------------------->
 </body>

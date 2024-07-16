@@ -125,12 +125,13 @@
 
                                             <div class="fileUpload btn btn--browse">
                                                 <span>Browse</span>
-                                                <input onchange="uploadProperty(event)" id="uploadBtn" type="file" name="file" class="upload">
+                                                <input onchange="uploadProperty(event)" id="uploadBtn" type="file" name="file" class="upload" accept=".docx,.doc,.pdf,.xlsx,.txt">
 
                                             </div>
 
                                         </div>
-                                        <img id="imagePreview" alt="Image Preview" style="display:none; max-width:100%; height:auto;">
+                                        <div id="imagePreview" alt="Image Preview" style="display:none; max-width:100%; height:auto;"></div>
+                                        <div class="mt-2 text text-danger invalidfile"></div>
                                         <x-input-error :messages="$errors->get('file')" class="mt-2 text-danger" />
                                     </div>
                                 </div>
@@ -143,7 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="add-btn">Add Property</button>
+                            <button style="transform: translate(0px, -26px);" type="submit" class="add-btn">Add Property</button>
                         </form>
                     </div>
 
@@ -161,7 +162,7 @@
                                     <tr>
                                         <th scope="col">Address</th>
                                         <th scope="col">Available Dates</th>
-                                        <th scope="col">Image</th>
+                                        <th scope="col">Documents</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -179,7 +180,23 @@
                                         <tr>
                                             <td>{{  $property->apartment }} ,{{  $property->street_address }}, {{ $property->zipcode }}</td>
                                             <td><img class="img-fluid" src="{{ asset('public/assets/images/date-icon.png') }}"> {{ !empty($property->date_available)?human_readable_date($property->date_available):""}}</td>
-                                            <td>{!! !empty($base_url)&&!empty($property->property_images)?'<img id="propertyimg" width="100" src='.$base_url.'/storage/app/'.$property->property_images.'></img>':"" !!}</td>
+                                            <td>
+                                                @if(!empty($property->property_docs) && !empty($base_url))
+                                                @if(strpos($property->property_docs,'.doc')>-1 || strpos($property->property_docs,'.docx')>-1)
+                                                <a target="_blank" href="{!! $base_url.'/storage/app/'.$property->property_docs !!}">Word Document</a>
+
+                                                @elseif(strpos($property->property_docs,'.xls')>-1 || strpos($property->property_docs,'.xlxs')>-1)
+                                                <a target="_blank" href="{!! $base_url.'/storage/app/'.$property->property_docs !!}">Excel Document</a>
+
+                                                @elseif(strpos($property->property_docs,'.pdf')>-1)
+                                                <a target="_blank" href="{!! $base_url.'/storage/app/'.$property->property_docs !!}">Pdf Document</a>
+
+                                                @elseif((strpos($property->property_docs,'.text')>-1))
+                                                <a target="_blank" href="{!! $base_url.'/storage/app/'.$property->property_docs !!}">Text Document</a>
+
+                                                @endif
+                                                @endif
+                                            </td>
                                             <td>
                                                 @switch($get_screening_status)
 

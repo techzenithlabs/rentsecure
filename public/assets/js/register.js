@@ -9,6 +9,8 @@ $(document).ready(function(){
     $('#filename').html('');
 
 
+
+
 })
 
 let getTabs=document.querySelectorAll('ul.nav.nav-pills > li');
@@ -99,6 +101,8 @@ function getStates(elem) {
         }
     });
 }
+
+
 
 
 

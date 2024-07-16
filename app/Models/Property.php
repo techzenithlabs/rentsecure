@@ -17,7 +17,7 @@ class Property extends Model
         'province',
         'date_available',
         'zipcode',
-        'property_images',
+        'property_docs',
         'status', // Include the new field status
         'is_verified',
         'is_deleted', // Include the new field is_deleted

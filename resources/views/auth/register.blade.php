@@ -1,6 +1,8 @@
 @include('includes.home-header')
 
-
+@php
+$getemail=isset($_GET['email'])&&!empty($_GET['email'])?$_GET['email']:"";
+@endphp
 <section class="customer-sec">
     <div class="row g-0">
         <div class="col-md-6 customerlft-sec">
@@ -15,14 +17,14 @@
 
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item" role="landlord">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                            <button {!! !empty($getemail)?'disabled':''!!} class="nav-link {!! empty($getemail)?'active':''!!}" id="pills-home-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                aria-selected="true">Register As Landlord</button>
+                                aria-selected="{!! empty($getemail)?'true':'false'!!}">Register As Landlord</button>
                         </li>
                         <li class="nav-item" role="tenant">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                            <button class="nav-link  {!! !empty($getemail)?'active':''!!}" id="pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-profile" type="button" role="tab"
-                                aria-controls="pills-profile" aria-selected="false">Register As tenant</button>
+                                aria-controls="pills-profile" aria-selected={!!empty($getemail)?'true':'false'!!}">Register As tenant</button>
                         </li>
                     </ul>
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -30,7 +32,7 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
-                                <input type="hidden" id="user_type" name="user_type" value="landlord">
+                                <input type="hidden" id="user_type" name="user_type" value="{!! !empty($getemail)?'tenant':'landlord' !!}">
                                 <form class="register-form">
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -61,7 +63,7 @@
                                         <div class="form-group col-6">
                                             <label>Email Address<span>*</span></label>
                                             <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Enter your Email Address">
+                                                placeholder="Enter your Email Address" {!!!empty($getemail)?'readonly':''!!} value="{{ !empty($getemail)?$getemail:''}}">
                                             <x-input-error :messages="$errors->get('email')" class="mt-2 text-danger" />
                                         </div>
                                         <h4>Security Requirements</h4>
