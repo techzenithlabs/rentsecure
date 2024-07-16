@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{{asset('public/assets/css/responsive.css')}}"/>
         <link rel="stylesheet" href="{{asset('public/assets/css/select2.min.css')}}"/>
         <link rel="stylesheet" href="{{asset('public/build/tailwind.css') }}">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('public/assets/css/custom.css') }}">
         <!-- Scripts -->
