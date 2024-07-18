@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenant_info', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('property_address');
-            $table->string('start_date');
-            $table->string('month');
-            $table->string('year');
-            $table->decimal('monthly_rent',10,2);
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tenant_infos');
+        Schema::dropIfExists('posts');
     }
 };

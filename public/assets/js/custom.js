@@ -758,6 +758,100 @@ $(document).ready(function(){
                     },
                 });
                 break;
+                case 'testimonial':
+                let testimonialData = [];
+                // $('.testimonials').each(function(index) {
+                //     var desc = $(this).find('textarea[name="testimonial_desc[]"]').val().trim();
+                //     var star = $(this).find('input[name="testimonial_star[]"]:checked').val();
+                //     var author = $(this).find('input[name="testimonial_author"]').val().trim();
+                //     var desg = $(this).find('input[name="testimonial_desg"]').val().trim();
+
+                //     if (desc === '' || star === undefined || star === '' || (author === '' && desg === '')) {
+                //         isValid = false;
+                //         return false; // Exit each loop early
+                //     }
+                // });
+
+
+                // $('.testimonials').each(function(index) {
+                //     var clonedData = {
+                //         'testimonial_desc': $(this).find('textarea[name="testimonial_desc[]"]').val(),
+                //         'testimonial_star': $(this).find('input[name="testimonial_star[]"]:checked').val(),
+                //         'testimonial_author': $(this).find('input[name="testimonial_author"]').val(),
+                //         'testimonial_desg': $(this).find('input[name="testimonial_desg"]').val()
+                //         // Add more fields as needed
+                //     };
+                //     testimonialData.push(clonedData);
+                // });
+
+                // formData.append('testimonial_data', JSON.stringify(testimonialData));
+                    $.ajax({
+                        url: baseURL + "/save-cms-block",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                           if(response.status==1){
+                           $('.savedmessage ').show();
+                           $('.savedmessage ').html(response.message);
+                           setTimeout(function(){
+                            $('.savedmessage ').hide();
+                            $('.savedmessage ').html("")
+                             $('#openblock').modal('hide')
+                             location.reload();
+
+                           },3000);
+                           }
+                        },
+                        error: function (response) {
+                            $(".verifiedfailed").show();
+                            $(".verifiedfailed").text(response);
+
+                            setTimeout(function () {
+                                $(".verifiedfailed").hide();
+                                $(".verifiedfailed").text("");
+                            }, 6000);
+                        },
+                    });
+                    break;
+                    case 'contact-us':
+                        $.ajax({
+                            url: baseURL + "/save-cms-block",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                               if(response.status==1){
+                               $('.savedmessage ').show();
+                               $('.savedmessage ').html(response.message);
+                               setTimeout(function(){
+                                $('.savedmessage ').hide();
+                                $('.savedmessage ').html("")
+                                 $('#openblock').modal('hide')
+                                 location.reload();
+
+                               },3000);
+                               }
+                            },
+                            error: function (response) {
+                                $(".verifiedfailed").show();
+                                $(".verifiedfailed").text(response);
+
+                                setTimeout(function () {
+                                    $(".verifiedfailed").hide();
+                                    $(".verifiedfailed").text("");
+                                }, 6000);
+                            },
+                        });
+                    break;
         }
 
         // Check if 'home_story' file input has a file selected
@@ -767,3 +861,55 @@ $(document).ready(function(){
 
     })
 })
+
+let testimonialIndex = 0;
+function clonetestimonial(event) {
+    event.preventDefault();
+    // Get the original testimonial div
+    var original = document.getElementById('testimonials');
+
+    // Clone the original testimonial div
+    var clone = original.cloneNode(true);
+
+    // Update the name attributes to be unique
+    let radioButtons = clone.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => {
+        radio.name = `testimonial_star[${testimonialIndex}]`;
+    });
+    testimonialIndex++;
+
+    // Create the remove button
+    var removeButton = document.createElement('button');
+    removeButton.innerText = 'Remove';
+    removeButton.classList.add('btn', 'btn-danger', 'float-end', 'ms-2');
+    removeButton.style="transform:translate(84px, -6px)";
+    removeButton.setAttribute('onclick', 'removeTestimonial(this)');
+
+    // Append the remove button next to the "Add More" button in the cloned testimonial div
+    var addButton = clone.querySelector('#removebtn');
+    addButton.parentNode.insertBefore(removeButton, addButton.nextSibling);
+
+    // Append the cloned testimonial div after the original
+    original.parentNode.appendChild(clone);
+
+    // Optionally, you can reset the values of the cloned inputs
+    var inputs = clone.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === 'file' || inputs[i].type === 'text') {
+            inputs[i].value = '';
+        } else if (inputs[i].type === 'radio') {
+            inputs[i].checked = false;
+        }
+    }
+
+    var textareas = clone.getElementsByTagName('textarea');
+    for (var i = 0; i < textareas.length; i++) {
+        textareas[i].value = '';
+    }
+}
+
+function removeTestimonial(button) {
+    let testimonial = button.parentNode;
+    testimonial.parentNode.removeChild(testimonial);
+}
+

@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'homePage'])->name('home');
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cms/add', [AdminController::class, 'addCMS'])->name('cms.add');
     Route::match(['get', 'post'], '/cms/edit/{id?}', [AdminController::class, 'editCMS'])->name('cms.edit');
     Route::post('/save-cms-block', [AdminController::class, 'saveCmsBlocks'])->name('save-cms.blocks');
+
+    Route::resource('posts', PostController::class);
     /****Admin */
 
     /***Landlord ***/
@@ -59,3 +62,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+

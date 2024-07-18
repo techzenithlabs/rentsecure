@@ -234,7 +234,103 @@ class AdminController extends Controller
                         }
                         break;
                     case 'testimonial':
-                        dd($request->id);
+                        $id = $request->input('id');
+                        $descs = $request->input('testimonial_desc');
+                        $stars = $request->input('testimonial_star');
+                        $authors = $request->input('testimonial_author');
+                        $desgs = $request->input('testimonial_desg');
+                        $pics = $request->file('testimonial_pic');
+
+                        $filePaths = [];
+
+                        // Handle file uploads
+                        if (!empty($pics)) {
+                            foreach ($pics as $key => $file) {
+                                if ($file) {
+                                    $fileName = time() . '_' . $file->getClientOriginalName();
+                                    $directory = 'public/assets/images/pages/testimonials';
+                                    $filePath = $file->storeAs($directory, $fileName);
+                                    $filePaths[] = $filePath;
+                                } else {
+                                    $filePaths[] = null;
+                                }
+                            }
+                        }
+                        // JSON encode arrays for storage
+                        $descsJson = json_encode($descs);
+                        $starsJson = json_encode($stars);
+                        $authorsJson = json_encode($authors);
+                        $desgsJson = json_encode($desgs);
+                        $filePathsJson = json_encode($filePaths);
+
+                        try {
+                            // Update or create the database entry for testimonials
+                            $updateOrCreate = CmsBlocks::updateOrCreate(
+                                ['cms_id' => $id], // Condition to check if block exists
+                                [
+                                    'testimonial_desc' => $descsJson,
+                                    'testimonial_star' => $starsJson,
+                                    'testimonial_author' => $authorsJson,
+                                    'testimonial_desg' => $desgsJson,
+                                    'testimonial_pic' => $filePathsJson,
+                                    // Add other fields similarly
+                                ]
+                            );
+
+                            if ($updateOrCreate) {
+                                $res = [
+                                    "status" => 1,
+                                    "message" => "Updated Successfully",
+                                ];
+
+                                return response()->json($res, 200);
+                            }
+                        } catch (\Exception $e) {
+                            $res = [
+                                "status" => 0,
+                                "message" => $e->getMessage(),
+                            ];
+
+                            return response()->json($res, 500);
+
+                        }
+
+                        break;
+                    case 'contact-us':
+                        $id = $request->input('id');
+                        $mo_no_usa = $request->input('mobile_no_usa');
+                        $mo_no_uk = $request->input('mobile_no_uk');
+                        $contact_email = $request->input('contact_email');
+                        try {
+                            // Update or create the database entry for testimonials
+                            $updateOrCreate = CmsBlocks::updateOrCreate(
+                                ['cms_id' => $id], // Condition to check if block exists
+                                [
+                                    'mobile_usa' => $mo_no_usa,
+                                    'mobile_uk' => $mo_no_uk,
+                                    'contact_email' => $contact_email,
+                                    // Add other fields similarly
+                                ]
+                            );
+
+                            if ($updateOrCreate) {
+                                $res = [
+                                    "status" => 1,
+                                    "message" => "Updated Successfully",
+                                ];
+
+                                return response()->json($res, 200);
+                            }
+                        } catch (\Exception $e) {
+                            $res = [
+                                "status" => 0,
+                                "message" => $e->getMessage(),
+                            ];
+
+                            return response()->json($res, 500);
+
+                        }
+
                         break;
                 }
             }

@@ -21,7 +21,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('cms') }}">Cms</a>
+                <a href="{{ route('cms') }}"> <img class="img-fluid" src="{{ asset('public/assets/images/cms.png') }}">Cms</a>
 
             </li>
 

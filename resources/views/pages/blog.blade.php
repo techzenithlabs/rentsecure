@@ -11,33 +11,28 @@
 
     </div>
 
-    @php
-
-     $blog_title=json_decode($page->blocks->blog_title);
-     $blog_img=!empty($page->blocks->blog_img)?json_decode($page->blocks->blog_img):[];
-     $blog_desc=json_decode($page->blocks->blog_desc);
-     $blog_date=$page->blocks->updated_at;
-
-    @endphp
-
 
     <h2 class="mb-5 mt-4">Landlords & Property Investors</h2>
-    @if(isset($blog_title)&&!empty($blog_title))
+    @if(isset($page)&&!empty($page))
     <div class="row mt-5 mb-2">
-    @foreach($blog_title as $key => $val)
+    @foreach($page as $p)
     @php
-      $getblogimg= !empty($blog_img)?$blog_img[$key]:[];
-      $getblogdesc=$blog_desc[$key];
+
+      $title=!empty($p->title)?$p->title:"";
+      $getblogimg= !empty($p->image_url)?$p->image_url:"";
+      $getblogdesc=!empty($p->content)?$p->content:"";
+      $updated_at=!empty($p->updated_at)?$p->updated_at:"";
+
     @endphp
 
         <div class="col-md-4 blog-card">
             <div class="card">
 
-                <img src="{{!empty($getblogimg)?asset('storage/app/'.$getblogimg):"" }}" class="card-img-top" alt="Hotel Image">
+                <img src="{{!empty($getblogimg)?asset($getblogimg):"" }}" class="card-img-top" alt="Hotel Image">
                 <div class="card-body">
-                    <h5 class="card-title">{{ !empty($val)?$val:'' }}</h5>
+                    <h5 class="card-title">{{ !empty($title)?$title:'' }}</h5>
                     <p class="card-text">{{ !empty($getblogdesc)?$getblogdesc:''; }}</p>
-                    <p class="card-text"><small class="text-muted">November 12, 2023 by Admin</small></p>
+                    <p class="card-text"><small class="text-muted">{!! !empty($updated_at)?\Carbon\Carbon::parse($updated_at)->format('F d, Y').' By Admin':'' !!}</small></p>
                 </div>
             </div>
         </div>
