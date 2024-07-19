@@ -47,6 +47,7 @@
                         </div>
                       </div>
                       <div class="col-sm-6">
+
                       </div>
 
 
@@ -54,7 +55,7 @@
                         <div class="form-group">
 
                             <label>Description</label>
-                            <textarea style="height:300px" class="form-control" name="description" rows="10" cols="5" value="{{!empty($pages->content)?$pages->content:"" }}">{{!empty($pages->content)?$pages->content:"" }}</textarea>
+                            <textarea style="height:300px" class="form-control" name="description" rows="10" cols="5" value="{{!empty($pages->description)?$pages->description:"" }}">{{!empty($pages->description)?$pages->description:"" }}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -66,7 +67,6 @@
                         </div>
                     </div>
 
-                     </div>
                     </form>
 
                     </div>

@@ -35,6 +35,25 @@
                     <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                            <h4><strong>Top Section Content</strong></h4>
+
+                            <div class="form-group">
+                                <label>Enter Title</label>
+                                <input type="text" class="form-control" name="top_section_text"  value="{{ old('top_blog_title', $post->top_blog_title) }}"><br/>
+                                <label>Upload File</label>
+                                <input type="hidden" name="topimage" value="{{ !empty($post->top_blog_image)?$post->top_blog_image:"" }}">
+                                <input type="file" class="form-control" name="top_section_file"/><br/>
+                                @if(!empty($post->top_blog_image)) <img width="40px" src="{{ asset('storage/app/'.$post->top_blog_image) }}"/><br/>@endif
+                                <label>Top Content</label>
+                                <textarea rows="10" cols="80" name="top_section_textarea" value="{{ old('top_blog_desc', $post->top_blog_desc) }}">{{ old('top_blog_desc', $post->top_blog_desc) }}</textarea> <br/>
+
+
+
+                            </div>
+                            </div>
+                            </div>
 
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
@@ -71,6 +90,43 @@
                             @error('content')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-sm-12 mt-4">
+                            <h4><strong>Bottom Section Content</strong></h4>
+
+                        <div class="form-group">
+                                <label>Enter Title</label>
+                                <input type="text" class="form-control" name="bottom_section_text"  value="{{ old('bottom_blog_title', $post->bottom_blog_title) }}"><br/>
+                                <label>Upload File</label>
+                                <input type="hidden" name="bottomimage" value="{{ !empty($post->bottom_blog_image)?$post->bottom_blog_image:"" }}">
+                                <input type="file" class="form-control" name="bottom_section_file"/><br/>
+                                @if(!empty($post->bottom_blog_image)) <img width="40px" src="{{ asset('storage/app/'.$post->bottom_blog_image) }}"/><br/>@endif
+                                <label>Bottom Content</label>
+                                <textarea rows="10" cols="80" name="bottom_section_textarea" value="{{ old('bottom_blog_desc', $post->bottom_blog_desc) }}">{{ old('bottom_blog_desc', $post->bottom_blog_desc) }}</textarea> <br/>
+
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-sm-12 mt-4">
+                            <h4><strong>Footer Section Content</strong></h4>
+
+                            <div class="form-group">
+                                <label>Enter Title</label>
+                                <input type="text" class="form-control" name="footer_section_text"  value="{{ old('footer_blog_title', $post->footer_blog_title) }}"><br/>
+                                <label>Upload File</label>
+                                <input type="hidden" name="footerimage" value="{{ !empty($post->footer_blog_image)?$post->footer_blog_image:"" }}">
+                                <input type="file" class="form-control" name="footer_section_file"/><br/>
+                                @if(!empty($post->footer_blog_image)) <img width="40px" src="{{ asset('storage/app/'.$post->footer_blog_image) }}"/><br/>@endif
+                                <label>Footer Content</label>
+                                <textarea rows="10" cols="80" name="footer_section_textarea" value="{{ old('footer_blog_desc', $post->footer_blog_desc) }}">{{ old('footer_blog_desc', $post->footer_blog_desc) }}</textarea> <br/>
+
+
+                        </div>
+                        </div>
                         </div>
 
                         <div class="flex items-center justify-end">

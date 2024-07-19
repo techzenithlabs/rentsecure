@@ -17,6 +17,7 @@
     <div class="row mt-5 mb-2">
     @foreach($page as $p)
     @php
+      $id=$p->id;
 
       $title=!empty($p->title)?$p->title:"";
       $getblogimg= !empty($p->image_url)?$p->image_url:"";
@@ -26,6 +27,7 @@
     @endphp
 
         <div class="col-md-4 blog-card">
+            <a href="{{ url('page/blog/detail/' . $id) }}">
             <div class="card">
 
                 <img src="{{!empty($getblogimg)?asset($getblogimg):"" }}" class="card-img-top" alt="Hotel Image">
@@ -35,6 +37,7 @@
                     <p class="card-text"><small class="text-muted">{!! !empty($updated_at)?\Carbon\Carbon::parse($updated_at)->format('F d, Y').' By Admin':'' !!}</small></p>
                 </div>
             </div>
+        </a>
         </div>
 
         <!-- Repeat the above three columns to simulate more blog posts -->

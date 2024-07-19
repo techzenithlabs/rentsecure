@@ -34,8 +34,26 @@
 
                     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                            <h4><strong>Top Section Content</strong></h4>
 
-                        <div class="mb-4">
+                        <div class="form-group">
+                            <label>Enter Title</label>
+                            <input type="text" class="form-control" name="top_section_text"><br/>
+                            <label>Upload File</label>
+                            <input type="hidden" name="topimage">
+                            <input type="file" class="form-control" name="top_section_file"/><br/>
+                            <label>Top Content</label>
+                            <textarea rows="10" cols="80" name="top_section_textarea"></textarea> <br/>
+
+
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="mt-5 mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                             <input type="text" id="title" name="title"
                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md
@@ -67,6 +85,42 @@
                             @error('description')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-sm-12 mt-4">
+                            <h4><strong>Bottom Section Content</strong></h4>
+
+                        <div class="form-group">
+                            <label>Enter Title</label>
+                            <input type="text" class="form-control" name="bottom_section_text"><br/>
+                            <label>Upload File</label>
+                            <input type="hidden" name="bottomimage">
+                            <input type="file" class="form-control" name="bottom_section_file"><br/>
+                            <label>Bottom Content</label>
+                            <textarea rows="10" cols="80" name="bottom_section_textarea"></textarea> <br/>
+
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-sm-12 mt-4">
+                            <h4><strong>Footer Section Content</strong></h4>
+
+                        <div class="form-group">
+                            <label>Enter Title</label>
+                            <input type="text" class="form-control" name="footer_section_text"><br/>
+                            <label>Upload File</label>
+                            <input type="hidden" name="footerimage">
+                            <input type="file" class="form-control" name="footer_section_file"><br/>
+                            <label>Footer Content</label>
+                            <textarea rows="10" cols="80" name="footer_section_textarea"></textarea> <br/>
+
+
+                        </div>
+                        </div>
                         </div>
 
                         <div class="flex items-center justify-end">

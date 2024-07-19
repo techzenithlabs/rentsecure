@@ -923,3 +923,20 @@ file-list {
     padding: 10px 30px;
     border: none;
 }
+
+.text-center p a {
+    color: #007bff;
+}
+
+.text-center p a:hover {
+    text-decoration: underline;
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}

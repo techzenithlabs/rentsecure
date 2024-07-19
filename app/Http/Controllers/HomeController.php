@@ -43,4 +43,21 @@ class HomeController extends Controller
         // Pass the page data to the view
         return $view;
     }
+
+    public function showDetailPage($id)
+    {
+        try {
+            // Fetch the blog post by slug
+            $blog = Post::where('id', $id)->firstOrFail();
+
+            $otherblogs=Post::WhereNotIn('id',(array)$id)->get();
+
+
+            // Return the view with blog details
+            return view('pages.blogs.show', compact('blog','otherblogs'));
+        } catch (ModelNotFoundException $e) {
+            // If the slug is not found, throw a 404 exception
+            abort(404, 'Blog post not found');
+        }
+    }
 }

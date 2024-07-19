@@ -11,7 +11,7 @@ class Post extends Model
     use CrudTrait;
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'image', 'category_id', 'author_id'];
+    protected $fillable = ['title', 'content', 'image_url', 'top_blog_title', 'top_blog_image', 'top_blog_desc', 'bottom_blog_title', 'bottom_blog_image', 'bottom_blog_desc', 'footer_blog_title', 'footer_blog_image', 'footer_blog_desc'];
 
     public function category()
     {

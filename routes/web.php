@@ -1,17 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'homePage'])->name('home');
 Route::get('/page/{slug}', [HomeController::class, 'showPage']);
+Route::get('/page/blog/detail/{id}', [HomeController::class, 'showDetailPage']);
 
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
@@ -62,4 +63,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
