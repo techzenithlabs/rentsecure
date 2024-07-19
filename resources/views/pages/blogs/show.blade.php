@@ -10,7 +10,7 @@ $formattedDate = $created_date->format('d F Y');
     <!-- Header Section -->
     <div class="text-center mb-5">
         <h1>{{ $blog->title }}</h1>
-        <p><a href="#">Home</a> / Blog</p>
+        <p><a href="{{ url('/') }}">Home</a> / Blog</p>
     </div>
 
     <!-- First Article Section -->
