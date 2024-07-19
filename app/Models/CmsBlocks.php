@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class CmsBlocks extends Model
 {
     use HasFactory;
-    protected $fillable = ['cms_id', 'home_story', 'our_mission', 'blog_title', 'blog_img', 'blog_desc', 'testimonial_pic', 'testimonial_desc', 'testimonial_star', 'testimonial_author', 'testimonial_desg', 'mobile_usa', 'mobile_uk', 'contact_email', 'created_at', 'updated_at'];
+    protected $fillable = ['cms_id', 'home_story', 'our_mission','our_mission_image', 'blog_title', 'blog_img', 'blog_desc', 'testimonial_pic', 'testimonial_desc', 'testimonial_star', 'testimonial_author', 'testimonial_desg', 'mobile_usa', 'mobile_uk', 'contact_email', 'created_at', 'updated_at'];
 
     public function cms()
     {

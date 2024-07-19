@@ -83,7 +83,7 @@
     <div class="container">
         <div class="row">
         <div class="col-sm-7 col-lg-7">
-            <img src="{{ url('public/assets/images/abouts-us/goals.png') }}">
+            <img src="{{ asset('storage/app/'.$page->blocks->our_mission_image) }}"/>
 
         </div>
         <div class="col-sm-5 col-lg-5">
@@ -92,7 +92,7 @@
             <h2 class="header-title1">OUR MISSION</h2>
             <h2 class="mb-4 text-start">Sustainability Goals</h2>
              <p class="text-start">{{ !empty($page->blocks->our_mission)?$page->blocks->our_mission:"" }}</p>
-            <button class="learnmore float-start">Contact Us</button>
+            <a href="{{ url('/page/contact-us') }}" class="learnmore float-start">Contact Us</a>
            </div>
         </div>
     </div>

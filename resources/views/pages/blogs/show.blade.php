@@ -17,7 +17,7 @@ $formattedDate = $created_date->format('d F Y');
     <div class="row mb-5">
         <div class="col-md-6">
             <h2>{{ !empty($blog->top_blog_title)?$blog->top_blog_title:"" }}</h2>
-             <p class="text-mute">Posted On: <strong>{{ $formattedDate }}</strong> <b>|</b> <span>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span> </p>
+             <p class="text-mute">Posted On: <strong>{{ $formattedDate }}</strong> <b>|</b> <span></span> </p>
             <p>{{ !empty($blog->top_blog_desc)?$blog->top_blog_desc:"" }}</p>
 
         </div>

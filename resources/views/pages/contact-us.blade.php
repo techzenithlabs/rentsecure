@@ -10,7 +10,7 @@
 
 <div class="container">
     <div class="contact-header">
-        <h1>Contact <span style="color: #000;">Us</span></h1>
+        <h1>Contact <span style="color: #000;"><b style="font-weight:800">Us</b></span></h1>
         <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry.</p>
     </div>
 

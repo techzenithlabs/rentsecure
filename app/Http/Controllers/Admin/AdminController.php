@@ -126,6 +126,28 @@ class AdminController extends Controller
                 $pages->slug = strtolower($getslug);
                 $pages->description = $descripton;
 
+                if ($getpage == "About Us") {
+
+                    $getfilePath = "";
+
+                    if ($request->hasFile('home_story')) {
+                        $file = $request->file('home_story');
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $directory = 'public/assets/images/pages/aboutus';
+                        $filePath = $directory . '/' . $fileName;
+
+                        if (!Storage::exists($directory)) {
+                            Storage::makeDirectory($directory, 0775, true); // Create directory recursively
+                        } else {
+                            // Directory exists, update permissions if needed
+                            //  Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
+                        }
+
+                        $getfilePath = $file->storeAs($directory, $fileName);
+                    }
+                    $pages->about_us_image = !empty($getfilePath) ? $getfilePath : $request->homefile;
+                }
+
                 if ($pages->save()) {
 
                     return redirect()->route('cms')->with('success', 'Page updated successfully!');
@@ -153,29 +175,18 @@ class AdminController extends Controller
                 $getpage = $request->pagename;
                 switch ($getpage) {
                     case 'about-us':
-
-                        $getfilePath = "";
-
-                        if ($request->hasFile('home_story')) {
-                            $file = $request->file('home_story');
+                        $file = !empty($request->file('mission_file')) ? $request->file('mission_file') : "";
+                        $filepath = "";
+                        if (!empty($file)) {
                             $fileName = time() . '_' . $file->getClientOriginalName();
-                            $directory = 'public/assets/images/pages/aboutus';
-                            $filePath = $directory . '/' . $fileName;
-
-                            if (!Storage::exists($directory)) {
-                                Storage::makeDirectory($directory, 0775, true); // Create directory recursively
-                            } else {
-                                // Directory exists, update permissions if needed
-                                //  Storage::chmod($directory, 0775, true); // Ensure permissions are set correctly
-                            }
-
-                            $getfilePath = $file->storeAs($directory, $fileName);
+                            $directory = 'public/assets/images/pages/about-us';
+                            $filepath = $file->storeAs($directory, $fileName);
                         }
 
                         $updateOrCreate = CmsBlocks::updateOrCreate(
                             ['cms_id' => $request->id], // Condition to check if block exists
                             [
-                                'home_story' => !empty($getfilePath) ? trim($getfilePath) : "",
+                                'our_mission_image' => !empty($filepath) ? $filepath : $request->uploadmissionfile,
                                 'our_mission' => !empty($request->our_mission) ? trim($request->our_mission) : "",
                                 // Add other fields similarly
                             ]

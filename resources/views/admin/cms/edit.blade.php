@@ -43,6 +43,12 @@
                             @endif
 
                         <input class="form-control" type="text" name="title" value="{{ !empty($pages->page_name)?$pages->page_name:"" }}" >
+                        @if($pages->page_name=="About Us")
+                        <div style="display:inline-flex;margin-top:20px">
+                            <input type="hidden" name="homefile" value="{{ !empty($pages->blocks->home_story)?$pages->blocks->home_story:'' }}">
+                            <input class="form-control" type="file" name="home_story" id="home_story">  <img width="50px" src="{{!empty($pages->blocks->home_story)?asset('storage/app/'.$pages->blocks->home_story):"" }}" alt="File">
+                        </div>
+                        @endif
 
                         </div>
                       </div>
@@ -115,20 +121,20 @@
                             <input type="hidden" name="id" value="{{ $pages->id }}">
                             <input type="hidden" name="pagename" value="{{ $page_slug }}">
                         @if($page_slug=="about-us")
-
-
-
                         <div class="row">
-                            <div class="col-md-12">
-                                <label>Home Story</label><br/>
-                                <div style="display:inline-flex">
-                                <input class="form_control" type="file" name="home_story" id="home_story">  <img width="50px" src="{{!empty($pages->blocks->home_story)?asset('storage/app/'.$pages->blocks->home_story):"" }}" alt="File">
-                                </div>
-                            </div>
 
                             <div class="col-md-12">
-                                <label>Our Mission</label>
-                                <textarea  name="our_mission" rows="5" cols="50" id="our_mission" value="{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}">{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}</textarea>
+                                <label>Upload Mission File</label><br/>
+                                <input type="hidden" name="uploadmissionfile" value="{{ !empty($pages->blocks->our_mission_image)?$pages->blocks->our_mission_image:'' }}">
+                                <div class="flex">
+
+                                <input class="form-control" type="file" name="mission_file" id="mission_file">  @if(!empty($pages->blocks->our_mission_image))<img width="40" src="{{ asset('storage/app/'.$pages->blocks->our_mission_image) }}"/>@endif<br/><br/>
+                               </div>
+                                <label>Our Mission</label><br/>
+                                <textarea name="our_mission" rows="5" cols="50" id="our_mission" value="{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}">{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}</textarea>
+                                <hr/><br/>
+
+
                             </div>
                         </div>
 

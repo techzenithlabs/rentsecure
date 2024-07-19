@@ -758,7 +758,7 @@ $(document).ready(function(){
                     },
                 });
                 break;
-                case 'testimonial':
+            case 'testimonial':
                 let testimonialData = [];
                 // $('.testimonials').each(function(index) {
                 //     var desc = $(this).find('textarea[name="testimonial_desc[]"]').val().trim();
@@ -836,7 +836,7 @@ $(document).ready(function(){
                                 $('.savedmessage ').hide();
                                 $('.savedmessage ').html("")
                                  $('#openblock').modal('hide')
-                                 location.reload();
+                                // location.reload();
 
                                },3000);
                                }

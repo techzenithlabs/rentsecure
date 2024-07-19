@@ -50,11 +50,10 @@ class HomeController extends Controller
             // Fetch the blog post by slug
             $blog = Post::where('id', $id)->firstOrFail();
 
-            $otherblogs=Post::WhereNotIn('id',(array)$id)->get();
-
+            $otherblogs = Post::WhereNotIn('id', (array) $id)->limit(4)->get();
 
             // Return the view with blog details
-            return view('pages.blogs.show', compact('blog','otherblogs'));
+            return view('pages.blogs.show', compact('blog', 'otherblogs'));
         } catch (ModelNotFoundException $e) {
             // If the slug is not found, throw a 404 exception
             abort(404, 'Blog post not found');
