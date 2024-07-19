@@ -940,3 +940,10 @@ file-list {
 .rounded-circle {
     border-radius: 50%;
 }
+
+.contactform
+{
+    margin-left:100px;
+    margin-right: 100px;
+    padding:20px;
+}
