@@ -1,6 +1,13 @@
 @include('includes.home-header')
 @include('layouts.home-navigation')
 
+@php
+
+ $mobile_usa=!empty($page->blocks->mobile_usa)?$page->blocks->mobile_usa:"";
+ $mobile_uk=!empty($page->blocks->mobile_uk)?$page->blocks->mobile_uk:"";
+ $contact_email=!empty($page->blocks->contact_email)?$page->blocks->contact_email:"";
+@endphp
+
 <div class="container">
     <div class="contact-header">
         <h1>Contact <span style="color: #000;">Us</span></h1>
@@ -11,7 +18,7 @@
         <div>
             <i class="fas fa-phone"></i>
             <h5>Call Us</h5>
-            <p>USA: +1 1234567890<br>UK: +44 1234567890</p>
+            <p>USA: {!!!empty($mobile_usa)?'+1 '.$mobile_usa:'N/A' !!}<br>UK: {!!!empty($mobile_uk)?'+44 '.$mobile_uk:'N/A' !!}</p>
         </div>
         <div>
             <i class="fas fa-envelope"></i>
