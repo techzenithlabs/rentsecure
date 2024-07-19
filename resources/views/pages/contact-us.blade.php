@@ -17,11 +17,13 @@
     <div class="contact-info">
         <div>
             <i class="fas fa-phone"></i>
+            <center><img width="40" src="{{ asset('public/assets/images/icons/phone-icon.png') }}"/></center><br/>
             <h5>Call Us</h5>
             <p>USA: {!!!empty($mobile_usa)?'+1 '.$mobile_usa:'N/A' !!}<br>UK: {!!!empty($mobile_uk)?'+44 '.$mobile_uk:'N/A' !!}</p>
         </div>
         <div>
             <i class="fas fa-envelope"></i>
+            <center><img width="40" src="{{ asset('public/assets/images/icons/email-icon.png') }}"/></center><br/>
             <h5>Email</h5>
             <p>info@entsecure.com</p>
         </div>
