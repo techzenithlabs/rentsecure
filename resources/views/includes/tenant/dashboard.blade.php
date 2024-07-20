@@ -36,7 +36,7 @@
         </div>
 
         <!-- Applicant 1 Details -->
-        <h4>Applicant #1</h4>
+        <h4><strong>Applicant</strong></h4>
         <div class="form-group">
             <label for="applicant1Name">Name</label>
             <input type="text" class="form-control" id="applicant1Name" name="applicant1Name">
@@ -59,6 +59,7 @@
         </div>
 
         <!-- Applicant 2 Details -->
+        <div style="display:none">
         <h4>Applicant #2</h4>
         <div class="form-group">
             <label for="applicant2Name">Name</label>
@@ -80,6 +81,7 @@
             <label for="applicant2Occupation">Occupation</label>
             <input type="text" class="form-control" id="applicant2Occupation" name="applicant2Occupation">
         </div>
+    </div>
 
         <!-- Other Occupants -->
         <h4>Other Occupants</h4>
@@ -111,7 +113,7 @@
         <!-- Employment Details -->
         <h4>Employment Details</h4>
         <div class="form-group">
-            <label for="presentEmployer1">Applicant #1 Present Employer</label>
+            <label for="presentEmployer1">Applicant Present Employer</label>
             <input type="text" class="form-control" id="presentEmployer1" name="presentEmployer1">
         </div>
         <div class="form-group">
@@ -171,7 +173,7 @@
         <!-- Previous Employment -->
         <h4>Previous Employment</h4>
         <div class="form-group">
-            <label for="previousEmployer1">Applicant #1 Previous Employer</label>
+            <label for="previousEmployer1">Applicant  Previous Employer</label>
             <input type="text" class="form-control" id="previousEmployer1" name="previousEmployer1">
         </div>
         <div class="form-group">
@@ -223,7 +225,7 @@
         <!-- Declaration -->
         <h4>Declaration</h4>
         <div class="form-group">
-            <label for="signature1">Applicant #1 Signature</label>
+            <label for="signature1">Applicant  Signature</label>
             <input type="text" class="form-control" id="signature1" name="signature1">
         </div>
         <div class="form-group">
