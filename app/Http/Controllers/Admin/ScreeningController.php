@@ -332,18 +332,36 @@ class ScreeningController extends Controller
             // Handle the case when no step is provided
             return view('tenant.tenant-screening.step1');
         }
-        $landlord_id = Auth::user()->id;
+        $tenant_id = Auth::user()->id;
+        $tenant_email = Auth::user()->email;
+        $check_tenant_properties = TenantScreening::where('tenant_email', trim($tenant_email))->get();
+        $tenant_assigned_properties = [];
+        $property_details = [];
+        if ($check_tenant_properties->isNotEmpty()) {
+            foreach ($check_tenant_properties as $property) {
+                $tenant_assigned_properties['landlord_id'] = $property->landlord_id;
+                $tenant_assigned_properties['tenant_id'] = $tenant_id;
+                $tenant_assigned_properties['property_id'] = $property->property_id;
+                $propertyDetails = Property::where('id', $property->property_id)->first();
+                if (!empty($propertyDetails)) {
+
+                    $property_details['id'] = $propertyDetails->id;
+                    $property_details['street_address'] = $propertyDetails->street_address;
+                    $property_details['amount'] = $propertyDetails->amount;
+                    $property_details['province'] = $propertyDetails->province;
+                    $property_details['zipcode'] = $propertyDetails->zipcode;
+
+                }
+                $tenant_assigned_properties['property_details'] = !empty($property_details) ? $property_details : [];
+            }
+        }
 
         switch ($step) {
             case 'step1':
                 if ($request->isMethod('post')) {
 
                 }
-                if (Session::has('paymentinfo')) {
-                    $data['paymentinfo'] = Session::get('paymentinfo');
-
-                }
-
+                $data['tenant_property_details'] = !empty($tenant_assigned_properties) ? $tenant_assigned_properties : [];
                 return view('tenant.tenant-screening.step1')->with($data);
             case 'step2':
                 if ($request->isMethod('post')) {
