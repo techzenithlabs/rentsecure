@@ -96,24 +96,27 @@
                                     </div>
                                     <!-- 2nd Row -->
                                     <div class="row">
-                                        <h6 class="mb-2">Applicant 1</h6>
+
                                         <div class="col-sm-4 col-lg-4">
+                                            <h6 class="mb-2"><strong>Applicant 1</strong></h6>
                                         <div class="form-group">
-                                            <label class="custom-label" for="applicant1">First Name:</label>
+                                            <label class="custom-label" for="applicant1">First Name</label><span class="text-danger">*</span>
                                             <input type="text" placeholder="Enter First Name" name="tenant_first_name" class="custom-input form-control" id="applicant1">
                                             <div class="mt-2 text text-danger firstnameerror"></div>
                                         </div>
                                         </div>
                                         <div class="col-sm-4 col-lg-4">
+                                            <h6 class="mb-2"></h6><br/>
                                         <div class="form-group">
-                                            <label class="custom-label" for="lastName">Last Name:</label>
+                                            <label class="custom-label" for="lastName">Last Name</label><span class="text-danger">*</span>
                                             <input type="text" placeholder="Enter Last Name" name="tenant_last_name" class="custom-input form-control" id="lastName">
                                             <div class="mt-2 text text-danger lastnameerror"></div>
                                         </div>
                                         </div>
                                         <div class="col-sm-4 col-lg-4">
+                                            <h6 class="mb-2"></h6><br/>
                                         <div class="form-group">
-                                            <label class="custom-label" for="email">Email*:</label>
+                                            <label class="custom-label" for="email">Email</label><span class="text-danger">*</span>
                                             <input type="email" placeholder="Enter Email" name="tenant_email" class="custom-input form-control" id="email">
                                             <div class="mt-2 text text-danger emailerror"></div>
                                         </div>
