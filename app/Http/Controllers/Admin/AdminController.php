@@ -176,6 +176,7 @@ class AdminController extends Controller
                 switch ($getpage) {
                     case 'about-us':
                         $file = !empty($request->file('mission_file')) ? $request->file('mission_file') : "";
+                        
                         $filepath = "";
                         if (!empty($file)) {
                             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -183,11 +184,36 @@ class AdminController extends Controller
                             $filepath = $file->storeAs($directory, $fileName);
                         }
 
+                        $faqTitles = $request->input('faqtitle', []);
+                        $faqDescs = $request->input('faqdesc', []);
+                        $faqs = [];
+
+                        if(!empty($faqTitles)){
+                            foreach ($faqTitles as $index => $title) {
+                                $faqs[] = [
+                                    'title' => $title,
+                                    'desc' => isset($faqDescs[$index]) ? $faqDescs[$index] : '',
+                                ];
+                            }
+                
+                        }
+
+                        // Split the combined data into separate arrays
+                        if(!empty($faqs)){
+                            $titles = array_column($faqs, 'title');
+                            $descs = array_column($faqs, 'desc');
+                        }
+                         
+
+
+
                         $updateOrCreate = CmsBlocks::updateOrCreate(
                             ['cms_id' => $request->id], // Condition to check if block exists
                             [
                                 'our_mission_image' => !empty($filepath) ? $filepath : $request->uploadmissionfile,
                                 'our_mission' => !empty($request->our_mission) ? trim($request->our_mission) : "",
+                                'faq_title' => !empty($titles) ? json_encode($titles) : json_encode([]),
+                                'faq_desc' => !empty($descs) ? json_encode($descs) : json_encode([]),
                                 // Add other fields similarly
                             ]
                         );

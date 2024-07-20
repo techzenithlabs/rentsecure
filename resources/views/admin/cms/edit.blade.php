@@ -1,4 +1,23 @@
 @include('includes.header')
+<style>
+     .faqform {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+     .remove-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-top: 10px;
+            float:right;
+        }
+</style>
 
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
@@ -133,6 +152,37 @@
                                 <label>Our Mission</label><br/>
                                 <textarea name="our_mission" rows="5" cols="50" id="our_mission" value="{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}">{{ !empty($pages->blocks->our_mission)?$pages->blocks->our_mission:""  }}</textarea>
                                 <hr/><br/>
+                                <h5><strong>FAQ</strong></h5><br/>
+                                        <button type="button" id="add-more-faq" class="btn btn-primary float-right mb-4">Add More</button>
+                                        @if(!empty($pages->blocks->faq_title))
+                                        @php 
+                                         $getfaq=json_decode($pages->blocks->faq_title);
+                                         $getdesc=json_decode($pages->blocks->faq_desc);
+                                         
+                                        @endphp 
+                                         <div id="faq-form-container">
+                                        @foreach($getfaq as $key=>$faq)
+                                        <div class="faqform mt-4 mb-4">
+                                            <label>Enter Faq Title</label>
+                                            <input type="text" name="faqtitle[]" value="{{ $faq }}" class="form-control"/><br/>
+                                            <label>Enter Faq Desc</label>
+                                            <textarea name="faqdesc[]" rows="5" cols="50" value="{{ $getdesc[$key] }}">{{ $getdesc[$key] }}</textarea>
+                                           </div>
+
+                                        @endforeach
+                                      </div>
+
+                                        @else
+                                        <div id="faq-form-container">
+                                        <div class="faqform mt-4 mb-4">
+                                        <label>Enter Title</label>
+                                        <input type="text" name="faqtitle[]" class="form-control"/><br/>
+                                        <label>Enter Desc</label>
+                                        <textarea name="faqdesc[]" rows="5" cols="50"></textarea>
+                                       </div>
+                                        </div>
+                                       @endif
+                               
 
 
                             </div>
@@ -282,3 +332,22 @@
         </div>
     </div>
 @include('includes.footer')
+<script>
+    document.getElementById('add-more-faq').addEventListener('click', function() {
+        const faqForm = document.querySelector('.faqform');
+            const clonedForm = faqForm.cloneNode(true);
+            
+            // Create and add a Remove button to the cloned form
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.className = 'remove-btn';
+
+            removeButton.addEventListener('click', function() {
+                clonedForm.remove();
+            });
+            clonedForm.appendChild(removeButton);
+
+            // Append the cloned form to the container
+            document.getElementById('faq-form-container').appendChild(clonedForm);
+        });
+</script>

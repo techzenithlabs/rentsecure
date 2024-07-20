@@ -1,4 +1,43 @@
 @include('includes.home-header')
+<style>
+.card{
+    border:1px solid rgb(0 0 0 / 8%);
+}
+
+    .accordion-button:not(.collapsed)
+    {
+        background-color: #FFF;
+        box-shadow: unset;
+    }
+    .faq-section .card-header
+    {
+        background-color: #FFF;
+    }
+    .faq-section .card-header button
+    {
+        color:black;
+    }
+  .accordion-button::after {
+            content: ' + '; /* Default icon for collapsed state */
+            font-size: 1.2em;
+            color: black;
+            float: right;
+        }
+
+        .accordion-button.collapsed::after {
+    content: '+';
+}
+
+     
+        .accordion-button {
+            text-align: left;
+            padding-right: 2em;
+        }
+        .accordion-button:not(.collapsed)::after
+        {
+            background-image:unset !important;
+        }
+</style>
 @include('layouts.home-navigation')
 
 <section class="hero-section text-center py-5">
@@ -134,81 +173,71 @@
     </div>
 </section>
 <section class="faq-section text-center py-5 bg-light">
+    @php 
+    $getfaqs=!empty($page->blocks->faq_title)?json_decode($page->blocks->faq_title):[];
+    $getfaqdesc=!empty($page->blocks->faq_desc)?json_decode($page->blocks->faq_desc):[];
+ 
+    @endphp 
     <div class="container mt-5">
-        <h2>Frequently Asked Questions</h2>
+        <h1 class="text-center mb-4">Frequenly Asked Questions</h1>
         <div class="row">
+            <!-- Left Column -->
             <div class="col-md-6">
                 <div id="accordionLeft" class="accordion">
-                    <div class="card">
-                        <div class="card-header" id="headingOneLeft">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneLeft" aria-expanded="true" aria-controls="collapseOneLeft">
-                                    Question 1
-                                    <span class="icon">+</span>
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="collapseOneLeft" class="collapse" aria-labelledby="headingOneLeft" data-parent="#accordionLeft">
-                            <div class="card-body">
-                                Answer to question 1.
+                    @foreach ($getfaqs as $index => $question)
+                        @if ($index % 2 === 0) <!-- Adjust condition based on your desired split -->
+                            <div class="card">
+                                <div class="card-header" id="heading{{ $index }}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link accordion-button" data-toggle="collapse" data-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
+                                            {{ $question }}
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse{{ $index }}" class="collapse" aria-labelledby="heading{{ $index }}" data-parent="#accordionLeft">
+                                    <div class="card-body">
+                                        {{ $getfaqdesc[$index] ?? '' }}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwoLeft">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwoLeft" aria-expanded="false" aria-controls="collapseTwoLeft">
-                                    Question 2
-                                    <span class="icon">+</span>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwoLeft" class="collapse" aria-labelledby="headingTwoLeft" data-parent="#accordionLeft">
-                            <div class="card-body">
-                                Answer to question 2.
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
-
+            <!-- Right Column -->
             <div class="col-md-6">
                 <div id="accordionRight" class="accordion">
-                    <div class="card">
-                        <div class="card-header" id="headingOneRight">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneRight" aria-expanded="true" aria-controls="collapseOneRight">
-                                    Question 3
-                                    <span class="icon">+</span>
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="collapseOneRight" class="collapse" aria-labelledby="headingOneRight" data-parent="#accordionRight">
-                            <div class="card-body">
-                                Answer to question 3.
+                    @foreach ($getfaqs as $index => $question)
+                        @if ($index % 2 !== 0) <!-- Adjust condition based on your desired split -->
+                            <div class="card">
+                                <div class="card-header" id="heading{{ $index }}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link accordion-button" data-toggle="collapse" data-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
+                                            {{ $question }}
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse{{ $index }}" class="collapse" aria-labelledby="heading{{ $index }}" data-parent="#accordionRight">
+                                    <div class="card-body">
+                                        {{ $getfaqdesc[$index] ?? '' }}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwoRight">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwoRight" aria-expanded="false" aria-controls="collapseTwoRight">
-                                    Question 4
-                                    <span class="icon">+</span>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwoRight" class="collapse" aria-labelledby="headingTwoRight" data-parent="#accordionRight">
-                            <div class="card-body">
-                                Answer to question 4.
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
 @include('includes.home-footer')
+<script>
+       $(document).ready(function() {
+            $('.accordion-button').on('click', function() {
+                var target = $(this).data('target');
+                
+                // Toggle the clicked accordion
+                $(target).collapse('toggle');
+            });
+        });
+  </script>
