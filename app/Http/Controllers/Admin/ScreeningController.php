@@ -246,6 +246,7 @@ class ScreeningController extends Controller
         try {
             if ($request->ajax()) {
                 $formData = (object) $request->all();
+              
 
                 $landlord_id = Auth::user()->id;
                 $landlorddetail = User::where(['id' => $landlord_id, 'role_id' => 2])->first();

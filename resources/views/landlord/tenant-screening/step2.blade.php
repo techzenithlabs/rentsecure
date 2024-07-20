@@ -80,8 +80,10 @@
                                     <li><i class="bi bi-check-lg"></i></li>
                                     <li><i class="bi bi-check-lg"></i></li>
                                 </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
+                                <form method="post" action="{!! url('session') !!}" name="formstep2">
                                     @csrf
+                                    <input type="hidden" name="productname" value="starter pack">
+                                    <input type="hidden" name="price" value="30">
                                 <div class="pricing-btn">
                                     <button type="submit">Buy Now</button> <button>View Sample</button>
                                 </div>
@@ -103,8 +105,10 @@
                                     <li><i class="bi bi-three-dots"></i></li>
                                     <li><i class="bi bi-check-lg"></i></li>
                                 </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
+                                <form method="post" action="{!! url('session') !!}" name="formstep2">
                                     @csrf
+                                    <input type="hidden" name="productname" value="business pack">
+                                    <input type="hidden" name="price" value="100">
                                 <div class="pricing-btn">
                                     <button type="submit">Buy Now</button> <button>View Sample</button>
                                 </div>
@@ -126,8 +130,10 @@
                                     <li><i class="bi bi-three-dots"></i></li>
                                     <li><i class="bi bi-check-lg"></i></li>
                                 </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
+                                <form method="post" action="{!! url('session') !!}" name="formstep2">
                                     @csrf
+                                    <input type="hidden" name="productname" value="professional pack">
+                                    <input type="hidden" name="price" value="150">
                                 <div class="pricing-btn">
                                     <button type="submit">Buy Now</button> <button>View Sample</button>
                                 </div>

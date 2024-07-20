@@ -68,11 +68,12 @@ $getemail=isset($_GET['email'])&&!empty($_GET['email'])?$_GET['email']:"";
                                         </div>
                                         <h4>Security Requirements</h4>
                                         <div class="form-group col-6">
-                                            <label>Password<span>*</span></label>
+                                            <label>Password<span>*</span></label> 
                                             <div class="password-div">
                                                 <input type="password" class="form-control" id="password"
                                                     name="password" placeholder="Enter Your Password">
                                                 <x-input-error :messages="$errors->get('password')" class="mt-2 text-danger" />
+                                                    <em style="font-size:0.9em;color:red;margin-top:10px" class="mt-4"><strong>Note:</strong> (Password should be mix of Uppercase,Lowercase ,numeric or special characters)</em>
                                             </div>
                                         </div>
                                         <div class="form-group col-6">

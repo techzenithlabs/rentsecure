@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ScreeningController;
+use App\Http\Controllers\Admin\StripeController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/cms/add', [AdminController::class, 'addCMS'])->name('cms.add');
     Route::match(['get', 'post'], '/cms/edit/{id?}', [AdminController::class, 'editCMS'])->name('cms.edit');
     Route::post('/save-cms-block', [AdminController::class, 'saveCmsBlocks'])->name('save-cms.blocks');
+
+    Route::post('/session', [StripeController::class, 'stripeSession'])->name('session');
+    Route::get('checkout-success', [StripeController::class, 'checkoutSuccess'])->name('checkout.success');
+    Route::get('checkout-cancel', [StripeController::class, 'checkoutCancel'])->name('checkout.cancel');
 
     Route::resource('posts', PostController::class);
     /****Admin */

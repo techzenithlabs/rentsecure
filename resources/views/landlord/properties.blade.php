@@ -152,10 +152,11 @@
                 <div class="added-pro">
 
                     <div class="row">
-                        <h2>Added Properties</h2>
+
                     @if(isset($properties)&&!empty($properties))
 
                     <div class="col-md-6">
+                        <h2>Added Properties</h2>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
