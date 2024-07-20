@@ -436,7 +436,7 @@ ul.subpara {list-style-type: disc !important}
 .payInfo-sec1 ul li label {position: absolute;top: 26px; left: 430px; background: #faa419; font-size: 12px; padding: 2px 5px; color: #000; font-family: 'graphikmedium';}
 .payInfo-sec1 ul li label:before {content: ""; width: 10px;height: 10px; border-bottom: solid 3px rgb(250 164 25);border-right: solid 10px rgb(250 164 25); border-left: solid 3px transparent; border-top: solid 10px transparent; position: absolute;  rotate: -180deg; right: -12px; top: 0;}
 .payInfo-sec1 ul li label:after { content: "";width: 10px; height: 10px; border-bottom: solid 3px rgb(250 164 25); border-left: solid 10px rgb(250 164 25); border-right: solid 3px transparent; border-top: solid 10px transparent; position: absolute;rotate: -360deg;  right: -12px;   bottom: 0;}
-
+.next-btn {background: #642a81; border: 1px solid #642a81; height: 40px; line-height: 40px; padding: 0px 28px;  border-radius: 30px; color: #fff; font-family: 'graphikmedium'; font-size: 14px;  text-transform: capitalize;}
 .form-content{
     margin-top:20px;
     margin-bottom: 20px;

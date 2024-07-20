@@ -20,7 +20,7 @@
                <!-----incude main layout-->
                <div class="main-content">
                 <div class="cont-wrapper">
-                <form method="post" action="{{ url('landlord/screening/tenant/step2') }}" name="formstep1">
+                <form method="post" action="{{ url('tenant/screening/step2') }}" name="tenantformstep1">
                         @csrf
                     <div class="tenant-screening">
                         <div class="card-head">
@@ -28,19 +28,15 @@
                             <div class="progress-sec">
                                 <ul>
                                     <li class="completed">
-                                        <label>Step 1/4</label>
+                                        <label>Step 1/3</label>
                                         <span></span>
                                     </li>
                                     <li>
-                                        <label>Step 2/4</label>
+                                        <label>Step 2/3</label>
                                         <span></span>
                                     </li>
                                     <li>
-                                        <label>Step 3/4</label>
-                                        <span></span>
-                                    </li>
-                                    <li>
-                                        <label>Step 4/4</label>
+                                        <label>Step 3/3</label>
                                         <span></span>
                                     </li>
                                 </ul>
@@ -48,29 +44,12 @@
                         </div>
                         <div class="form-content">
                         <div class="card-body whopays-sec min-hieght">
-                            <h2>Select Who will fill the Information <span>Select who will be entering the applicant’s information</span></h2>
-
-                            <div class="payInfo-sec">
-                                <input type="hidden" id="paymentinfo" name="paymentinfo" value="{{ !empty($paymentinfo)?$paymentinfo:"" }}">
-                                <ul>
-                                    <li  role="button" {!! !empty($paymentinfo) && $paymentinfo == 'landlord' ? 'style="border:1px solid grey;"' : '' !!} data-info="landlord">
-                                        <h3>You fill out information</h3>
-                                        <span>Enter the applicant’s information and get a report back within 5 minutes.</span>
-                                    </li>
-                                    <li role="button" {!! !empty($paymentinfo) && $paymentinfo == 'tenant' ? 'style="border:1px solid grey;"' : '' !!} data-info="tenant">
-                                        <h3>Applicant Fills Out information</h3>
-                                        <span>Email the applicants a form to collect their information and consent.</span>
-                                        <label class="new">New</label>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
+                            <h2>Hi {{ Auth::user()->firstname }}, <span></span></h2>
+                            <p>landlord invited them to fill out a secure online credit report application to rent at the below property 123 Main Street, Toronto ON M4L 1V2. If you have questions, contact info@rentsecure.com</p><br/>
+                            <button type="submit" class="next-btn">Get Started</button>
+                       </div>
                       </div>
-                        <div class="card-footer">
-                            <button disabled class="back-btn">Back</button>
-                            <button type="submit" class="next-btn">Continue</button>
-                        </div>
+
                     </div>
                 </form>
                 </div>

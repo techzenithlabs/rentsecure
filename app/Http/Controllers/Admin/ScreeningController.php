@@ -327,6 +327,7 @@ class ScreeningController extends Controller
     {
 
         $data = [];
+
         if ($step === null) {
             // Handle the case when no step is provided
             return view('tenant.tenant-screening.step1');
@@ -342,7 +343,8 @@ class ScreeningController extends Controller
                     $data['paymentinfo'] = Session::get('paymentinfo');
 
                 }
-                return view('landlord.tenant-screening.step1')->with($data);
+
+                return view('tenant.tenant-screening.step1')->with($data);
             case 'step2':
                 if ($request->isMethod('post')) {
 
@@ -359,7 +361,7 @@ class ScreeningController extends Controller
 
                 }
 
-                return view('landlord.tenant-screening.step2')->with($data);
+                return view('tenant.tenant-screening.step2')->with($data);
             case 'step3':
                 if ($request->isMethod('post')) {
                     $country = !empty($request->country) ? $request->country : "";
@@ -414,7 +416,7 @@ class ScreeningController extends Controller
                     $data['applicant_consignment'] = Session::get('applicant_consignment');
                 }
 
-                return view('landlord.tenant-screening.step3')->with($data);
+                return view('tenant.tenant-screening.step3')->with($data);
             case 'step4':
                 if ($request->isMethod('post')) {
                     $allinfo = $request->all();

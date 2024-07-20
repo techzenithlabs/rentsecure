@@ -19,7 +19,7 @@
                @endswitch
                <div class="main-content">
                 <div class="cont-wrapper">
-                    <form method="post" action="{{ url('landlord/screening/tenant/step4') }}" id="formstep3" name="formstep3">
+                    <form method="post" action="{{ url('tenant/screening/step4') }}" id="tenantformstep3" name="tenantformstep3">
                         @csrf
                         <div class="tenant-screening">
                             <div class="card-head">
@@ -27,21 +27,18 @@
                                 <div class="progress-sec">
                                     <ul>
                                         <li class="completed">
-                                            <label>Step 1/4</label>
+                                            <label>Step 1/3</label>
                                             <span></span>
                                         </li>
                                         <li class="completed">
-                                            <label>Step 2/4</label>
+                                            <label>Step 2/3</label>
                                             <span></span>
                                         </li>
                                         <li class="completed">
-                                            <label>Step 3/4</label>
+                                            <label>Step 3/3</label>
                                             <span></span>
                                         </li>
-                                        <li>
-                                            <label>Step 4/4</label>
-                                            <span></span>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -152,7 +149,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ url('landlord/screening/tenant/step2') }}" class="back-btn">Back</a>
+                                <a href="{{ url('tenant/screening/step2') }}" class="back-btn">Back</a>
                                 <button type="submit" class="next-btn">Continue</button>
                             </div>
                         </div>

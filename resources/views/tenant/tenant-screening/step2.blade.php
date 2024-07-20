@@ -17,134 +17,177 @@
                 @include('layouts.tenant.sidebar')
                   @break
                @endswitch
-
                <div class="main-content">
                 <div class="cont-wrapper">
-                    <div class="pricing-sec">
-                        <div class="card-head">
-                            <h3>Pricing</h3>
+                    <form method="post" action="{{ url('tenant/screening/step3') }}" id="tenantformstep2" name="tenantformstep2">
+                        @csrf
+                        <div class="tenant-screening">
+                            <div class="card-head">
+                                <h3>Tenant Screening</h3>
+                                <div class="progress-sec">
+                                    <ul>
+                                        <li class="completed">
+                                            <label>Step 1/3</label>
+                                            <span></span>
+                                        </li>
+                                        <li class="completed">
+                                            <label>Step 2/3</label>
+                                            <span></span>
+                                        </li>
+                                        <li>
+                                            <label>Step 3/3</label>
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                                <div class="card-body min-hieght">
+
+                                        <div class="form-content">
+
+                                            <div class="ms-4 text text-danger paymentinfoerror"></div>
+                                            <div class="ms-4 text text-danger countryerror"></div>
+
+
+                                        <div class="row mt-4 mb-4">
+                                            <!-- 1st Row -->
+                                            <div class="col-sm-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="custom-label font-weight-bold" for="applicant1">First Name</label><span class="text-danger">*</span>
+                                                <p><span><input class="form-control" type="text" name="firstname" placeholder="Enter First Name"></span></p>
+                                                <div class="mt-2 text text-danger firstnameerror"></div>
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">Middle Name</label>
+                                                    <p><span><input class="form-control" type="text" name="middlename" placeholder="Enter Middle Name"></span></p>
+                                                    <div class="mt-2 text text-danger middlenameerror"></div>
+                                                </div>
+                                                </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="custom-label font-weight-bold" for="applicant1">Last Name</label><span class="text-danger">*</span>
+                                                <p><span><input class="form-control" type="text" name="lastname" placeholder="Enter Last Name"></span></p>
+                                                <div class="mt-2 text text-danger lastnameerror"></div>
+
+                                            </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <!-- 2nd Row -->
+
+                                        <div class="row mt-4 mb-4">
+                                            <!-- 1st Row -->
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">DOB <span class="text-danger">*</span></label>
+
+                                                    <p><span><input class="form-control"  type="date" name="dob"></span></p>
+                                                    <div class="mt-2 text text-danger doberror"></div>
+                                                </div>
+
+                                            </div>
+                                              <div class="col-sm-4 col-lg-4">
+                                                    <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">SIN:</label>
+                                                    <p><span><input class="form-control" type="text" name="sin" placeholder="Enter SIN"></span></p>
+                                                    <div class="mt-2 text text-danger sineerror"></div>
+                                                    </div>
+
+
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+
+
+                                            </div>
+
+                                        </div>
+
+                                         <!-- 3rd Row -->
+
+                                         <div class="row mt-4 mb-4">
+                                            <!-- 1st Row -->
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="province">Street Address</label><span class="text-danger">*</span>
+
+                                                    <p><span><input class="form-control" type="text" name="address" placeholder="Enter Street Address"></span></p>
+                                                    <div class="mt-2 text text-danger addresserror"></div>
+
+                                                    </div>
+
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                    <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="postalcpde">Postal Code</label><span class="text-danger">*</span>
+                                                    <p><span><input class="form-control" type="text" id="postalcode" name="postalcode" placeholder="Enter Postal Code"></span></p>
+                                                    <div class="mt-2 text text-danger postalcodeeerror"></div>
+                                                    </div>
+
+
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">City/Town</label><span class="text-danger">*</span>
+                                                    <p><span><input class="form-control" type="text" name="city" placeholder="Enter City"></span></p>
+                                                    <div class="mt-2 text text-danger cityerror"></div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                       <!--4th Row-->
+                                        <div class="row mt-4 mb-4">
+                                            <!-- 1st Row -->
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="province">Province</label><span class="text-danger">*</span>
+
+                                                    <p><span><input class="form-control" type="text" id="province" name="province" placeholder="Enter Province"></span></p>
+                                                    <div class="mt-2 text text-danger provinceerror"></div>
+
+                                                    </div>
+
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+
+
+
+                                            </div>
+                                            <div class="col-sm-4 col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">Select Which Property the Screening is For</label><span class="text-danger">*</span>
+                                                    <p><span>
+                                                    <select name="propertyscreen" class="form-control">
+                                                     <option value="">Select Property</option>
+                                                    </select>
+                                                    </span></p>
+                                                    <div class="mt-2 text text-danger propertyscreenerror"></div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" class="next-btn">Continue</button>
+
+
+
+                                        </div>
+
+
+                                </div>
+                            </div>
 
                         </div>
-                        <div class="progress-sec">
-                            <ul>
-                                <li class="completed">
-                                    <label>Step 1/4</label>
-                                    <span></span>
-                                </li>
-                                <li class="completed">
-                                    <label>Step 2/4</label>
-                                    <span></span>
-                                </li>
-                                <li>
-                                    <label>Step 3/4</label>
-                                    <span></span>
-                                </li>
-                                <li>
-                                    <label>Step 4/4</label>
-                                    <span></span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="buynow-offer">
-                            <div class="offer-list">
-                                <div class="offer-head">
-                                    <h3>Features</h3>
-                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
-                                </div>
-                                <ul>
-                                    <li>Aliquam tincidunt mauris eu.</li>
-                                    <li>Vestibulum auctor dapibus.</li>
-                                    <li>Nunc dignissim risus id metus.</li>
-                                    <li>Cras ornare tristique elit.</li>
-                                    <li>Praesent placerat risus quis</li>
-                                    <li>Vestibulum auctor dapibus.</li>
-                                    <li>Nunc dignissim risus id metus.</li>
-                                    <li>Cras ornare tristique elit.</li>
-                                    <li>Praesent placerat risus quis</li>
-                                </ul>
-                            </div>
-                            <div class="offer-list">
-                                <div class="offer-head">
-                                    <h3>Other</h3>
-                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
-                                </div>
-                                <ul>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
-                                    @csrf
-                                <div class="pricing-btn">
-                                    <button type="submit">Buy Now</button> <button>View Sample</button>
-                                </div>
-                                </form>
-                            </div>
-                            <div class="offer-list">
-                                <div class="offer-head">
-                                    <h3>P1</h3>
-                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
-                                </div>
-                                <ul>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
-                                    @csrf
-                                <div class="pricing-btn">
-                                    <button type="submit">Buy Now</button> <button>View Sample</button>
-                                </div>
-                                </form>
-                            </div>
-                            <div class="offer-list">
-                                <div class="offer-head">
-                                    <h3>P2</h3>
-                                    <img class="img-fluid" src="{{ asset('public/assets/images/logo.png') }}">
-                                </div>
-                                <ul>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                    <li><i class="bi bi-three-dots"></i></li>
-                                    <li><i class="bi bi-check-lg"></i></li>
-                                </ul>
-                                <form method="post" action="{!! (Session::get('paymentinfo')=="tenant")?url('landlord/screening/tenant/step4'):url('landlord/screening/tenant/step3') !!}" name="formstep2">
-                                    @csrf
-                                <div class="pricing-btn">
-                                    <button type="submit">Buy Now</button> <button>View Sample</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ url('landlord/screening/tenant/step1') }}" class="back-btn">Back</a>
-
-                    </div>
+                    </form>
                 </div>
-
-            </div>
-
-
-            </section>
+              </section>
         </div>
-@include('includes.footer')
 
+@include('includes.footer')
