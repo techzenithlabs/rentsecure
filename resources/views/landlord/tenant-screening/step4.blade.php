@@ -160,7 +160,7 @@
                 <h4 style="font-size:1.5rem" class="text-center">Applicant invite has been sent</h4>
                 <p style="margin-top: 10px;margin-bottom: 20px;line-height: 1.5;" class="text-center mt-3"><span>You will be notified when the applicant has completed their application.</span></p>
                 <center><button class="view-applicant btn btn-primary text-center">View Applicants Reports</button></center>
-                <p class="mt-3 text-center screen-other"><a href="{{ route('landlord.screening.tenant') }}">+ Screen Another tenant</a></p>
+                <p class="mt-3 text-center screen-other"><a href="{{ route('landlord.screening.tenant') }}/step1">+ Screen Another tenant</a></p>
             </div>
 
             <!-- Modal Footer -->
