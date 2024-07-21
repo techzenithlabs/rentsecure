@@ -612,7 +612,7 @@ class ScreeningController extends Controller
                 //$allinfo = $request->all();
 
                 //$tenantproperty=new TenantProperty;
-                $tenantproperty->landlord_id=$formData
+                $tenantproperty->landlord_id=$formData;
                 //$tenantproperty->save();
 
                 // $response = [
@@ -656,6 +656,7 @@ class ScreeningController extends Controller
                 //     return response()->json($response, 200);
 
                 // }
+            }
 
 
 
