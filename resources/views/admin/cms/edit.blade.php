@@ -1,6 +1,6 @@
 @include('includes.header')
 <style>
-     .faqform {
+     .faqform,.faqformhome {
             margin-bottom: 10px;
             padding: 10px;
             border: 1px solid #ddd;
@@ -55,7 +55,8 @@
                          <div class="form-group">
 
 
-                            <label>Title</label>  @if($pages->page_name=="Blog")
+                            <label>Title</label>
+                            @if($pages->page_name=="Blog")
                             <a href="{{ route('posts.index') }}" style="transform:translate(4px, -25px)" class="btn btn-primary float-end">Edit Blocks</a>
                             @else
                             <button type="button" style="transform:translate(4px, -25px)" data-toggle="modal" data-target="#openblock" class="btn btn-primary float-end">Edit Blocks</button>
@@ -139,7 +140,106 @@
                             @csrf
                             <input type="hidden" name="id" value="{{ $pages->id }}">
                             <input type="hidden" name="pagename" value="{{ $page_slug }}">
-                        @if($page_slug=="about-us")
+                        @if($page_slug=="home")
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <h2><strong> Top Section</strong></h2><br/>
+                                <label>Top Section Title</label><br/>
+                                <input type="text" class="form-control" name="hometoptitle"><br/>
+                                <label>Top Section Sub Title</label><br/>
+                                <input type="text" class="form-control" name="hometopsubtitle"><br/>
+                                <label>Upload Background Image</label><br/>
+
+                                <input class="form-control" type="file" name="home_top_file" id="home_top_file"><br/>
+                                <hr/>
+                                <h2 class="mt-2"><strong> Problem Solution Section</strong></h2><br/>
+                                <label>Second Section Title</label><br/>
+                                <input type="text" class="form-control" name="homesecondtitle"><br/>
+                                <label>Upload Second Section Image</label><br/>
+                                <input class="form-control" type="file" name="home_second_file" id="home_second_file"><br/>
+                                <hr/>
+                                <h2 class="mt-2"><strong>Values We Brings Section</strong></h2><br/>
+                                <label>Third Section Title</label><br/>
+                                <input type="text" class="form-control" name="homethirdtitle"><br/>
+                                <label>Third Secton Content</label><br/>
+                                <textarea name="home_third_content" rows="5" cols="50"></textarea><br/>
+                                <label>Upload Third Section Image</label><br/>
+                                <input class="form-control" type="file" name="home_third_file" id="home_third_file"><br/>
+                                <label>Third Section Blocks</label><br/>
+                                <div class="row">
+                                    <div class="col-md-6"><textarea name="home_third_block[]" rows="5" cols="20"></textarea></div>
+                                    <div class="col-md-6"><textarea name="home_third_block[]" rows="5" cols="20"></textarea></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><textarea name="home_third_block[]" rows="5" cols="20"></textarea></div>
+                                    <div class="col-md-6"><textarea name="home_third_block[]" rows="5" cols="20"></textarea></div>
+                                </div>
+                                <hr/>
+                                <h2 class="mt-3"><strong> Testimonial Section</strong></h2><br/>
+                                <button onclick="clonehometestimonial(event)" style="float:right" class="btn btn-primary float-end">Add More</button>
+                                <div id="hometestimonials" class="hometestimonials col-sm-12 col-md-12 mt-5 mb-5">
+                                    <div id="removebtn"></div>
+                                   <label>Upload Pic</label><br/>
+                                  <input class="form-control" type="file" name="home_testimonial_pic[]" ><br/>
+                                  <label>Enter Description</label><br/>
+                                  <textarea class="mt-2" name="home_testimonial_desc[]" rows="5" cols="50"  value="{{ !empty($bogdesc)?$bogdesc:""  }}">{{ !empty($bogdesc)?$bogdesc:""  }}</textarea>
+                                  <div class="flex">
+                                    <label><input type="radio" name="home_testimonial_star[]" value="1"> 1 Star </label>
+                                    <label><input type="radio" name="home_testimonial_star[]" value="2"> 2 Star </label>
+                                    <label><input type="radio" name="home_testimonial_star[]" value="3"> 3 Star </label>
+                                    <label><input type="radio" name="home_testimonial_star[]" value="4"> 4 Star </label>
+                                    <label><input type="radio" name="home_testimonial_star[]" value="5"> 5 Star </label>
+                                  </div>
+                                  <label>Author</label>
+                                  <input class="form-control" type="text" name="home_testimonial_author[]">
+                                  <label>Designation</label>
+                                  <input class="form-control" type="text" name="home_testimonial_desg[]">
+                                </div>
+                                <hr/>
+
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="mt-2"><strong> Process For Landlord Section</strong></h2><br/>
+                                <label>Fifth Section Title</label><br/>
+                                <input type="text" class="form-control" name="homefifthtitle"><br/>
+                                <label>Fifth Section Image</label><br/>
+                                <input class="form-control" type="file" name="home_fifth_file" id="home_fifth_file"><br/>
+                                <label>Fifth Section Content</label><br/>
+                                <textarea name="home_fifth_content" rows="5" cols="50"></textarea><br/>
+
+
+                                <hr/>
+                                <h2 class="mt-2"><strong> Process For Tenant Section</strong></h2><br/>
+                                <label>Sixth Section Title</label><br/>
+                                <input type="text" class="form-control" name="homesixthtitle"><br/>
+                                <label>Sixth Section Image</label><br/>
+                                <input class="form-control" type="file" name="home_sixth_file" id="home_sixth_file"><br/>
+                                <label>Sixth Section Content</label><br/>
+                                <textarea name="home_sixth_content" rows="5" cols="50"></textarea><br/>
+
+                                <hr/>
+                                <h2 class="mt-3"><strong> FAQ Section</strong></h2><br/>
+                                <button type="button" id="home-add-more-faq" class="btn btn-primary float-right mb-4">Add More</button>
+                                <div id="home-faq-form-container">
+                                    <div class="faqformhome mt-4 mb-4">
+                                    <label>Enter Title</label>
+                                    <input type="text" name="homefaqtitle[]" class="form-control"/><br/>
+                                    <label>Enter Desc</label>
+                                    <textarea name="homefaqdesc[]" rows="5" cols="50"></textarea>
+                                   </div>
+                                    </div>
+
+
+                                </div>
+                        </div>
+                        @elseif($page_slug=="about-us")
                         <div class="row">
 
                             <div class="col-md-12">
@@ -334,6 +434,26 @@
     </div>
 @include('includes.footer')
 <script>
+    //Home
+    document.getElementById('home-add-more-faq').addEventListener('click', function() {
+        const faqForm = document.querySelector('.faqformhome');
+            const clonedForm = faqForm.cloneNode(true);
+
+            // Create and add a Remove button to the cloned form
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.className = 'remove-btn';
+
+            removeButton.addEventListener('click', function() {
+                clonedForm.remove();
+            });
+            clonedForm.appendChild(removeButton);
+
+            // Append the cloned form to the container
+            document.getElementById('home-faq-form-container').appendChild(clonedForm);
+        });
+
+    //About Us
     document.getElementById('add-more-faq').addEventListener('click', function() {
         const faqForm = document.querySelector('.faqform');
             const clonedForm = faqForm.cloneNode(true);

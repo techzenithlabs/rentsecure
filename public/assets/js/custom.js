@@ -1133,6 +1133,50 @@ $(document).ready(function(){
     })
 })
 
+let hometestimonialIndex = 1; // Start from 1 to avoid updating the initial set
+
+function clonehometestimonial(event){
+    event.preventDefault();
+    // Get the original testimonial div
+    let original = document.getElementById('hometestimonials');
+    let clone = original.cloneNode(true);
+    let radioButtons = clone.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => {
+        radio.name = `testimonial_star[${hometestimonialIndex}]`;
+    });
+    hometestimonialIndex++;
+
+    // Create the remove button
+    let removeButton = document.createElement('button');
+    removeButton.innerText = 'Remove';
+    removeButton.classList.add('btn', 'btn-danger', 'float-end', 'ms-2');
+    removeButton.style = "float: right;margin-bottom: 14px;";
+    removeButton.setAttribute('onclick', 'removeTestimonial(this)');
+
+    // Append the remove button next to the "Add More" button in the cloned testimonial div
+    let addButton = clone.querySelector('#removebtn');
+    addButton.parentNode.insertBefore(removeButton, addButton.nextSibling);
+
+    // Append the cloned testimonial div after the original
+    original.parentNode.appendChild(clone);
+
+    // Optionally, you can reset the values of the cloned inputs
+    let inputs = clone.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === 'file' || inputs[i].type === 'text') {
+            inputs[i].value = '';
+        } else if (inputs[i].type === 'radio') {
+            inputs[i].checked = false;
+        }
+    }
+
+    let textareas = clone.getElementsByTagName('textarea');
+    for (var i = 0; i < textareas.length; i++) {
+        textareas[i].value = '';
+    }
+
+}
+
 let testimonialIndex = 1; // Start from 1 to avoid updating the initial set
 
 function clonetestimonial(event) {

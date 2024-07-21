@@ -15,6 +15,7 @@ Route::get('/', [HomeController::class, 'homePage'])->name('home');
 Route::get('/page/{slug}', [HomeController::class, 'showPage']);
 Route::get('/page/blog/detail/{id}', [HomeController::class, 'showDetailPage']);
 
+
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
 
