@@ -50,8 +50,7 @@
 
                                             <div class="ms-4 text text-danger paymentinfoerror"></div>
                                             <div class="ms-4 text text-danger countryerror"></div>
-                                            <input type="hidden" name="paymentinfo" value="{{!empty($paymeninfo)?$paymeninfo:"landlord" }}">
-                                            <input type="hidden" name="country" value="{{!empty($country)?$country:"" }}">
+
 
                                         <div class="row mt-4 mb-4">
                                             <!-- 1st Row -->
@@ -116,6 +115,38 @@
 
                                             </div>
                                         </div>
+
+                                        <!---3rd  Row-->
+                                        <div class="row mt-4 mb-4">
+                                            <!-- 1st Row -->
+                                            <div class="col-sm-3 col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="applicant1">City/Town</label><span class="text-danger">*</span>
+                                                    <p><span><input class="form-control" type="text" name="city" placeholder="Enter City"  value="{{ !empty($city)?$city:'' }}"></span></p>
+                                                    <div class="mt-2 text text-danger cityerror"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="province">Province</label><span class="text-danger">*</span>
+
+                                                    <p><span><input class="form-control" type="text" id="province" name="province"  value="{{ !empty($province)?$province:'' }}" placeholder="Enter Province"></span></p>
+                                                    <div class="mt-2 text text-danger provinceerror"></div>
+
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-3 col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="custom-label font-weight-bold" for="postalcpde">Postal Code</label><span class="text-danger">*</span>
+                                                    <p><span><input class="form-control" type="text" id="postalcode" name="postalcode" value="{{ !empty($postalcode)?$postalcode:'' }}" placeholder="Enter Postal Code"></span></p>
+                                                    <div class="mt-2 text text-danger postalcodeeerror"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-3 col-lg-3">
+
+                                            </div>
+                                        </div>
                                         </div>
 
                                         <div class="form-content">
@@ -144,6 +175,9 @@
                                                 <div class="mt-2 text text-danger applicant_consignmentrror"></div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="landlord_id" value="{{!empty($landlord_id)?$landlord_id:'' }}">
+                                        <input type="hidden" name="tenant_id" value="{{!empty($tenant_id)?$tenant_id:"" }}">
+                                        <input type="hidden" name="property_id" value="{{!empty($property_id)?$property_id:"" }}">
 
 
                                 </div>

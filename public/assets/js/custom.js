@@ -800,7 +800,7 @@ $(document).ready(function () {
 
     $("#tenantformstep3").on("submit", function (event) {
         event.preventDefault();
-        console.log("third")
+
         $(".screeningsuccess").hide();
         $(".screeningsuccess").text("");
         $(".screeningerror").hide();
@@ -815,18 +815,21 @@ $(document).ready(function () {
             formData[this.name] = this.value;
         });
 
-        let country = formData.country;
-        let paymentInfo = formData.paymentinfo;
+
+        let landlord_id=formData.landlord_id;
+        let property_id=formData.property_id;
+        let tenant_id=formData.tenant_id;
         let firstName = formData.firstname;
         let lastName = formData.lastname;
         let middleName = formData.middlename;
         let sin = formData.sin;
         let dob = formData.dob;
         let address = formData.address;
-        let applicant_confirm = formData.applicant_confirm;
-        let applicant_consignment = formData.applicant_consignment;
-
+        let postalcode = formData.postalcode;
+        let city = formData.city;
         let landlord_property = formData.property;
+        let applicant_confirm=formData.applicant_confirm;
+        let applicant_consignment=formData.applicant_consignment;
 
 
         let formValid = false;
@@ -895,8 +898,9 @@ $(document).ready(function () {
 
         if (formValid == true) {
             let data = {
-                country: country,
-                paymentinfo: paymentInfo,
+                landlord_id:landlord_id,
+                property_id:property_id,
+                tenant_id:tenant_id,
                 firstname: firstName,
                 middlename: middleName,
                 lastname: lastName,
@@ -904,42 +908,43 @@ $(document).ready(function () {
                 dob: dob,
                 address: address,
                 landlord_property: landlord_property,
-                tenant_first_name: tenant_first_name,
-                tenant_last_name: tenant_last_name,
-                tenant_email: tenant_email,
+                city: city,
+                postalcode: postalcode,
+
             };
 
-            // $.ajax({
-            //     url: baseURL + "/landlord/tenant-screening",
-            //     headers: {
-            //         "X-CSRF-TOKEN": csrfToken,
-            //     },
-            //     type: "POST",
-            //     data: data,
-            //     success: function (response) {
-            //         if (response.status == 1) {
-            //             console.log("success");
-            //             $("#tenatmodal").modal("show");
-            //             $(".screeningsuccess").show();
-            //             $(".screeningsuccess").text(response.message);
-            //             setTimeout(function () {
-            //                 $(".screeningsuccess").hide();
-            //                 $(".screeningsuccess").text("");
-            //             }, 5000);
-            //         } else {
-            //             $(".screeningerror").show();
-            //             $(".screeningerror").text(response.message);
 
-            //             setTimeout(function () {
-            //                 $(".screeningerror").hide();
-            //                 $(".screeningerror").text("");
-            //             }, 5000);
-            //         }
-            //     },
-            //     error: function (response) {
-            //         console.log(response);
-            //     },
-            // });
+            $.ajax({
+                url: baseURL + "/tenant/tenant-screening",
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    if (response.status == 1) {
+
+                        $("#tenatmodal").modal("show");
+                        $(".screeningsuccess").show();
+                        $(".screeningsuccess").text(response.message);
+                        setTimeout(function () {
+                            $(".screeningsuccess").hide();
+                            $(".screeningsuccess").text("");
+                        }, 5000);
+                    } else {
+                        $(".screeningerror").show();
+                        $(".screeningerror").text(response.message);
+
+                        setTimeout(function () {
+                            $(".screeningerror").hide();
+                            $(".screeningerror").text("");
+                        }, 5000);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+            });
         }
     });
 

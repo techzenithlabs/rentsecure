@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 
     /***Tenant ***/
     Route::match(['get', 'post'], '/tenant/screening/{step?}', [ScreeningController::class, 'tenantScreeningSteps'])->name('tenant.screening');
+    Route::post('/tenant/tenant-screening', [ScreeningController::class, 'tenantScreeningFinal'])->name('tenant.tenant-screening');
     /***Tenant ***/
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
