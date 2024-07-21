@@ -176,7 +176,7 @@ class AdminController extends Controller
                 switch ($getpage) {
                     case 'about-us':
                         $file = !empty($request->file('mission_file')) ? $request->file('mission_file') : "";
-                        
+
                         $filepath = "";
                         if (!empty($file)) {
                             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -188,24 +188,21 @@ class AdminController extends Controller
                         $faqDescs = $request->input('faqdesc', []);
                         $faqs = [];
 
-                        if(!empty($faqTitles)){
+                        if (!empty($faqTitles)) {
                             foreach ($faqTitles as $index => $title) {
                                 $faqs[] = [
                                     'title' => $title,
                                     'desc' => isset($faqDescs[$index]) ? $faqDescs[$index] : '',
                                 ];
                             }
-                
+
                         }
 
                         // Split the combined data into separate arrays
-                        if(!empty($faqs)){
+                        if (!empty($faqs)) {
                             $titles = array_column($faqs, 'title');
                             $descs = array_column($faqs, 'desc');
                         }
-                         
-
-
 
                         $updateOrCreate = CmsBlocks::updateOrCreate(
                             ['cms_id' => $request->id], // Condition to check if block exists
@@ -277,8 +274,18 @@ class AdminController extends Controller
                         $authors = $request->input('testimonial_author');
                         $desgs = $request->input('testimonial_desg');
                         $pics = $request->file('testimonial_pic');
-
+                        $savedPics = $request->input('testipics', []);
                         $filePaths = [];
+
+                        if(!empty($savedPics)){
+                             // Combine saved pics and newly uploaded pics
+                            foreach ($savedPics as $key => $savedPic) {
+                                $filePaths[$key] = $savedPic;
+                            }
+
+                        }
+
+
 
                         // Handle file uploads
                         if (!empty($pics)) {
@@ -287,12 +294,12 @@ class AdminController extends Controller
                                     $fileName = time() . '_' . $file->getClientOriginalName();
                                     $directory = 'public/assets/images/pages/testimonials';
                                     $filePath = $file->storeAs($directory, $fileName);
-                                    $filePaths[] = $filePath;
-                                } else {
-                                    $filePaths[] = null;
+                                    $filePaths[$key] = $filePath;
                                 }
                             }
                         }
+
+
                         // JSON encode arrays for storage
                         $descsJson = json_encode($descs);
                         $starsJson = json_encode($stars);

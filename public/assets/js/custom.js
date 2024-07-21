@@ -1133,7 +1133,8 @@ $(document).ready(function(){
     })
 })
 
-let testimonialIndex = 0;
+let testimonialIndex = 1; // Start from 1 to avoid updating the initial set
+
 function clonetestimonial(event) {
     event.preventDefault();
     // Get the original testimonial div
@@ -1142,7 +1143,7 @@ function clonetestimonial(event) {
     // Clone the original testimonial div
     var clone = original.cloneNode(true);
 
-    // Update the name attributes to be unique
+    // Update the name attributes to be unique for the cloned element
     let radioButtons = clone.querySelectorAll('input[type="radio"]');
     radioButtons.forEach((radio) => {
         radio.name = `testimonial_star[${testimonialIndex}]`;
@@ -1153,7 +1154,7 @@ function clonetestimonial(event) {
     var removeButton = document.createElement('button');
     removeButton.innerText = 'Remove';
     removeButton.classList.add('btn', 'btn-danger', 'float-end', 'ms-2');
-    removeButton.style="transform:translate(84px, -6px)";
+    removeButton.style = "float: right;margin-bottom: 14px;";
     removeButton.setAttribute('onclick', 'removeTestimonial(this)');
 
     // Append the remove button next to the "Add More" button in the cloned testimonial div

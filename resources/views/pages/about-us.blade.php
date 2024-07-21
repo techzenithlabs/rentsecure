@@ -28,7 +28,7 @@
     content: '+';
 }
 
-     
+
         .accordion-button {
             text-align: left;
             padding-right: 2em;
@@ -173,11 +173,11 @@
     </div>
 </section>
 <section class="faq-section text-center py-5 bg-light">
-    @php 
+    @php
     $getfaqs=!empty($page->blocks->faq_title)?json_decode($page->blocks->faq_title):[];
     $getfaqdesc=!empty($page->blocks->faq_desc)?json_decode($page->blocks->faq_desc):[];
- 
-    @endphp 
+
+    @endphp
     <div class="container mt-5">
         <h1 class="text-center mb-4">Frequenly Asked Questions</h1>
         <div class="row">
@@ -235,7 +235,7 @@
        $(document).ready(function() {
             $('.accordion-button').on('click', function() {
                 var target = $(this).data('target');
-                
+
                 // Toggle the clicked accordion
                 $(target).collapse('toggle');
             });

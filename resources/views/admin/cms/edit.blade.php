@@ -155,11 +155,11 @@
                                 <h5><strong>FAQ</strong></h5><br/>
                                         <button type="button" id="add-more-faq" class="btn btn-primary float-right mb-4">Add More</button>
                                         @if(!empty($pages->blocks->faq_title))
-                                        @php 
+                                        @php
                                          $getfaq=json_decode($pages->blocks->faq_title);
                                          $getdesc=json_decode($pages->blocks->faq_desc);
-                                         
-                                        @endphp 
+
+                                        @endphp
                                          <div id="faq-form-container">
                                         @foreach($getfaq as $key=>$faq)
                                         <div class="faqform mt-4 mb-4">
@@ -182,7 +182,7 @@
                                        </div>
                                         </div>
                                        @endif
-                               
+
 
 
                             </div>
@@ -240,10 +240,10 @@
                           @if(isset($testimonial_desc)&&!empty($testimonial_desc))
                           @foreach($testimonial_desc as $key =>$val)
                           @php
-                          $testi_img=!empty($testimonial_img)? $testimonial_img[$key]:"";
-                          $rating=!empty( $testimonial_star)? @$testimonial_star[$key]:0;
-                          $author=!empty($testimonial_author)?@$testimonial_author[$key]:[];
-                          $desg=!empty($testimonial_desg)?@$testimonial_desg[$key]:[];
+                          $testi_img = !empty($testimonial_img[$key]) ? $testimonial_img[$key] : "";
+                            $rating = !empty($testimonial_star[$key]) ? (int)$testimonial_star[$key] : 0;
+                            $author = !empty($testimonial_author[$key]) ? $testimonial_author[$key] : "";
+                            $desg = !empty($testimonial_desg[$key]) ? $testimonial_desg[$key] : "";
 
 
                          @endphp
@@ -251,17 +251,18 @@
                             <div id="removebtn"></div>
                            <label>Upload Pic</label><br/>
                            <div class="flex">
+                           <input type="hidden" name="testipics[]" value="{{ !empty($testi_img)?$testi_img:"" }}">
                           <input class="form-control" type="file" name="testimonial_pic[]" >  <img src="{{!empty($testi_img)?asset('storage/app/'.$testi_img):"" }}" class="rounded-circle mr-3" width="60" height="60" alt="Hotel Image"><br/>
                         </div>
                           <label>Enter Description</label><br/>
                           <textarea class="mt-2" name="testimonial_desc[]" rows="5" cols="53"  value="{{ !empty($val)?$val:""  }}">{{ !empty($val)?$val:""  }}</textarea>
                           <div class="flex">
 
-                            <label><input type="radio" name="testimonial_star[]" {!! (int)$rating==1?'checked':'' !!} value="1"> 1 Star </label>
-                            <label><input type="radio" name="testimonial_star[]" {!! (int)$rating==2?'checked':'' !!} value="2"> 2 Star </label>
-                            <label><input type="radio" name="testimonial_star[]" {!! (int)$rating==3?'checked':'' !!} value="3"> 3 Star </label>
-                            <label><input type="radio" name="testimonial_star[]" {!! (int)$rating==4?'checked':'' !!} value="4"> 4 Star </label>
-                            <label><input type="radio" name="testimonial_star[]" {!! (int)$rating==5?'checked':'' !!} value="5"> 5 Star </label>
+                            <label><input type="radio" name="testimonial_star[{{$key}}]" {!! (int)$rating==1?'checked':'' !!} value="1"> 1 Star </label>
+                            <label><input type="radio" name="testimonial_star[{{$key}}]" {!! (int)$rating==2?'checked':'' !!} value="2"> 2 Star </label>
+                            <label><input type="radio" name="testimonial_star[{{$key}}]" {!! (int)$rating==3?'checked':'' !!} value="3"> 3 Star </label>
+                            <label><input type="radio" name="testimonial_star[{{$key}}]" {!! (int)$rating==4?'checked':'' !!} value="4"> 4 Star </label>
+                            <label><input type="radio" name="testimonial_star[{{$key}}]" {!! (int)$rating==5?'checked':'' !!} value="5"> 5 Star </label>
                           </div>
                           <label>Author</label>
                           <input class="form-control" type="text" name="testimonial_author[]" value="{{ !empty($author)?$author:'' }}">
@@ -336,7 +337,7 @@
     document.getElementById('add-more-faq').addEventListener('click', function() {
         const faqForm = document.querySelector('.faqform');
             const clonedForm = faqForm.cloneNode(true);
-            
+
             // Create and add a Remove button to the cloned form
             const removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
