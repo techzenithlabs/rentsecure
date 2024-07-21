@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Property;
 use App\Models\User_Document;
+use App\Models\TenantInfo;
 use App\Notifications\VerifyUserEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -73,6 +74,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function properties()
     {
         return $this->hasMany(Property::class, 'landlord_id');
+    }
+
+    public function tenantInfos()
+    {
+        return $this->hasMany(TenantInfo::class, 'tenant_id');
     }
 
     // Scope to get only landlords

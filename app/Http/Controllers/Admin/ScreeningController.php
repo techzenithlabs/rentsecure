@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\TenantScreeningEmail;
 use App\Models\Property;
 use App\Models\TenantScreening;
+use App\Models\TenantInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,23 @@ class ScreeningController extends Controller
 
     }
 
-    public function tenantScreening()
+    public function tenantScreening(Request $request)
     {
-        return View('admin.screening.tenant');
+        try {
+            $tenant = User::where('role_id',3)->get();
+
+            $data['tenants'] = !empty($tenant) ? $tenant : [];
+
+            if ($request->isMethod('post')) {
+
+            }
+            return View('admin.screening.tenant')->with($data);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+
+        }
+
 
     }
 
@@ -56,6 +71,23 @@ class ScreeningController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([$e->getMessage()])->withInput();
         }
+    }
+
+    public function viewTenantDetails($user_id)
+    {
+        try {
+            $tenantinfo = TenantInfo::where('tenant_id',$user_id)->get();
+
+            $data['tenantinfo'] = !empty($tenantinfo) ? $tenantinfo : [];
+
+
+            return View('admin.details.tenant')->with($data);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+
+        }
+
     }
 
     /**********Admin *******************/
@@ -246,7 +278,7 @@ class ScreeningController extends Controller
         try {
             if ($request->ajax()) {
                 $formData = (object) $request->all();
-              
+
 
                 $landlord_id = Auth::user()->id;
                 $landlorddetail = User::where(['id' => $landlord_id, 'role_id' => 2])->first();

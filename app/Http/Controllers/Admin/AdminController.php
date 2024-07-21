@@ -7,6 +7,7 @@ use App\Models\Cms;
 use App\Models\CmsBlocks;
 use App\Models\User;
 use App\Models\User_Document;
+use App\Models\TenantInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class AdminController extends Controller
 
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         try {
             $user = Auth::user();
@@ -32,6 +33,37 @@ class AdminController extends Controller
                     return View('landlord.dashboard');
                     break;
                 case 3: //Tenant
+                    if ($request->isMethod('post')) {
+
+
+                            // Validate the request data
+
+
+                            $user=Auth::user()->id;
+                            $user_id=User::where('id',$user)->first();
+
+
+                            // Create a new TenantInfo instance and fill it with validated data
+                            $tenantInfo = new TenantInfo();
+                            $tenantInfo->tenant_id=$user_id->id;
+                            $tenantInfo->property_address = $request->property;
+                            $tenantInfo->start_date = $request->startDay;
+                            $tenantInfo->rent = $request->rent;
+                            $tenantInfo->due_date = $request->dueDay;
+                            $tenantInfo->applicant_name = $request->applicant1Name;
+                            $tenantInfo->applicant_dob = $request->applicant1Dob;
+                            $tenantInfo->applicant_sin = $request->applicant1Sin;
+                            $tenantInfo->applicant_license = $request->applicant1License;
+                            $tenantInfo->applicant_occupation = $request->applicant1Occupation;
+                            $tenantInfo->dec_signature = $request->signature1;
+                            $tenantInfo->dec_date = $request->date1;
+
+                            // Save the TenantInfo to the database
+                            $tenantInfo->save();
+
+                            return redirect()->back()->with('success', 'Tenant information saved successfully.');
+                    }
+
                     return View('tenant.dashboard');
                     break;
 
@@ -39,7 +71,7 @@ class AdminController extends Controller
 
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            return redirect()->back()->withErrors($validator)->with('error', $errorMessage)->withInput();
+             return redirect()->back()->with('error', $errorMessage)->withInput();
         }
 
     }
@@ -174,6 +206,145 @@ class AdminController extends Controller
 
                 $getpage = $request->pagename;
                 switch ($getpage) {
+                    case 'home':
+                        // Directory for storing images
+                        $directory = 'public/assets/images/pages/home';
+
+                        // Handle Top Section
+                        $topTitle = $request->input('hometoptitle');
+                        $topSubtitle = $request->input('hometopsubtitle');
+                        $topFile = $request->file('home_top_file');
+                        $topFilePath = null;
+
+                        if ($topFile) {
+                            $topFileName = time() . '_' . $topFile->getClientOriginalName();
+                            $topFilePath = $topFile->storeAs($directory, $topFileName);
+                        }
+
+                        // Handle Problem Solution Section
+                        $secondTitle = $request->input('homesecondtitle');
+                        $secondContent = $request->input('home_second_content');
+                        $secondFile = $request->file('home_second_file');
+                        $secondFilePath = null;
+
+                        if ($secondFile) {
+                            $secondFileName = time() . '_' . $secondFile->getClientOriginalName();
+                            $secondFilePath = $secondFile->storeAs($directory, $secondFileName);
+                        }
+
+                        // Handle Values We Bring Section
+                        $thirdTitle = $request->input('homethirdtitle');
+                        $thirdContent = $request->input('home_third_content');
+                        $thirdFile = $request->file('home_third_file');
+                        $thirdFilePath = null;
+
+                        if ($thirdFile) {
+                            $thirdFileName = time() . '_' . $thirdFile->getClientOriginalName();
+                            $thirdFilePath = $thirdFile->storeAs($directory, $thirdFileName);
+                        }
+
+                        $thirdBlocks = $request->input('home_third_block', []);
+                        $thirdBlocksJson = json_encode($thirdBlocks);
+
+                        // Handle Testimonial Section
+                        $testimonialDescs = $request->input('home_testimonial_desc', []);
+                        $testimonialStars = $request->input('home_testimonial_star', []);
+                        $testimonialAuthors = $request->input('home_testimonial_author', []);
+                        $testimonialDesgs = $request->input('home_testimonial_desg', []);
+                        $testimonialPics = $request->file('home_testimonial_pic', []);
+                        $testimonialFilePaths = [];
+
+                        foreach ($testimonialPics as $key => $file) {
+                            if ($file) {
+                                $fileName = time() . '_' . $file->getClientOriginalName();
+                                $filePath = $file->storeAs($directory, $fileName);
+                                $testimonialFilePaths[$key] = $filePath;
+                            }
+                        }
+
+                        $testimonialDescsJson = json_encode($testimonialDescs);
+                        $testimonialStarsJson = json_encode($testimonialStars);
+                        $testimonialAuthorsJson = json_encode($testimonialAuthors);
+                        $testimonialDesgsJson = json_encode($testimonialDesgs);
+                        $testimonialFilePathsJson = json_encode($testimonialFilePaths);
+
+                        // Handle Process For Landlord Section
+                        $fifthTitle = $request->input('homefifthtitle');
+                        $fifthContent = $request->input('home_fifth_content');
+                        $fifthFile = $request->file('home_fifth_file');
+                        $fifthFilePath = null;
+
+                        if ($fifthFile) {
+                            $fifthFileName = time() . '_' . $fifthFile->getClientOriginalName();
+                            $fifthFilePath = $fifthFile->storeAs($directory, $fifthFileName);
+                        }
+
+                        // Handle Process For Tenant Section
+                        $sixthTitle = $request->input('homesixthtitle');
+                        $sixthContent = $request->input('home_sixth_content');
+                        $sixthFile = $request->file('home_sixth_file');
+                        $sixthFilePath = null;
+
+                        if ($sixthFile) {
+                            $sixthFileName = time() . '_' . $sixthFile->getClientOriginalName();
+                            $sixthFilePath = $sixthFile->storeAs($directory, $sixthFileName);
+                        }
+
+                        // Handle FAQ Section
+                        $faqTitles = $request->input('homefaqtitle', []);
+                        $faqDescs = $request->input('homefaqdesc', []);
+                        $faqTitlesJson = json_encode($faqTitles);
+                        $faqDescsJson = json_encode($faqDescs);
+
+                        try {
+                            // Update or create the database entry for the home page
+                            $updateOrCreate = CmsBlocks::updateOrCreate(
+                                ['cms_id' => $request->input('id')], // Condition to check if block exists
+                                [
+                                    'hometoptitle' => $topTitle,
+                                    'hometopsubtitle' => $topSubtitle,
+                                    'home_top_file' => $topFilePath,
+                                    'homesecondtitle' => $secondTitle,
+                                    'home_second_content' => $secondContent,
+                                    'home_second_file' => $secondFilePath,
+                                    'homethirdtitle' => $thirdTitle,
+                                    'home_third_content' => $thirdContent,
+                                    'home_third_file' => $thirdFilePath,
+                                    'home_third_block' => $thirdBlocksJson,
+                                    'home_testimonial_desc' => $testimonialDescsJson,
+                                    'home_testimonial_star' => $testimonialStarsJson,
+                                    'home_testimonial_author' => $testimonialAuthorsJson,
+                                    'home_testimonial_desg' => $testimonialDesgsJson,
+                                    'home_testimonial_pic' => $testimonialFilePathsJson,
+                                    'homefifthtitle' => $fifthTitle,
+                                    'home_fifth_content' => $fifthContent,
+                                    'home_fifth_file' => $fifthFilePath,
+                                    'homesixthtitle' => $sixthTitle,
+                                    'home_sixth_content' => $sixthContent,
+                                    'home_sixth_file' => $sixthFilePath,
+                                    'homefaqtitle' => $faqTitlesJson,
+                                    'homefaqdesc' => $faqDescsJson,
+                                ]
+                            );
+
+                            if ($updateOrCreate) {
+                                $res = [
+                                    "status" => 1,
+                                    "message" => "Updated Successfully",
+                                ];
+
+                                return response()->json($res, 200);
+                            }
+                        } catch (\Exception $e) {
+                            $res = [
+                                "status" => 0,
+                                "message" => $e->getMessage(),
+                            ];
+
+                            return response()->json($res, 500);
+                        }
+
+                        break;
                     case 'about-us':
                         $file = !empty($request->file('mission_file')) ? $request->file('mission_file') : "";
 
@@ -277,15 +448,13 @@ class AdminController extends Controller
                         $savedPics = $request->input('testipics', []);
                         $filePaths = [];
 
-                        if(!empty($savedPics)){
-                             // Combine saved pics and newly uploaded pics
+                        if (!empty($savedPics)) {
+                            // Combine saved pics and newly uploaded pics
                             foreach ($savedPics as $key => $savedPic) {
                                 $filePaths[$key] = $savedPic;
                             }
 
                         }
-
-
 
                         // Handle file uploads
                         if (!empty($pics)) {
@@ -298,7 +467,6 @@ class AdminController extends Controller
                                 }
                             }
                         }
-
 
                         // JSON encode arrays for storage
                         $descsJson = json_encode($descs);

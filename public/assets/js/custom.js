@@ -954,6 +954,40 @@ $(document).ready(function(){
         let checkForm=$('input[name="pagename"]').val();
 
         switch(checkForm){
+            case 'home':
+                $.ajax({
+                    url: baseURL + "/save-cms-block",
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                       if(response.status==1){
+                       $('.savedmessage ').show();
+                       $('.savedmessage ').html(response.message);
+                       setTimeout(function(){
+                        $('.savedmessage ').hide();
+                        $('.savedmessage ').html("")
+                         $('#openblock').modal('hide')
+                         location.reload();
+
+                       },3000);
+                       }
+                    },
+                    error: function (response) {
+                        $(".verifiedfailed").show();
+                        $(".verifiedfailed").text(response);
+
+                        setTimeout(function () {
+                            $(".verifiedfailed").hide();
+                            $(".verifiedfailed").text("");
+                        }, 6000);
+                    },
+                });
+            break;
             case 'about-us':
                 let homeStoryFile = $('#home_story')[0].files[0];
                 if (homeStoryFile) {
@@ -1031,31 +1065,6 @@ $(document).ready(function(){
                 break;
             case 'testimonial':
                 let testimonialData = [];
-                // $('.testimonials').each(function(index) {
-                //     var desc = $(this).find('textarea[name="testimonial_desc[]"]').val().trim();
-                //     var star = $(this).find('input[name="testimonial_star[]"]:checked').val();
-                //     var author = $(this).find('input[name="testimonial_author"]').val().trim();
-                //     var desg = $(this).find('input[name="testimonial_desg"]').val().trim();
-
-                //     if (desc === '' || star === undefined || star === '' || (author === '' && desg === '')) {
-                //         isValid = false;
-                //         return false; // Exit each loop early
-                //     }
-                // });
-
-
-                // $('.testimonials').each(function(index) {
-                //     var clonedData = {
-                //         'testimonial_desc': $(this).find('textarea[name="testimonial_desc[]"]').val(),
-                //         'testimonial_star': $(this).find('input[name="testimonial_star[]"]:checked').val(),
-                //         'testimonial_author': $(this).find('input[name="testimonial_author"]').val(),
-                //         'testimonial_desg': $(this).find('input[name="testimonial_desg"]').val()
-                //         // Add more fields as needed
-                //     };
-                //     testimonialData.push(clonedData);
-                // });
-
-                // formData.append('testimonial_data', JSON.stringify(testimonialData));
                     $.ajax({
                         url: baseURL + "/save-cms-block",
                         headers: {

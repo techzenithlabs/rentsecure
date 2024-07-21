@@ -38,7 +38,7 @@ $whopaid = json_encode(Session::get('paymentinfo'));
             window.location.href = redirectUrl;
         }, 5000); // 15000 milliseconds = 15 seconds
 
-   
+
     </script>
 </body>
 </html>

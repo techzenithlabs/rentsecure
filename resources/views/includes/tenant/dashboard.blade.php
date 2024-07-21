@@ -3,65 +3,91 @@
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Rental Application - Residential</h1>
-             
+              <div class="allerrors">
+               <!-- Display session error message -->
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <!-- Display validation errors -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+              </div>
+
             </div>
 
-            <form>
+            <form method="post" action="{{ route('dashboard') }}" >
+                @csrf
         <!-- Rental Details -->
         <div class="form-group">
             <label for="property">Property Address</label>
-            <input type="text" class="form-control" id="property" name="property">
+            <input type="text" class="form-control" id="property" required name="property">
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-12">
                 <label for="startDay">Start Date</label>
-                <input type="text" class="form-control" id="startDay" placeholder="Day" name="startDay">
+                <input type="date" required  class="form-control" id="startDay" placeholder="Day" name="startDay">
             </div>
-            <div class="form-group col-md-4">
+            {{-- <div class="form-group col-md-4">
                 <label for="startMonth">Month</label>
                 <input type="text" class="form-control" id="startMonth" placeholder="Month" name="startMonth">
             </div>
             <div class="form-group col-md-4">
                 <label for="startYear">Year</label>
                 <input type="text" class="form-control" id="startYear" placeholder="Year" name="startYear">
-            </div>
+            </div> --}}
         </div>
         <div class="form-group">
             <label for="rent">Monthly Rent</label>
-            <input type="text" class="form-control" id="rent" name="rent">
+            <input type="text" class="form-control" id="rent" required name="rent">
         </div>
         <div class="form-group">
             <label for="dueDay">Rent Due Day</label>
-            <input type="text" class="form-control" id="dueDay" name="dueDay">
+            <input type="date" class="form-control" id="dueDay" required name="dueDay">
         </div>
 
         <!-- Applicant 1 Details -->
         <h4><strong>Applicant</strong></h4>
         <div class="form-group">
             <label for="applicant1Name">Name</label>
-            <input type="text" class="form-control" id="applicant1Name" name="applicant1Name">
+            <input type="text" class="form-control" id="applicant1Name" required  name="applicant1Name">
         </div>
         <div class="form-group">
             <label for="applicant1Dob">Date of Birth</label>
-            <input type="text" class="form-control" id="applicant1Dob" name="applicant1Dob">
+            <input type="date" class="form-control" id="applicant1Dob" required name="applicant1Dob">
         </div>
         <div class="form-group">
             <label for="applicant1Sin">SIN No. (Optional)</label>
-            <input type="text" class="form-control" id="applicant1Sin" name="applicant1Sin">
+            <input type="text" class="form-control" id="applicant1Sin" required  name="applicant1Sin">
         </div>
         <div class="form-group">
             <label for="applicant1License">Drivers License No.</label>
-            <input type="text" class="form-control" id="applicant1License" name="applicant1License">
+            <input type="text" class="form-control" id="applicant1License" required  name="applicant1License">
         </div>
         <div class="form-group">
             <label for="applicant1Occupation">Occupation</label>
-            <input type="text" class="form-control" id="applicant1Occupation" name="applicant1Occupation">
+            <input type="text" class="form-control" id="applicant1Occupation" required name="applicant1Occupation">
         </div>
 
         <!-- Applicant 2 Details -->
         <div style="display:none">
         <h4>Applicant #2</h4>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="applicant2Name">Name</label>
             <input type="text" class="form-control" id="applicant2Name" name="applicant2Name">
         </div>
@@ -80,18 +106,19 @@
         <div class="form-group">
             <label for="applicant2Occupation">Occupation</label>
             <input type="text" class="form-control" id="applicant2Occupation" name="applicant2Occupation">
-        </div>
+        </div> --}}
     </div>
 
         <!-- Other Occupants -->
-        <h4>Other Occupants</h4>
-        <div class="form-group">
+        <div style="display:none">
+        <h4><strong>Other Occupants</strong></h4>
+        {{-- <div class="form-group">
             <label for="occupant1Name">Name</label>
-            <input type="text" class="form-control" id="occupant1Name" name="occupant1Name">
+            <input type="text" class="form-control" id="occupant1Name" required name="occupant1Name">
         </div>
         <div class="form-group">
             <label for="occupant1Relationship">Relationship</label>
-            <input type="text" class="form-control" id="occupant1Relationship" name="occupant1Relationship">
+            <input type="text" class="form-control" id="occupant1Relationship" required name="occupant1Relationship">
         </div>
         <div class="form-group">
             <label for="occupant1Age">Age</label>
@@ -108,10 +135,12 @@
         <div class="form-group">
             <label for="reasonVacating">Why are you vacating your present place of residence?</label>
             <textarea class="form-control" id="reasonVacating" name="reasonVacating"></textarea>
-        </div>
+        </div> --}}
+    </div>
 
         <!-- Employment Details -->
-        <h4>Employment Details</h4>
+        <div style="display:none">
+        {{-- <h4><strong>Employment Details</strong></h4>
         <div class="form-group">
             <label for="presentEmployer1">Applicant Present Employer</label>
             <input type="text" class="form-control" id="presentEmployer1" name="presentEmployer1">
@@ -139,9 +168,10 @@
         <div class="form-group">
             <label for="presentSalary1">Current Salary Range: Monthly $</label>
             <input type="text" class="form-control" id="presentSalary1" name="presentSalary1">
-        </div>
-
-        <div class="form-group">
+        </div> --}}
+    </div>
+      <div style="display:none">
+        {{-- <div class="form-group">
             <label for="presentEmployer2">Applicant #2 Present Employer</label>
             <input type="text" class="form-control" id="presentEmployer2" name="presentEmployer2">
         </div>
@@ -168,10 +198,12 @@
         <div class="form-group">
             <label for="presentSalary2">Current Salary Range: Monthly $</label>
             <input type="text" class="form-control" id="presentSalary2" name="presentSalary2">
-        </div>
+        </div> --}}
+    </div>
 
         <!-- Previous Employment -->
-        <h4>Previous Employment</h4>
+        <div style="display:none">
+        <h4><strong>Previous Employment</strong></h4>
         <div class="form-group">
             <label for="previousEmployer1">Applicant  Previous Employer</label>
             <input type="text" class="form-control" id="previousEmployer1" name="previousEmployer1">
@@ -196,8 +228,8 @@
             <label for="previousSupervisor1">Name of Supervisor</label>
             <input type="text" class="form-control" id="previousSupervisor1" name="previousSupervisor1">
         </div>
-
-        <div class="form-group">
+       <div style="display: none">
+        {{-- <div class="form-group">
             <label for="previousEmployer2">Applicant #2 Previous Employer</label>
             <input type="text" class="form-control" id="previousEmployer2" name="previousEmployer2">
         </div>
@@ -220,18 +252,21 @@
         <div class="form-group">
             <label for="previousSupervisor2">Name of Supervisor</label>
             <input type="text" class="form-control" id="previousSupervisor2" name="previousSupervisor2">
-        </div>
+        </div> --}}
+    </div>
+</div>
 
         <!-- Declaration -->
-        <h4>Declaration</h4>
+        <h4><strong>Declaration</strong></h4>
         <div class="form-group">
             <label for="signature1">Applicant  Signature</label>
             <input type="text" class="form-control" id="signature1" name="signature1">
         </div>
         <div class="form-group">
             <label for="date1">Date</label>
-            <input type="text" class="form-control" id="date1" name="date1">
+            <input type="date" class="form-control" id="date1" name="date1">
         </div>
+        <div style="display:none">
         <div class="form-group">
             <label for="signature2">Applicant #2 Signature</label>
             <input type="text" class="form-control" id="signature2" name="signature2">
@@ -240,6 +275,7 @@
             <label for="date2">Date</label>
             <input type="text" class="form-control" id="date2" name="date2">
         </div>
+    </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

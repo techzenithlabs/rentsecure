@@ -15,7 +15,6 @@ Route::get('/', [HomeController::class, 'homePage'])->name('home');
 Route::get('/page/{slug}', [HomeController::class, 'showPage']);
 Route::get('/page/blog/detail/{id}', [HomeController::class, 'showDetailPage']);
 
-
 Route::get('/send-mail', [MailController::class, 'sendMail']);
 Route::get('/state', [RegisteredUserController::class, 'getStates'])->name('state');
 
@@ -23,7 +22,7 @@ Route::get('/registration/success/{firstname}', function ($firstname) {
     return view('emails.registration-success', ['firstname' => $firstname]);
 })->name('registration.success');
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::match(['get', 'post'], '/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -35,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
     /*****Admin */
     Route::get('landlord-documents/{user_id}', [ScreeningController::class, 'viewDocuments'])->name('landlord.documents');
-
+    Route::get('tenant-details/{user_id}', [ScreeningController::class, 'viewTenantDetails'])->name('tenant.details');
     Route::get('/screening/tenant', [ScreeningController::class, 'tenantScreening'])->name('screening.tenant');
     /**Screening steps ***/
 
