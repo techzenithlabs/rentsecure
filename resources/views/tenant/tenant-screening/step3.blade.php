@@ -18,6 +18,14 @@
                   @break
                @endswitch
                <div class="main-content">
+
+                <div style="display:none" class="screeningsuccessstatus alert alert-success">
+
+                </div>
+
+                <div style="display:none" class="screeningerrorstatus alert alert-danger">
+
+                </div>
                 <div class="cont-wrapper">
                     <form method="post" action="{{ url('tenant/screening/step4') }}" id="tenantformstep3" name="tenantformstep3">
                         @csrf
@@ -184,6 +192,13 @@
                             </div>
                             <div class="card-footer">
                                 <a href="{{ url('tenant/screening/step2') }}" class="back-btn">Back</a>
+                                <div style="display:none" class="screeningsuccessstatus alert alert-success">
+
+                                </div>
+
+                                <div style="display:none" class="screeningerrorstatus alert alert-danger">
+
+                                </div>
                                 <button type="submit" class="next-btn">Continue</button>
                             </div>
                         </div>

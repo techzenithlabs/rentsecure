@@ -922,22 +922,27 @@ $(document).ready(function () {
                 type: "POST",
                 data: data,
                 success: function (response) {
+
                     if (response.status == 1) {
 
                         $("#tenatmodal").modal("show");
-                        $(".screeningsuccess").show();
-                        $(".screeningsuccess").text(response.message);
+                        $(".screeningsuccessstatus").show();
+                        $(".screeningsuccessstatus").text(response.message);
                         setTimeout(function () {
-                            $(".screeningsuccess").hide();
-                            $(".screeningsuccess").text("");
+                            $(".screeningsuccessstatus").hide();
+                            $(".screeningsuccessstatus").text("");
                         }, 5000);
+                        setTimeout(function () {
+                            location.href=baseURL+'/dashboard';
+                        }, 5300);
+
                     } else {
-                        $(".screeningerror").show();
-                        $(".screeningerror").text(response.message);
+                        $(".screeningerrorstatus").show();
+                        $(".screeningerrorstatus").text(response.message);
 
                         setTimeout(function () {
-                            $(".screeningerror").hide();
-                            $(".screeningerror").text("");
+                            $(".screeningerrorstatus").hide();
+                            $(".screeningerrorstatus").text("");
                         }, 5000);
                     }
                 },

@@ -10,8 +10,10 @@ use App\Models\TenantScreening;
 use App\Models\TenantProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class ScreeningController extends Controller
@@ -366,6 +368,11 @@ class ScreeningController extends Controller
         $tenant_id = Auth::user()->id;
         $tenant_email = Auth::user()->email;
         $check_tenant_properties = TenantScreening::where('tenant_email', trim($tenant_email))->get();
+
+        if ($check_tenant_properties->isEmpty()) {
+
+            return Redirect::back()->withErrors(['error' => 'Sorry you havent been assigned any property by landlord']);
+        }
         $tenant_assigned_properties = [];
         $property_details = [];
         if ($check_tenant_properties->isNotEmpty()) {
@@ -400,16 +407,15 @@ class ScreeningController extends Controller
 
                 }
 
-
-                if(!empty($tenant_assigned_properties['landlord_id'])){
+                if (!empty($tenant_assigned_properties['landlord_id'])) {
                     $data['landlord_id'] = $tenant_assigned_properties['landlord_id'];
                 }
 
-                if(!empty($tenant_assigned_properties['tenant_id'])){
+                if (!empty($tenant_assigned_properties['tenant_id'])) {
                     $data['tenant_id'] = $tenant_assigned_properties['tenant_id'];
                 }
 
-                if(!empty($tenant_assigned_properties['property_id'])){
+                if (!empty($tenant_assigned_properties['property_id'])) {
                     $data['property_id'] = $tenant_assigned_properties['property_id'];
                 }
 
@@ -468,8 +474,7 @@ class ScreeningController extends Controller
                     $postalcode = !empty($request->postalcode) ? $request->postalcode : "";
                     $city = !empty($request->city) ? $request->city : "";
                     $province = !empty($request->province) ? $request->province : "";
-                    $propertyscreen=!empty($request->propertyscreen)?$request->propertyscreen:"";
-
+                    $propertyscreen = !empty($request->propertyscreen) ? $request->propertyscreen : "";
 
                     if (!empty($firstname)) {
                         Session::put('firstname', $firstname);
@@ -525,24 +530,24 @@ class ScreeningController extends Controller
                         Session::forget('province');
                     }
 
-                    if(!empty($propertyscreen)){
+                    if (!empty($propertyscreen)) {
                         Session::put('propertyscreen', $propertyscreen);
 
-                    }else{
+                    } else {
                         Session::forget('propertyscreen');
 
                     }
 
                 }
-                if(!empty($tenant_assigned_properties['landlord_id'])){
+                if (!empty($tenant_assigned_properties['landlord_id'])) {
                     $data['landlord_id'] = $tenant_assigned_properties['landlord_id'];
                 }
 
-                if(!empty($tenant_assigned_properties['tenant_id'])){
+                if (!empty($tenant_assigned_properties['tenant_id'])) {
                     $data['tenant_id'] = $tenant_assigned_properties['tenant_id'];
                 }
 
-                if(!empty($tenant_assigned_properties['property_id'])){
+                if (!empty($tenant_assigned_properties['property_id'])) {
                     $data['property_id'] = $tenant_assigned_properties['property_id'];
                 }
 
@@ -586,15 +591,11 @@ class ScreeningController extends Controller
                     $data['propertyscreen'] = Session::get('propertyscreen');
                 }
 
-
                 return view('tenant.tenant-screening.step3')->with($data);
             case 'step4':
                 if ($request->isMethod('post')) {
 
-
                 }
-
-
 
                 return view('landlord.tenant-screening.step4')->with($data);
             default:
@@ -608,57 +609,50 @@ class ScreeningController extends Controller
         try {
             if ($request->ajax()) {
                 $formData = (object) $request->all();
+                $landlord_id=$formData->landlord_id;
+                $property_id=$formData->property_id;
+                $tenant_id=$formData->tenant_id;
+                $firstname=$formData->firstname;
+                $middlename=!empty($formData->middlename)?$formData->middlename:"";
+                $lastname=!empty($formData->lastname)?$formData->lastname:"";
+                $sin=!empty($formData->sin)?$formData->sin:"";
+                $dob=!empty($formData->dob)?$formData->dob:"";
+                $address=!empty($formData->address)?$formData->address:"";
+                $city=!empty($formData->city)?$formData->city:"";
+                $postalcode=!empty($formData->postalcode)?$formData->postalcode:"";
+
 
                 //$allinfo = $request->all();
 
-                //$tenantproperty=new TenantProperty;
-                $tenantproperty->landlord_id=$formData;
-                //$tenantproperty->save();
+                $tenantproperty=new TenantProperty();
+                $tenantproperty->landlord_id = $landlord_id;
+                $tenantproperty->tenant_id = $tenant_id;
+                $tenantproperty->property_id = $property_id;
+                $tenantproperty->tenant_first_name=$firstname;
+                $tenantproperty->tenant_middle_name=!empty($middlename)?$middlename:"";
+                $tenantproperty->tenant_last_name=!empty($lastname)?$lastname:"";
+                $tenantproperty->sin=!empty($sin)?$sin:"";
+                $tenantproperty->dob=!empty($dob)?$dob:"";
+                $tenantproperty->address=!empty($address)?$address:"";
+                $tenantproperty->city=!empty($city)?$city:"";
+                $tenantproperty->postalcode=!empty($postalcode)?$postalcode:"";
+                $tenantproperty->created_at=Carbon::now();
+                if($tenantproperty->save()){
+                    $response = [
+                        'status' => 1,
+                        'message' => "Screening information Saved Successfully",
+                    ];
+                    return response()->json($response, 200);
+                } else {
+                        $response = [
+                            'status' => 0,
+                            'message' => "There mihght be some technical error,please try again or contact admin",
+                        ];
+                        return response()->json($response, 200);
 
-                // $response = [
-                //         'status' => 1,
-                //         'message' => "Screening information Saved Successfully",
-                //     ];
-                //     return response()->json($response, 200);
+                    }
 
-                // dd($formData);
-
-                // $landlord_id = Auth::user()->id;
-                // $landlorddetail = User::where(['id' => $landlord_id, 'role_id' => 2])->first();
-
-                // $tenantscreening = new TenantScreening();
-                // $tenantscreening->landlord_id = $landlorddetail->id;
-                // $tenantscreening->property_id = $formData->landlord_property ?? '';
-                // $tenantscreening->tenant_first_name = $formData->tenant_first_name ?? '';
-                // $tenantscreening->tenant_last_name = $formData->tenant_last_name ?? '';
-                // $tenantscreening->tenant_email = $formData->tenant_email ?? '';
-                // $tenantscreening->country = $formData->country ?? '';
-                // $tenantscreening->paymentinfo = $formData->paymentinfo ?? '';
-                // $tenantscreening->firstname = $formData->firstname ?? '';
-                // $tenantscreening->middlename = $formData->middlename ?? '';
-                // $tenantscreening->lastname = $formData->lastname ?? '';
-                // $tenantscreening->sin = $formData->sin ?? '';
-                // $tenantscreening->dob = $formData->dob ?? '';
-                // $tenantscreening->address = $formData->address ?? '';
-                // if ($tenantscreening->save()) {
-                //     Mail::to($tenantscreening->tenant_email)->send(new TenantScreeningEmail($tenantscreening));
-
-                //     $response = [
-                //         'status' => 1,
-                //         'message' => "Screening information Saved Successfully",
-                //     ];
-                //     return response()->json($response, 200);
-                // } else {
-                //     $response = [
-                //         'status' => 0,
-                //         'message' => "There mihght be some technical error,please try again or contact admin",
-                //     ];
-                //     return response()->json($response, 200);
-
-                // }
             }
-
-
 
         } catch (\Exception $e) {
             $response = [
