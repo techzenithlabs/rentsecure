@@ -47,6 +47,7 @@ class PropertyController extends Controller
                 }
 
             }
+
             return View('admin.properties.landlord')->with($data);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -193,10 +194,8 @@ class PropertyController extends Controller
                     'province' => ['required'],
                     'date_available' => ['required'],
                     'zipcode' => ['required'],
-
                     'agreement' => ['required', 'accepted'],
-                    'file' => ['required', 'file', 'mimes:doc,docx,pdf,xlsx,txt', 'max:5048'], // 2MB max size
-
+                    //'file' => ['required', 'file', 'mimes:doc,docx,pdf,xlsx,txt', 'max:5048'], // 5MB max size for each file
                 ]);
 
                 if ($validator->fails()) {
@@ -205,31 +204,24 @@ class PropertyController extends Controller
 
                 $id = Auth::user()->id;
                 $landlord = User::where('id', $id)->first();
+                $directory = 'public/document_uploaded/property/user_' . $id;
 
-                $file = $request->file('file');
-
-                $filename = $file->getClientOriginalName();
-                $tmppath = $file->getPathname();
-                $filepath = $file->getRealPath();
-                $size = $file->getSize();
-                $mime = $file->getMimeType();
-
-                $directory = 'public/document_uploaded/property/user_' . $id . '';
-
-                if (!Storage::exists('public/document_uploaded/property/user_' . $id . '')) {
-                    // If the directory does not exist, create it
-                    Storage::makeDirectory('public/document_uploaded/property/user_' . $id . '');
-                    // Set permissions to 0777
-                    File::chmod(storage_path('app/public/document_uploaded/property/user_' . $id . ''), 0777);
+                if (!Storage::exists($directory)) {
+                    Storage::makeDirectory($directory);
+                    File::chmod(storage_path('app/' . $directory), 0777);
                 } else {
-                    // If the directory exists, update permissions to 0777
-                    File::chmod(storage_path('app/public/document_uploaded/property/user_' . $id . ''), 0777);
+                    File::chmod(storage_path('app/' . $directory), 0777);
                 }
 
-                $storedFilePath = $file->store($directory);
+                $storedFilePaths = [];
 
-                // Get the storage path to the stored file
-                $storagePath = storage_path('app/' . $storedFilePath);
+                if ($request->hasFile('file')) {
+
+                    foreach ($request->file('file') as $file) {
+                        $storedFilePath = $file->store($directory);
+                        $storedFilePaths[] = $storedFilePath;
+                    }
+                }
 
                 $property_data = [
                     'landlord_id' => $landlord->id,
@@ -239,14 +231,13 @@ class PropertyController extends Controller
                     'province' => $request->province,
                     'date_available' => $request->date_available,
                     'zipcode' => $request->zipcode,
-                    'property_docs' => $storedFilePath,
+                    'property_docs' => json_encode($storedFilePaths), // Store file paths as a JSON array
                     'is_verified' => 0,
                     'status' => 1,
                     'created_at' => Carbon::now()->toDateString(),
                 ];
 
                 Property::create($property_data);
-
                 return redirect()->back()->with('success', 'Property created successfully.');
             }
             $user = Auth::user();

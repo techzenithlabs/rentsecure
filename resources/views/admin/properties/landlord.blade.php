@@ -69,23 +69,67 @@
 
                                     <td>
                                         @if(!empty($property->property_docs) && !empty($filePath))
+                                        @php
+                                          $getdocs=(strpos($property->property_docs,"[")>-1)?json_decode($property->property_docs):$property->property_docs;
+
+
+                                        @endphp
+                                        @if(is_array($getdocs))
+                                        @foreach($getdocs as $docs)
+
+                                        @if(strpos($docs,'.doc')>-1 || strpos($docs,'.docx')>-1)
+                                        <em>Word</em><br/>
+                                        @endif
+
+                                        @if(strpos($docs,'.xls')>-1 || strpos($docs,'.xlxs')>-1)
+                                        <em>Excel</em><br/>
+                                        @endif
+
+                                        @if(strpos($docs,'.pdf')>-1)
+                                        <em>Pdf</em><br/>
+                                        @endif
+
+                                        @if(strpos($docs,'.txt')>-1)
+                                        <em>Text</em><br/>
+                                        @endif
+
+                                        @endforeach
+
+                                        @else
                                         @if(strpos($property->property_docs,'.doc')>-1 || strpos($property->property_docs,'.docx')>-1)
-                                        <em>Word Document</em>
+                                        <em>Word</em>
 
                                         @elseif(strpos($property->property_docs,'.xls')>-1 || strpos($property->property_docs,'.xlxs')>-1)
-                                        <em>Excel Document</em>
+                                        <em>Excel</em>
 
                                         @elseif(strpos($property->property_docs,'.pdf')>-1)
-                                        <em>Pdf Document</em>
+                                        <em>Pdf</em>
 
-                                        @elseif((strpos($property->property_docs,'.text')>-1))
-                                        <em>Text Document</em>
+                                        @elseif((strpos($property->property_docs,'.txt')>-1))
+                                        <em>Text</em>
 
+                                        @endif
                                         @endif
                                         @endif
                                     </td>
                                     <td>
-                                        <a target="_blank" href="{!! $filePath.'/'.$property->property_docs !!}">Download Document</a>
+                                        @php
+                                        $getalldocs=(strpos($property->property_docs,"[")>-1)?json_decode($property->property_docs):$property->property_docs;
+
+
+                                      @endphp
+                                      @if(is_array($getalldocs))
+                                      @foreach($getalldocs as $docs)
+                                      <a target="_blank" href="{!! $filePath.'/'.$docs !!}"><strong>Download</strong></a><br/>
+
+                                      @endforeach
+
+                                      @else
+                                      <a target="_blank" href="{!! $filePath.'/'.$property->property_docs !!}"><strong>Download</strong></a>
+
+
+                                      @endif
+
 
                                     </td>
                                     <td>

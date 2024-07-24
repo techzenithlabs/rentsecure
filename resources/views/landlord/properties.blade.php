@@ -125,11 +125,14 @@
 
                                             <div class="fileUpload btn btn--browse">
                                                 <span>Browse</span>
-                                                <input onchange="uploadProperty(event)" id="uploadBtn" type="file" name="file" class="upload" accept=".docx,.doc,.pdf,.xlsx,.txt">
+                                                <input onchange="uploadProperty(event)" id="uploadBtn" type="file" name="file[]"  multiple="multiple" class="upload" accept=".docx,.doc,.pdf,.xlsx,.txt">
+
 
                                             </div>
 
                                         </div>
+                                        <div class="mt-4 mb-2" id="fileList"></div>
+                                        <div class=" mt-2 mb-2 invalidfile" style="color: red;"></div>
                                         <div id="imagePreview" alt="Image Preview" style="display:none; max-width:100%; height:auto;"></div>
                                         <div class="mt-2 text text-danger invalidfile"></div>
                                         <x-input-error :messages="$errors->get('file')" class="mt-2 text-danger" />

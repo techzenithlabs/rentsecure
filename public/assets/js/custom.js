@@ -124,8 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function uploadProperty(event) {
-    const file = event.target.files[0];
-    $(".invalidfile").text("");
+    const files = event.target.files;
     const allowedMimes = [
         "application/msword",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -133,25 +132,38 @@ function uploadProperty(event) {
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "text/plain",
     ];
-    imagePreview.style.display = "none";
-    if (file) {
+    const fileList = document.getElementById("fileList");
+    $(".invalidfile").text("");
+
+    let invalidFileFound = false;
+    Array.from(files).forEach((file) => {
         if (!allowedMimes.includes(file.type)) {
             $(".invalidfile").text(
                 "Invalid file type. Please select a DOC, DOCX, PDF, XLSX, or TXT file."
             );
-            event.target.value = ""; // Clear the file input
-            return;
+            invalidFileFound = true;
         }
+    });
+
+    if (invalidFileFound) {
+        event.target.value = ""; // Clear the file input if any invalid file is found
+        return;
+    }
+
+    Array.from(files).forEach((file) => {
+
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            const imagePreview = document.getElementById("imagePreview");
-            imagePreview.innerText = file.name;
-            imagePreview.style.display = "block";
+            const fileItem = document.createElement("div");
+            fileItem.style="border:1px solid #8080805e;width:300px;margin-top:4px;";
+            fileItem.innerText = file.name;
+
+            fileList.appendChild(fileItem);
         };
 
         reader.readAsDataURL(file);
-    }
+    });
 }
 
 function changeStatus(event, status, landlord_id, property_id) {
