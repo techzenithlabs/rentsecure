@@ -10,7 +10,7 @@
                 <div class="card text-white bg-primary mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Users</h5>
-                    <p class="card-text badge">{{ getUserData()->total }}</p>
+                    <p class="card-text badge text-white">{{ getUserData()->total }}</p>
                   </div>
                 </div>
               </div>
@@ -18,7 +18,7 @@
                 <div class="card text-white bg-success mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Land lords</h5>
-                    <p class="card-text badge">{{ getUserData()->landlords }}</p>
+                    <p class="card-text badge text-white">{{ getUserData()->landlords }}</p>
                   </div>
                 </div>
               </div>
@@ -26,14 +26,14 @@
                 <div class="card text-white bg-warning mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Tenants</h5>
-                    <p class="card-text badge">{{ getUserData()->tenants }}</p>
+                    <p class="card-text badge text-white">{{ getUserData()->tenants }}</p>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            
+
 
     </div>
    </div>

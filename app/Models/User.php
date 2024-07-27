@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Property;
-use App\Models\User_Document;
 use App\Models\TenantInfo;
+use App\Models\User_Document;
 use App\Notifications\VerifyUserEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

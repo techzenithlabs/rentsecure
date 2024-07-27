@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Mail\TenantScreeningEmail;
 use App\Models\Property;
 use App\Models\TenantInfo;
-use App\Models\TenantScreening;
 use App\Models\TenantProperty;
+use App\Models\TenantScreening;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -353,6 +353,22 @@ class ScreeningController extends Controller
         }
     }
 
+    public function PropertyTenant()
+    {
+        try {
+            $data = [];
+            $user_id = Auth::user()->id;
+            $gettenants = TenantProperty::where('landlord_id', $user_id)->get();
+            $data['tenant_applied'] = $gettenants->isNotEmpty() ? $gettenants : [];
+            return view('landlord.tenant-applied-properties')->with($data);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+
+        }
+
+    }
+
     /**********Landlord *******************/
 
     /***********Tenant *****************/
@@ -609,48 +625,47 @@ class ScreeningController extends Controller
         try {
             if ($request->ajax()) {
                 $formData = (object) $request->all();
-                $landlord_id=$formData->landlord_id;
-                $property_id=$formData->property_id;
-                $tenant_id=$formData->tenant_id;
-                $firstname=$formData->firstname;
-                $middlename=!empty($formData->middlename)?$formData->middlename:"";
-                $lastname=!empty($formData->lastname)?$formData->lastname:"";
-                $sin=!empty($formData->sin)?$formData->sin:"";
-                $dob=!empty($formData->dob)?$formData->dob:"";
-                $address=!empty($formData->address)?$formData->address:"";
-                $city=!empty($formData->city)?$formData->city:"";
-                $postalcode=!empty($formData->postalcode)?$formData->postalcode:"";
-
+                $landlord_id = $formData->landlord_id;
+                $property_id = $formData->property_id;
+                $tenant_id = $formData->tenant_id;
+                $firstname = $formData->firstname;
+                $middlename = !empty($formData->middlename) ? $formData->middlename : "";
+                $lastname = !empty($formData->lastname) ? $formData->lastname : "";
+                $sin = !empty($formData->sin) ? $formData->sin : "";
+                $dob = !empty($formData->dob) ? $formData->dob : "";
+                $address = !empty($formData->address) ? $formData->address : "";
+                $city = !empty($formData->city) ? $formData->city : "";
+                $postalcode = !empty($formData->postalcode) ? $formData->postalcode : "";
 
                 //$allinfo = $request->all();
 
-                $tenantproperty=new TenantProperty();
+                $tenantproperty = new TenantProperty();
                 $tenantproperty->landlord_id = $landlord_id;
                 $tenantproperty->tenant_id = $tenant_id;
                 $tenantproperty->property_id = $property_id;
-                $tenantproperty->tenant_first_name=$firstname;
-                $tenantproperty->tenant_middle_name=!empty($middlename)?$middlename:"";
-                $tenantproperty->tenant_last_name=!empty($lastname)?$lastname:"";
-                $tenantproperty->sin=!empty($sin)?$sin:"";
-                $tenantproperty->dob=!empty($dob)?$dob:"";
-                $tenantproperty->address=!empty($address)?$address:"";
-                $tenantproperty->city=!empty($city)?$city:"";
-                $tenantproperty->postalcode=!empty($postalcode)?$postalcode:"";
-                $tenantproperty->created_at=Carbon::now();
-                if($tenantproperty->save()){
+                $tenantproperty->tenant_first_name = $firstname;
+                $tenantproperty->tenant_middle_name = !empty($middlename) ? $middlename : "";
+                $tenantproperty->tenant_last_name = !empty($lastname) ? $lastname : "";
+                $tenantproperty->sin = !empty($sin) ? $sin : "";
+                $tenantproperty->dob = !empty($dob) ? $dob : "";
+                $tenantproperty->address = !empty($address) ? $address : "";
+                $tenantproperty->city = !empty($city) ? $city : "";
+                $tenantproperty->postalcode = !empty($postalcode) ? $postalcode : "";
+                $tenantproperty->created_at = Carbon::now();
+                if ($tenantproperty->save()) {
                     $response = [
                         'status' => 1,
                         'message' => "Screening information Saved Successfully",
                     ];
                     return response()->json($response, 200);
                 } else {
-                        $response = [
-                            'status' => 0,
-                            'message' => "There mihght be some technical error,please try again or contact admin",
-                        ];
-                        return response()->json($response, 200);
+                    $response = [
+                        'status' => 0,
+                        'message' => "There mihght be some technical error,please try again or contact admin",
+                    ];
+                    return response()->json($response, 200);
 
-                    }
+                }
 
             }
 

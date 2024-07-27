@@ -10,7 +10,7 @@
                 <div class="card text-white bg-primary mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Properties</h5>
-                    <p class="card-text badge">{{ getLandLordData()->total }}</p>
+                    <p class="card-text badge text-white">{{ getLandLordData()->total }}</p>
                   </div>
                 </div>
               </div>
@@ -18,7 +18,7 @@
                 <div class="card text-white bg-success mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Verified Properties</h5>
-                    <p class="card-text badge">{{ getLandLordData()->verified }}</p>
+                    <p class="card-text badge text-white">{{ getLandLordData()->verified }}</p>
                   </div>
                 </div>
               </div>
@@ -26,7 +26,7 @@
                 <div class="card text-white bg-warning mb-3 custom-card-height">
                   <div class="card-body">
                     <h5 class="card-title">Total Tenants</h5>
-                    <p class="card-text badge"></p>
+                    <p class="card-text badge text-white"></p>
                   </div>
                 </div>
               </div>

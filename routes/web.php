@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/landlord/screening/tenant/{step?}', [ScreeningController::class, 'landlordtenantScreening'])->name('landlord.screening.tenant');
     Route::post('/landlord/tenant-screening', [ScreeningController::class, 'tenantScreeningSubmission'])->name('landlord.tenant-screening');
     Route::post('/landlord/property/screening', [ScreeningController::class, 'PropertyScreening'])->name('property-screening');
-
+    Route::get('/landlord/property/tenant-applied', [ScreeningController::class, 'PropertyTenant'])->name('property.tenant-applied');
     /***Landlord ****/
 
     /***Tenant ***/
