@@ -1,11 +1,30 @@
 @include('includes.home-header')
 @include('layouts.home-navigation')
 
+@php
+
+$top_title=$page->blocks->hometoptitle??"";
+$top_sub_title=$page->blocks->hometopsubtitle??"";
+$home_top_file=$page->blocks->home_top_file??"";
+$homesecondtitle=$page->blocks->homesecondtitle??"";
+$home_second_content=$page->blocks->home_second_content??"";
+$home_second_file=$page->blocks->home_second_file??"";
+$homethirdtitle=$page->blocks->homethirdtitle??"";
+$home_third_content=$page->blocks->home_third_content??"";
+$home_third_file=$pge->blocks->home_third_file??"";
+$home_third_block=json_decode($page->blocks->home_third_block)??[];
+$home_testimonial_desc=json_decode($page->blocks->home_testimonial_desc)??[];
+$home_testimonial_star=json_decode($page->blocks->home_testimonial_star)??[];
+$home_testimonial_author=json_decode($page->blocks->home_testimonial_author)??[];
+$home_testimonial_desg=json_decode($page->blocks->home_testimonial_desg)??[];
+$home_testimonial_pic=json_decode($page->blocks->home_testimonial_pic)??[];
+@endphp
+
 <section class="banner-sec">
     <div class="container">
       <div class="banner-overlay">
-        <h1>go far beyond the standard FICO scores and credit reports</h1>
-        <p>We provide unparalleled service</p>
+        <h1>{{ !empty($top_title)?$top_title:"" }}</h1>
+        <p>{{ !empty($top_sub_title)?$top_sub_title:"" }}</p>
         <ul>
           <li>Lorem Ipsum is simply dummy text of the printing</li>
           <li>when an unknown printer took a galley of type</li>
@@ -30,10 +49,9 @@
           </div>
         </div>
         <div class="col-md-7">
-          <h2 class="sec-hedding">Problem/Solution</h2>
+          <h2 class="sec-hedding">{{ !empty($homesecondtitle)?$homesecondtitle:""; }}</h2>
           <h3><span>Talk about the main pain point</span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </h3>
-          <p><em>Lorem Ipsum has been the industry's</em> standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          <p><em>Contrary to popular belief,</em> Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia. Lorem Ipsum is not simply random text.</p>
+           <p>{{ !empty($home_second_content)?$home_second_content:"" }}</p>
         </div>
       </div>
     </div>
@@ -86,13 +104,18 @@
                   </picture>
               </div>
               <div class="col-md-7 values-rgt">
-                  <h2 class="sec-hedding">The Values We brings</h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</p>
+                  <h2 class="sec-hedding">{{ !empty($homethirdtitle)?$homethirdtitle:"" }}</h2>
+                  <p>{{ !empty($home_third_content)?$home_third_content:"" }}</p>
                   <ul>
-                      <li><p>15 Years of<span> Experience</span><p></li>
-                      <li><p>Risk Management and<span> Quality Professional</span><span> Background</span><p></li>
-                      <li><p>Meetup with <span>Professionals</span><p></li>
-                      <li><p>Building <span>communities</span><p></li>
+                    @if(!empty($home_third_block))
+                    @foreach($home_third_block as $blocks)
+                         <li><p>{{ $blocks }}</p></li>
+
+
+                    @endforeach
+
+                    @endif
+
                   </ul>
               </div>
           </div>

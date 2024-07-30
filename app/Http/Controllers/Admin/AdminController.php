@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cms;
 use App\Models\CmsBlocks;
+use App\Models\TenantInfo;
 use App\Models\User;
 use App\Models\User_Document;
-use App\Models\TenantInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,33 +35,30 @@ class AdminController extends Controller
                 case 3: //Tenant
                     if ($request->isMethod('post')) {
 
+                        // Validate the request data
 
-                            // Validate the request data
+                        $user = Auth::user()->id;
+                        $user_id = User::where('id', $user)->first();
 
+                        // Create a new TenantInfo instance and fill it with validated data
+                        $tenantInfo = new TenantInfo();
+                        $tenantInfo->tenant_id = $user_id->id;
+                        $tenantInfo->property_address = $request->property;
+                        $tenantInfo->start_date = $request->startDay;
+                        $tenantInfo->rent = $request->rent;
+                        $tenantInfo->due_date = $request->dueDay;
+                        $tenantInfo->applicant_name = $request->applicant1Name;
+                        $tenantInfo->applicant_dob = $request->applicant1Dob;
+                        $tenantInfo->applicant_sin = $request->applicant1Sin;
+                        $tenantInfo->applicant_license = $request->applicant1License;
+                        $tenantInfo->applicant_occupation = $request->applicant1Occupation;
+                        $tenantInfo->dec_signature = $request->signature1;
+                        $tenantInfo->dec_date = $request->date1;
 
-                            $user=Auth::user()->id;
-                            $user_id=User::where('id',$user)->first();
+                        // Save the TenantInfo to the database
+                        $tenantInfo->save();
 
-
-                            // Create a new TenantInfo instance and fill it with validated data
-                            $tenantInfo = new TenantInfo();
-                            $tenantInfo->tenant_id=$user_id->id;
-                            $tenantInfo->property_address = $request->property;
-                            $tenantInfo->start_date = $request->startDay;
-                            $tenantInfo->rent = $request->rent;
-                            $tenantInfo->due_date = $request->dueDay;
-                            $tenantInfo->applicant_name = $request->applicant1Name;
-                            $tenantInfo->applicant_dob = $request->applicant1Dob;
-                            $tenantInfo->applicant_sin = $request->applicant1Sin;
-                            $tenantInfo->applicant_license = $request->applicant1License;
-                            $tenantInfo->applicant_occupation = $request->applicant1Occupation;
-                            $tenantInfo->dec_signature = $request->signature1;
-                            $tenantInfo->dec_date = $request->date1;
-
-                            // Save the TenantInfo to the database
-                            $tenantInfo->save();
-
-                            return redirect()->back()->with('success', 'Tenant information saved successfully.');
+                        return redirect()->back()->with('success', 'Tenant information saved successfully.');
                     }
 
                     return View('tenant.dashboard');
@@ -71,7 +68,7 @@ class AdminController extends Controller
 
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-             return redirect()->back()->with('error', $errorMessage)->withInput();
+            return redirect()->back()->with('error', $errorMessage)->withInput();
         }
 
     }
@@ -207,6 +204,7 @@ class AdminController extends Controller
                 $getpage = $request->pagename;
                 switch ($getpage) {
                     case 'home':
+
                         // Directory for storing images
                         $directory = 'public/assets/images/pages/home';
 
@@ -262,11 +260,14 @@ class AdminController extends Controller
                             }
                         }
 
+
+
                         $testimonialDescsJson = json_encode($testimonialDescs);
                         $testimonialStarsJson = json_encode($testimonialStars);
                         $testimonialAuthorsJson = json_encode($testimonialAuthors);
                         $testimonialDesgsJson = json_encode($testimonialDesgs);
                         $testimonialFilePathsJson = json_encode($testimonialFilePaths);
+
 
                         // Handle Process For Landlord Section
                         $fifthTitle = $request->input('homefifthtitle');
@@ -295,6 +296,7 @@ class AdminController extends Controller
                         $faqDescs = $request->input('homefaqdesc', []);
                         $faqTitlesJson = json_encode($faqTitles);
                         $faqDescsJson = json_encode($faqDescs);
+
 
                         try {
                             // Update or create the database entry for the home page

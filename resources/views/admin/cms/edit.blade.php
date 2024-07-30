@@ -217,6 +217,7 @@
                                             <h2 class="mt-3"><strong> Testimonial Section</strong></h2><br/>
                                             <button onclick="clonehometestimonial(event)" style="float:right" class="btn btn-primary float-end">Add More</button>
                                             @if(!empty($home_testimonial_desc))
+
                                             <div id="hometestimonials" class="hometestimonials col-sm-12 col-md-12 mt-5 mb-5">
                                                 <div id="removebtn"></div>
                                             @foreach($home_testimonial_desc as $key=>$val)

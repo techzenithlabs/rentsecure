@@ -10,7 +10,10 @@ class HomeController extends Controller
 {
     public function homePage()
     {
-        return View('home');
+        $data=[];
+        $page = Cms::with('blocks')->where('slug', 'home')->where('status', 1)->first();
+        $data['page']=$page;
+        return View('home')->with($data);
     }
 
     public function showPage($slug = false)
@@ -18,6 +21,7 @@ class HomeController extends Controller
 
         // Retrieve the page from the database using the slug
         $page = Cms::with('blocks')->where('slug', $slug)->where('status', 1)->first();
+
 
         $blogs = Post::all();
 
